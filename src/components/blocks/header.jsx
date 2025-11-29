@@ -32,7 +32,7 @@ const Header = () => {
           <NavigationMenuDemo />
         </nav>
         <div className="logo">
-          <Image src="/images/logo.svg" alt="Logo" width={100} height={50} />
+          <Image src="/images/aqua-logo.png" alt="Logo" width={100} height={50} />
         </div>
         <div className="userActions flex items-center gap-2">
           <div>

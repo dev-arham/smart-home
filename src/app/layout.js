@@ -6,7 +6,7 @@ const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
 
 
 export const metadata = {
-  title: "MTRONIC",
+  title: "Aqua Electrical",
   description: "Smart Home Accessories Store",
 };
 
