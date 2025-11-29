@@ -33,7 +33,7 @@ export function HeroSlider() {
         }
     ]
   return (
-    <div className="w-full px-4 py-8 " >
+    <div className="w-full px-4 py-5 " >
         <Carousel className="container mx-auto z-3" opts={{loop: true}} plugins={[Autoplay({delay: 2500, stopOnInteraction: true})]}>
         <CarouselContent>
             {slides.map((item, index) => (

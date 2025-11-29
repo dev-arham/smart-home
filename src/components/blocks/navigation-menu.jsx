@@ -111,7 +111,7 @@ export function NavigationMenuDemo() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        
+
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
           <NavigationMenuContent className='z-5'>
