@@ -7,6 +7,7 @@ import HeroCards from '@/components/blocks/hero-cards'
 import { HeroSlider } from '@/components/blocks/hero-slider'
 import LookBook from '@/components/blocks/lookbook'
 import Newsletter from '@/components/blocks/newsletter'
+import Services from '@/components/blocks/services'
 import VideoBanner from '@/components/blocks/video-banner'
 import React from 'react'
 
@@ -23,7 +24,7 @@ const page = () => {
       <CustomerReviews />
       <LookBook />
       <Newsletter />
-      
+      <Services />
     </div>
   )
 }
