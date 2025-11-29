@@ -7,7 +7,7 @@ import { Headset } from 'lucide-react'
 
 const Services = () => {
   return (
-    <Card className='container mx-auto py-4 mb-20'>
+    <Card className='container mx-auto py-4 mb-5 shadow-none'>
         <div className='flex items-center justify-evenly'>
             <div className='flex items-center justify-center gap-5 px-10'><TruckElectric /> Fast, Free Shipping</div>
             <div className='flex items-center justify-center border-l gap-5 px-10'><BanknoteArrowDown /> 30-Day Money-Back Guarantee</div>

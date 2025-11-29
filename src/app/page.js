@@ -2,6 +2,7 @@ import Categories from '@/components/blocks/categories'
 import CustomerReviews from '@/components/blocks/customer-reviews'
 import DayLightSection from '@/components/blocks/day-light-section'
 import DisplayCards from '@/components/blocks/display-cards'
+import Footer from '@/components/blocks/footer'
 import Header from '@/components/blocks/header'
 import HeroCards from '@/components/blocks/hero-cards'
 import { HeroSlider } from '@/components/blocks/hero-slider'
@@ -25,6 +26,7 @@ const page = () => {
       <LookBook />
       <Newsletter />
       <Services />
+      <Footer />
     </div>
   )
 }
