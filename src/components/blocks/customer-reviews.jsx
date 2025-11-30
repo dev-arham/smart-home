@@ -12,7 +12,7 @@ const CustomerReviews = () => {
                     {Array.from({ length: 5 }).map((_, index) => (
                         <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
                             <div className="p-1">
-                                <Card className='bg-secondary flex flex-col p-10 justify-between max-sm:p-5 max-sm:text-sm'>
+                                <Card className='bg-secondary flex flex-col p-10 justify-between max-sm:p-5 max-sm:text-sm dark:bg-card'>
                                     <div className='flex gap-5'>
                                         <Avatar className='w-16 h-16'>
                                             <AvatarImage src="https://github.com/shadcn.png" />
@@ -20,7 +20,7 @@ const CustomerReviews = () => {
                                         </Avatar>
                                         <div>
                                             <p>★★★★☆</p>
-                                            <h4 className='text-tertiary font-bold text-xl'>Teressa Holland</h4>
+                                            <h4 className='text-tertiary font-bold text-xl dark:text-tertiary-foreground'>Teressa Holland</h4>
                                             <p className='text-muted-foreground text-sm'>Business Manager</p>
                                         </div>
                                     </div>

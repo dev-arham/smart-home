@@ -13,10 +13,12 @@ import { Phone } from 'lucide-react'
 import { Hamburger } from 'lucide-react'
 import { MoreVertical } from 'lucide-react'
 import { Menu } from 'lucide-react'
+import { SidebarTrigger } from '../ui/sidebar'
+import { ThemeToggle } from './theme-toggle'
 
 const Header = () => {
   return (
-    <header className="w-full bg-background dark:bg-gray-900 shadow-sm">
+    <header className="w-full bg-background dark:bg-background shadow-sm">
       <div className='topBar bg-tertiary text-tertiary-foreground py-2 text-center text-sm'>
         <div className='container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2'>
           <div className="left max-sm:hidden">
@@ -38,8 +40,8 @@ const Header = () => {
         <nav className="menu max-sm:hidden">
           <NavigationMenuDemo />
         </nav>
-        <div>
-          <Menu className='text-muted-foreground hidden max-sm:block' />
+        <div className='hidden max-sm:block'>
+          <SidebarTrigger />
         </div>
         <div className="logo max-sm:w-full">
           <Image src="/images/aqua-logo.png" alt="Logo" width={100} height={50} className='' />
@@ -61,11 +63,9 @@ const Header = () => {
             <User /> <span className='max-sm:hidden'>Login/Register</span>
           </Button>
           <Button variant='ghost' size='icon' className='cursor-pointer'>
-            <Heart />
-          </Button>
-          <Button variant='ghost' size='icon' className='cursor-pointer'>
             <ShoppingBag />
           </Button>
+          <ThemeToggle />
         </div>
       </div>
     </header>

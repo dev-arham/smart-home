@@ -32,7 +32,7 @@ export const title = "Company Footer";
 
 export default function Footer() {
     return (
-        <footer className="w-full border-t pb-8 pt-20">
+        <footer className="w-full border-t pb-4 pt-20">
             <div className="container mx-auto px-4">
                 <div className="mb-12 grid grid-cols-1 items-start justify-between gap-8 md:grid-cols-2 lg:gap-12">
                     <div>
@@ -59,15 +59,12 @@ export default function Footer() {
                         ))}
                     </div>
                 </div>
-                <div className="border-border flex flex-col items-start justify-between gap-6 border-t pt-8 md:flex-row md:items-center">
-                    <p className="text-muted-foreground max-w-2xl text-sm">
-                        Designed and Developed with ❤️ by Easyway
-                    </p>
-                    <p className="text-muted-foreground whitespace-nowrap text-sm">
+            </div>
+                <div className="w-full border-border flex flex-col items-start justify-center gap-6 border-t pt-4 md:flex-row md:items-center">
+                    <p className="text-muted-foreground whitespace-nowrap text-sm text-center w-full">
                         &copy; {YEAR} Aqua Electrical. All Rights Reserved.
                     </p>
                 </div>
-            </div>
         </footer>
     );
 }

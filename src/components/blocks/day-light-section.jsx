@@ -24,13 +24,13 @@ const DayLightSection = () => {
                     <h2 className="text-7xl text-white font-semibold mb-3 text-center max-sm:text-2xl">Making life effortlessly easy!</h2>
                     <p className="w-2/3 text-lg text-white mb-10 text-center max-sm:text-xs max-sm:w-full max-sm:mb-5">Walk into a low-lit, warm and cosy room to help you unwind before bed or have your home light up as the sun sets.</p>
                     <div className='flex gap-10 mb-5 max-sm:gap-2'>
-                        <Button className="border border-foreground text-accent-foreground bg-white hover:bg-accent/90 hover:text-accent-foreground dark:hover:bg-accent/20"
+                        <Button className="border border-foreground text-black bg-white hover:bg-accent/90 hover:text-accent-foreground dark:hover:bg-accent/20"
                             size={isMobile ? 'sm' : 'lg'}
                             onClick={() => changeMode('day')}>
                             <Sun />
                             Good Morning
                         </Button>
-                        <Button className="border border-foreground bg-black hover:bg-accent-foreground/90 hover:text-accent dark:hover:bg-accent/20"
+                        <Button className="border border-foreground bg-black text-white hover:bg-accent-foreground/90 hover:text-white dark:hover:bg-accent/20"
                             size={isMobile ? 'sm' : 'lg'}
                             onClick={() => changeMode('night')}>
                             <Moon />
