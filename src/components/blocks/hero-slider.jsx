@@ -40,15 +40,15 @@ export function HeroSlider() {
             <CarouselItem key={item.id}>
                 <div className="p-0">
                 <Card style={{backgroundImage: `url(${'/slider-bg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
-                    <CardContent className="flex h-[70vh] items-center justify-between px-20">
-                        <div className="w-9/10">
-                            <p className="text-primary text-sm font-bold uppercase mb-2">{item.badge}</p>
-                            <h2 className="text-7xl text-tertiary font-bold capitalize mb-3">{item.title}</h2>
-                            <p className="text-md text-tertiary font-semibold capitalize mb-6">{item.subTitle}</p>
+                    <CardContent className="flex h-[70vh] items-center justify-between px-20 max-sm:flex-col max-sm:h-[60vh] max-sm:p-5">
+                        <div className="w-9/10 max-sm:w-full max-sm:mb-5 max-sm:text-center">
+                            <p className="text-primary text-sm font-bold uppercase mb-2 max-sm:text-xs max-sm:mb-1">{item.badge}</p>
+                            <h2 className="text-7xl text-tertiary font-bold capitalize mb-3 max-sm:text-4xl max-sm:mb-1">{item.title}</h2>
+                            <p className="text-md text-tertiary font-semibold capitalize mb-6 max-sm:text-xs max-sm:mb-4">{item.subTitle}</p>
                             <Button variant='secondary' size='lg'>Shop Now</Button>
                         </div>
-                        <div className="w-full justify-items-end">
-                            <Image src={item.imageUrl} alt={item.title} width={600} height={400} />
+                        <div className="w-full justify-items-end max-sm:px-10 max-sm:py-5">
+                            <Image src={item.imageUrl} alt={item.title} width={600} height={400} className="max-sm:mx-auto" />
                         </div>
                     </CardContent>
                 </Card>

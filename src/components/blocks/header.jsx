@@ -9,33 +9,43 @@ import { Button } from '../ui/button'
 import { User } from 'lucide-react'
 import { Heart } from 'lucide-react'
 import { ShoppingBag } from 'lucide-react'
+import { Phone } from 'lucide-react'
+import { Hamburger } from 'lucide-react'
+import { MoreVertical } from 'lucide-react'
+import { Menu } from 'lucide-react'
 
 const Header = () => {
   return (
     <header className="w-full bg-background dark:bg-gray-900 shadow-sm">
       <div className='topBar bg-tertiary text-tertiary-foreground py-2 text-center text-sm'>
-        <div className='container mx-auto flex items-center justify-between px-1'>
-          <div className="left">
+        <div className='container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2'>
+          <div className="left max-sm:hidden">
             <p>Need help? Call us <span className='font-bold'>1-800-123-4567</span></p>
+          </div>
+          <div className='hidden max-sm:block'>
+            <Phone className='text-white' />
           </div>
           <div className="center">
             Summer sale discount off 50% off! <a href="#" className='font-bold underline'>Shop Now</a>
           </div>
-          <div className="right">
+          <div className="right max-sm:hidden">
             <RadioDropdownLocal />
             <RadioDropdownCurrency />
           </div>
         </div>
       </div>
-      <div className='container mx-auto flex items-center justify-between px-1 py-4'>
-        <nav className="menu">
+      <div className='container mx-auto flex items-center justify-between px-1 py-4 max-sm:px-5 max-sm:py-2 gap-2'>
+        <nav className="menu max-sm:hidden">
           <NavigationMenuDemo />
         </nav>
-        <div className="logo">
-          <Image src="/images/aqua-logo.png" alt="Logo" width={100} height={50} />
+        <div>
+          <Menu className='text-muted-foreground hidden max-sm:block' />
+        </div>
+        <div className="logo max-sm:w-full">
+          <Image src="/images/aqua-logo.png" alt="Logo" width={100} height={50} className='' />
         </div>
         <div className="userActions flex items-center gap-2">
-          <div>
+          <div className=' max-sm:hidden'>
             <div className="relative flex-1">
               <Input
                 className="peer h-8 w-full max-w-xs ps-8 pe-2"
@@ -48,7 +58,7 @@ const Header = () => {
             </div>
           </div>
           <Button variant='text' size='lg'>
-            <User /> Login/Register
+            <User /> <span className='max-sm:hidden'>Login/Register</span>
           </Button>
           <Button variant='ghost' size='icon' className='cursor-pointer'>
             <Heart />
