@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 const CustomerReviews = () => {
     return (
         <div className='w-full mx-auto overflow-x-hidden mb-20 -mt-20 max-sm:mb-10'>
-            <Carousel className="w-full z-3 cursor-grab">
+            <Carousel className="w-full z-3 cursor-grab select-none">
                 <CarouselContent className="mx-10">
                     {Array.from({ length: 5 }).map((_, index) => (
                         <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
