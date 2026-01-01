@@ -17,7 +17,7 @@ const page = () => {
     <div className='w-full'>
       <Header />
       <HeroSlider />
-      {/* <HeroCards /> */}
+      <HeroCards />
       <Categories />
       <DayLightSection />
       <DisplayCards />

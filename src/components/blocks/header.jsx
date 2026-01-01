@@ -44,7 +44,7 @@ const Header = () => {
           <SidebarTrigger />
         </div>
         <div className="logo max-sm:w-full">
-          <Image src="/images/sh-logo.png" alt="Logo" width={100} height={50} className='' />
+          <Image src="/images/aqua-logo.png" alt="Logo" width={100} height={50} className='' />
         </div>
         <div className="userActions flex items-center gap-2">
           <div className=' max-sm:hidden'>

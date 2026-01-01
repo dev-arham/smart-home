@@ -9,13 +9,13 @@ const openSans = Open_Sans({ subsets: ['latin'], variable: '--font-open-sans' })
 
 
 export const metadata = {
-  title: "Shargo Homes",
-  description: "Kitchenware, Home Appliances and more",
+  title: "Aqua Electrical",
+  description: "Smart Home Accessories Store",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${montserrat.variable} ${openSans.variable} antialiased`}
       >
