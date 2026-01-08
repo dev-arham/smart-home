@@ -147,7 +147,7 @@
   --sidebar-border: oklch(0.92 0.00 286.61);
   --sidebar-ring: oklch(0.62 0.21 259.23);
 
-  --font-sans: Inter, sans-serif;
+  --font-sans: var(--font-sans, system-ui, sans-serif);
   --font-serif: Lora, serif;
   --font-mono: JetBrains Mono, monospace;
 
@@ -270,6 +270,6 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }

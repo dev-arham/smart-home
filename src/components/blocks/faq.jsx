@@ -35,8 +35,8 @@ const Faq = () => {
     },
     {
       id: "item-6",
-      question: "Do you offer international shipping?",
-      answer: "Yes, we ship to over 50 countries worldwide. Shipping costs and delivery times vary by location. Free shipping is available for orders over $100 within the continental US. International orders may be subject to customs duties and taxes based on your country's regulations."
+      question: "Do you offer free shipping?",
+      answer: "Yes, we offer free standard shipping on all orders over PKR 5000 within the country. For orders below this amount, a flat shipping fee applies. We also provide expedited shipping options at an additional cost. International shipping rates vary based on destination."
     }
   ]
 

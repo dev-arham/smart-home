@@ -27,7 +27,7 @@ const page = () => {
       <CustomerReviews />
       <Services />
       <LookBook />
-      <OurTeam />
+      {/* <OurTeam /> */}
       <Faq />
       <Newsletter />
       <Footer />

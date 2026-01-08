@@ -21,18 +21,19 @@ const Header = () => {
     <header className="w-full bg-background dark:bg-background shadow-sm">
       <div className='topBar bg-tertiary text-tertiary-foreground py-2 text-center text-sm'>
         <div className='container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2'>
-          <div className="left max-sm:hidden">
-            <p>Need help? Call us <span className='font-bold'>1-800-123-4567</span></p>
+          <div className="left max-sm:hidden w-full flex">
+            <p>Need help? Call us <a href="tel:+923368882782"><span className='font-bold underline'>+92 336 8882782</span></a></p>
           </div>
           <div className='hidden max-sm:block'>
             <Phone className='text-white' />
           </div>
-          <div className="center">
-            Summer sale discount off 50% off! <a href="#" className='font-bold underline'>Shop Now</a>
+          <div className="center w-full flex gap-2 justify-center">
+            <span>Winter Sale Upto 50% off! </span>
+            <span><a href="#" className='font-bold underline'>Shop Now</a></span>
           </div>
-          <div className="right max-sm:hidden">
-            <RadioDropdownLocal />
-            <RadioDropdownCurrency />
+          <div className="right max-sm:hidden w-full">
+            {/* <RadioDropdownLocal />
+            <RadioDropdownCurrency /> */}
           </div>
         </div>
       </div>

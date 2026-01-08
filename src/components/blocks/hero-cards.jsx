@@ -6,16 +6,16 @@ const HeroCards = () => {
         <div className='flex justify-center items-center gap-5 container mx-auto mb-20 max-sm:flex-col max-sm:px-5 max-sm:mb-10'>
             <HeroCard item={{
                 id: 1,
-                badge: "Upgrade your home and save big",
+                badge: "Get the best switches for less",
                 title: "Hurry and take up to 35% off.",
-                imageUrl: '/product-one-bg.jpg',
+                imageUrl: '/images/big-switches.png',
             }} />
             <HeroCard item={{
                 id: 2,
-                badge: "Get the best for less",
-                title: "Smart home devices on sale",
+                badge: "Upgrade your home with LED lights",
+                title: "Brighten up your life",
                 subTitle: "Imagine what home could be",
-                imageUrl: '/product-one-bg.jpg',
+                imageUrl: '/images/led-lights.png',
             }} />
         </div>
     )
