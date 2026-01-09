@@ -3,7 +3,7 @@ import HeroCard from '../ui/hero-card'
 
 const HeroCards = () => {
     return (
-        <div className='flex justify-center items-center gap-5 container mx-auto mb-20 max-sm:flex-col max-sm:px-5 max-sm:mb-10'>
+        <div className='flex justify-center items-center gap-5 container mx-auto mb-20 max-sm:flex-col max-xl:px-5 max-sm:mb-10'>
             <HeroCard item={{
                 id: 1,
                 badge: "Get the best switches for less",

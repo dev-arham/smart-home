@@ -10,8 +10,8 @@ import { useIsMobile } from '@/hooks/use-mobile'
 const VideoBanner = () => {
     const isMobile = useIsMobile();
     return (
-        <div className='container mx-auto max-sm:p-5'>
-            <Card className='relative  h-[90vh] flex items-center justify-center group overflow-hidden max-sm:h-[60vh]'>
+        <div className='container mx-auto max-xl:p-5'>
+            <Card className='relative h-[80vh] flex items-center justify-center group overflow-hidden max-sm:h-[60vh]'>
                 <Image width={1500} height={700} src='/images/video-thumbnail.jpg' alt='video banner background' className='w-full h-full absolute object-cover rounded-xl z-1 group-hover:scale-110 transition-transform duration-300' />
                 <div className='absolute z-2 w-full h-full bg-black/40 rounded-xl'></div>
                 <div className='z-2'>

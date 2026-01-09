@@ -15,9 +15,9 @@ const CategoryCarousel = () => {
 
     return (
         <Carousel className="w-full cursor-grab">
-            <CarouselContent className="mx-20 max-sm:mx-5">
+            <CarouselContent className="xl:mx-20 mx-5">
                 {categories.map((category, index) => (
-                    <CarouselItem key={index} className="pl-5 md:basis-1/2 lg:basis-1/5 max-sm:pl-0 max-sm:basis-1/2">
+                    <CarouselItem key={index} className="pl-5 md:basis-1/2 lg:basis-1/4 max-sm:pl-0 max-sm:basis-1/2">
                         <div className="p-1 max-sm:p-2">
                             <Card className='select-none cursor-pointer bg-secondary flex flex-col pt-10 gap-10 justify-between items-center group overflow-hidden max-sm:gap-5 dark:bg-card max-sm:pt-5'>
                                 <div>

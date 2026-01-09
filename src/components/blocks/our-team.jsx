@@ -71,7 +71,7 @@ const OurTeam = () => {
   ]
 
   return (
-    <section className="w-full py-12 md:py-20 lg:py-24 bg-muted/50 ">
+    <section className="container mx-auto md:py-20 lg:py-24">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
@@ -84,7 +84,7 @@ const OurTeam = () => {
         </div>
 
         {/* Team Carousel */}
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative w-full mx-auto">
           <Carousel
             opts={{
               align: "start",
@@ -95,20 +95,21 @@ const OurTeam = () => {
             <CarouselContent className="-ml-2 md:-ml-4 py-5">
               {teamMembers.map((member) => (
                 <CarouselItem key={member.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 h-full overflow-hidden group">
-                    <CardContent className="p-0 h-full flex flex-col">
+                  <Card className="border-0 shadow-sm hover:shadow-md transition-all duration-300 h-full overflow-hidden group p-0" >
+                    <CardContent className="h-full flex flex-col relative p-8">
+                      <img src="/images/slider-bg.jpg" alt="" className='absolute inset-0 w-full h-full object-cover opacity-50 z-0'/>
                       {/* Image Container */}
-                      <div className="relative w-full aspect-square overflow-hidden bg-muted">
+                      <div className="relative aspect-square overflow-hidden bg-muted mx-5 mb-5 rounded-full">
                         <img
                           src={member.image}
                           alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
-                      
+
                       {/* Content */}
-                      <div className="p-4 md:p-6 flex flex-col grow">
+                      <div className="flex flex-col grow z-10">
                         <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">
                           {member.name}
                         </h3>
@@ -124,14 +125,14 @@ const OurTeam = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            
+
             {/* Navigation Buttons */}
             <div className="hidden md:block">
               <CarouselPrevious className="left-0 -translate-x-1/2" />
               <CarouselNext className="right-0 translate-x-1/2" />
             </div>
           </Carousel>
-          
+
           {/* Mobile Navigation Hint */}
           <p className="text-center text-xs md:text-sm text-muted-foreground mt-4 md:hidden">
             Swipe to see more team members

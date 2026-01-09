@@ -16,7 +16,7 @@ const reviews = [
         name: "Fatima Malik",
         title: "Interior Designer",
         rating: "★★★★★",
-        review: "Optimized solution hai yeh! Mere home automation setup bilkul professional lag raha hai. Security features boht solid hain. Clients ko impress karna aasan ho gaya. Highly recommended!",
+        review: "Optimized solution hai yeh! Mere home automation setup bilkul professional lag raha hai. Security features boht solid hain. Clients ko impress karna aasan ho gaya.",
         image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Zehra"
     },
     {
@@ -55,7 +55,7 @@ const CustomerReviews = () => {
             <Carousel className="w-full z-3 cursor-grab">
                 <CarouselContent className="mx-10">
                     {reviews.map((review, index) => (
-                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 2xl:basis-1/4">
+                        <CarouselItem key={index} className="md:basis-1/2 xl:basis-1/3 2xl:basis-1/4">
                             <div className="p-1">
                                 <Card className='select-none bg-secondary flex flex-col p-10 justify-between max-sm:p-5 max-sm:text-sm dark:bg-card'>
                                     <div className='flex gap-5'>

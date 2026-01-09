@@ -20,28 +20,28 @@ const Header = () => {
   return (
     <header className="w-full bg-background dark:bg-background shadow-sm">
       <div className='topBar bg-tertiary text-tertiary-foreground py-2 text-center text-sm'>
-        <div className='container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2'>
+        <div className='container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2 md:justify-center max-xl:px-5'>
           <div className="left max-sm:hidden w-full flex">
             <p>Need help? Call us <a href="tel:+923368882782"><span className='font-bold underline'>+92 336 8882782</span></a></p>
           </div>
           <div className='hidden max-sm:block'>
             <Phone className='text-white' />
           </div>
-          <div className="center w-full flex gap-2 justify-center">
+          <div className="center w-full flex gap-2 justify-center max-xl:justify-end">
             <span>Winter Sale Upto 50% off! </span>
             <span><a href="#" className='font-bold underline'>Shop Now</a></span>
           </div>
-          <div className="right max-sm:hidden w-full">
+          <div className="right hidden w-full xl:block">
             {/* <RadioDropdownLocal />
             <RadioDropdownCurrency /> */}
           </div>
         </div>
       </div>
       <div className='container mx-auto flex items-center justify-between px-1 py-4 max-sm:px-5 max-sm:py-2 gap-2'>
-        <nav className="menu max-sm:hidden">
+        <nav className="menu max-lg:hidden">
           <NavigationMenuDemo />
         </nav>
-        <div className='hidden max-sm:block'>
+        <div className='hidden max-lg:block'>
           <SidebarTrigger />
         </div>
         <div className="logo max-sm:w-full">

@@ -41,8 +41,11 @@ const Faq = () => {
   ]
 
   return (
-    <section className="w-full py-12 md:py-20 lg:py-24 bg-background  mb-5">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+    <section className="w-full relative border-y mb-20">
+      <div className="absolute -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[14px_24px]">
+        <div className="-z-10 m-auto h-77.5 w-77.5 rounded-full bg-blue-400 opacity-20 blur-[100px]"></div>
+      </div>
+      <div className="container mx-auto py-12 md:py-20 lg:py-24 mb-5 px-4 md:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4">
@@ -57,8 +60,8 @@ const Faq = () => {
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full space-y-3 md:space-y-4">
             {faqData.map((faq) => (
-              <AccordionItem 
-                key={faq.id} 
+              <AccordionItem
+                key={faq.id}
                 value={faq.id}
                 className="border rounded-lg px-4 md:px-6 bg-card hover:shadow-md transition-shadow"
               >
@@ -72,19 +75,6 @@ const Faq = () => {
             ))}
           </Accordion>
         </div>
-
-        {/* Contact CTA */}
-        {/* <div className="text-center mt-8 md:mt-12 lg:mt-16">
-          <p className="text-muted-foreground text-sm md:text-base mb-3 md:mb-4">
-            Still have questions?
-          </p>
-          <a 
-            href="/contact" 
-            className="inline-flex items-center justify-center px-6 md:px-8 py-2.5 md:py-3 text-sm md:text-base font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary/90 transition-colors"
-          >
-            Contact Support
-          </a>
-        </div> */}
       </div>
     </section>
   )

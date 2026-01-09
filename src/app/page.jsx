@@ -3,6 +3,7 @@ import CustomerReviews from '@/components/blocks/customer-reviews'
 import DayLightSection from '@/components/blocks/day-light-section'
 import DisplayCards from '@/components/blocks/display-cards'
 import Faq from '@/components/blocks/faq'
+import FeaturedProducts from '@/components/blocks/featured-products'
 import Footer from '@/components/blocks/footer'
 import Header from '@/components/blocks/header'
 import HeroCards from '@/components/blocks/hero-cards'
@@ -21,13 +22,14 @@ const page = () => {
       <HeroSlider />
       <HeroCards />
       <Categories />
+      <FeaturedProducts />
       <DayLightSection />
       <DisplayCards />
       <VideoBanner />
       <CustomerReviews />
       <Services />
       <LookBook />
-      {/* <OurTeam /> */}
+      <OurTeam />
       <Faq />
       <Newsletter />
       <Footer />
