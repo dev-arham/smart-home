@@ -1,20 +1,16 @@
 import React from 'react'
-import RadioDropdownLocal from './radio-dropdown-local'
-import RadioDropdownCurrency from './radio-button-currency'
 import { NavigationMenuDemo } from './navigation-menu'
 import { Input } from '../ui/input'
 import Image from 'next/image'
 import { SearchIcon } from 'lucide-react'
 import { Button } from '../ui/button'
 import { User } from 'lucide-react'
-import { Heart } from 'lucide-react'
 import { ShoppingBag } from 'lucide-react'
 import { Phone } from 'lucide-react'
-import { Hamburger } from 'lucide-react'
-import { MoreVertical } from 'lucide-react'
 import { Menu } from 'lucide-react'
 import { SidebarTrigger } from '../ui/sidebar'
 import { ThemeToggle } from './theme-toggle'
+import UserAvatar from './user-avatar'
 
 const Header = () => {
   return (
@@ -32,8 +28,6 @@ const Header = () => {
             <span><a href="#" className='font-bold underline'>Shop Now</a></span>
           </div>
           <div className="right hidden w-full xl:block">
-            {/* <RadioDropdownLocal />
-            <RadioDropdownCurrency /> */}
           </div>
         </div>
       </div>
@@ -60,9 +54,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <Button variant='text' size='lg'>
-            <User /> <span className='max-sm:hidden'>Login/Register</span>
-          </Button>
+          <UserAvatar />
           <Button variant='ghost' size='icon' className='cursor-pointer'>
             <ShoppingBag />
           </Button>

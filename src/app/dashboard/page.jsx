@@ -1,9 +1,6 @@
-import React from 'react'
 
-const page = () => {
+export default function page() {
   return (
-    <div>Protected Dashboard Page</div>
+    <div>page</div>
   )
 }
-
-export default page

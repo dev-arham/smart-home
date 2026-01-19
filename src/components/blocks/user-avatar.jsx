@@ -1,0 +1,42 @@
+import { getCurrentSession, signOut } from '@/server/auth';
+import React from 'react'
+import { Button } from '../ui/button';
+import { User } from 'lucide-react';
+import { UserCircle } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import Link from 'next/link';
+
+export default async function UserAvatar() {
+    const session = await getCurrentSession();
+    if (!session)
+        return (
+            <Link href="/login">
+                <Button variant='ghost' size='lg' className='cursor-pointer'>
+                    <User /> <span className='max-sm:hidden'>Login/Register</span>
+                </Button>
+            </Link>
+        )
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant='ghost' size='lg' className='cursor-pointer'>
+                    <UserCircle /> {session?.user?.name}
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem className='font-bold'>
+                    {session?.user?.email}
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    Settings
+                </DropdownMenuItem>
+                <DropdownMenuItem variant='destructive' onClick={signOut}>
+                    Logout
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}

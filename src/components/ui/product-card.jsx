@@ -4,6 +4,7 @@ import { Star, ShoppingCart, Heart } from 'lucide-react'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './card'
 import { Button } from './button'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 /**
  * ProductCard Component
@@ -23,7 +24,7 @@ import { cn } from '@/lib/utils'
  * @param {boolean} [props.product.isSale]
  * @param {string} [props.className]
  */
-export default function ProductCard({ 
+export default function ProductCard({
   product = {
     id: "1",
     title: "Smart Thermostat Pro",
@@ -35,24 +36,25 @@ export default function ProductCard({
     reviews: 128,
     isSale: true
   },
-  className 
+  className
 }) {
   const { title, description, price, originalPrice, image, rating, reviews, isSale } = product
 
   return (
+    <Link href={`/product/${product.id}`} passHref>
     <Card className={cn("group overflow-hidden rounded-lg border-muted bg-card transition-all hover:shadow-md", className)}>
       <div className="relative aspect-square overflow-hidden bg-muted">
         {/* Product Image */}
         <div className="relative h-full w-full">
-            <Image
+          <Image
             src={image}
             alt={title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
+          />
         </div>
-        
+
         {/* Badges */}
         <div className="absolute left-3 top-3 flex flex-col gap-2">
           {isSale && (
@@ -75,22 +77,22 @@ export default function ProductCard({
 
       <CardHeader className="px-4">
         <div className="flex items-center justify-between">
-            <CardTitle className="line-clamp-1 text-lg font-bold">{title}</CardTitle>
+          <CardTitle className="line-clamp-1 text-lg font-bold">{title}</CardTitle>
         </div>
-        
+
         {/* Rating */}
         <div className="flex items-center gap-1">
-            <div className="flex items-center text-yellow-500">
-                {Array.from({ length: 5 }).map((_, i) => (
-                    <Star 
-                        key={i} 
-                        className={cn("h-4 w-4 fill-current", i < Math.floor(rating || 0) ? "text-yellow-400" : "text-muted-foreground/30")} 
-                    />
-                ))}
-            </div>
-            <span className="text-xs text-muted-foreground">({reviews})</span>
+          <div className="flex items-center text-yellow-500">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                className={cn("h-4 w-4 fill-current", i < Math.floor(rating || 0) ? "text-yellow-400" : "text-muted-foreground/30")}
+              />
+            ))}
+          </div>
+          <span className="text-xs text-muted-foreground">({reviews})</span>
         </div>
-        
+
         <CardDescription className="line-clamp-2 text-sm mt-2">
           {description}
         </CardDescription>
@@ -101,7 +103,7 @@ export default function ProductCard({
           <span className="text-xl font-bold">PKR {price.toFixed(2)}</span>
           {originalPrice && originalPrice > price && (
             <span className="text-sm text-muted-foreground line-through">
-            PKR {originalPrice.toFixed(2)}
+              PKR {originalPrice.toFixed(2)}
             </span>
           )}
         </div>
@@ -114,5 +116,6 @@ export default function ProductCard({
         </Button>
       </CardFooter>
     </Card>
+    </Link>
   )
 }

@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, index, uuid, varchar, pgEnum } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -92,9 +92,50 @@ export const accountRelations = relations(account, ({ one }) => ({
   }),
 }));
 
+export const appRoleEnum = pgEnum("app_role", [
+  "customer",
+  "admin",
+  "seller",
+]);
+
+/**
+ * User profile extension table
+ */
+export const userProfile = pgTable("user_profile", {
+  id: uuid("id").primaryKey().defaultRandom(),
+
+  // Reference to Better Auth user
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" })
+    .unique(),
+
+  // Profile
+  fullName: varchar("full_name", { length: 150 }),
+  phone: varchar("phone", { length: 20 }),
+  avatarUrl: text("avatar_url"),
+
+  // App-specific role & status
+  role: appRoleEnum("role").notNull().default("customer"),
+  isActive: boolean("is_active").notNull().default(true),
+
+  // Preferences / flags
+  marketingOptIn: boolean("marketing_opt_in").notNull().default(false),
+
+  // Audit
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
 export const schema = {
   user,
   session,
   account,
   verification,
+  userProfile,
 };

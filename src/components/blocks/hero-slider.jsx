@@ -39,7 +39,7 @@ export function HeroSlider() {
                 <div className="p-0">
                 <Card style={{backgroundImage: `url(${'/images/slider-bg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
                     <CardContent className="flex h-[70vh] items-center justify-between px-20 max-sm:flex-col max-sm:h-[60vh] max-sm:p-5 select-none md:px-10 md:h-[50vh]">
-                        <div className="w-9/10 max-sm:w-full max-sm:mb-5 max-sm:text-center w-full">
+                        <div className="max-sm:w-full max-sm:mb-5 max-sm:text-center w-full">
                             <p className="text-primary text-sm font-bold uppercase mb-2 max-sm:text-xs max-sm:mb-1">{item.badge}</p>
                             <h2 className="text-6xl text-tertiary font-black capitalize mb-3 max-sm:text-4xl max-sm:mb-1 max-lg:text-4xl">{item.title}</h2>
                             <p className="text-md text-muted-foreground mb-6 max-sm:text-xs max-sm:mb-4">{item.subTitle}</p>

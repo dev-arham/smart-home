@@ -17,10 +17,6 @@ import { Coins } from "lucide-react"
 import { File } from "lucide-react"
 import { Info } from "lucide-react"
 import { Phone } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
-import { Sun } from "lucide-react"
-import { ChevronUp } from "lucide-react"
-import { ContrastIcon } from "lucide-react"
 import Image from "next/image"
 
 // Menu items.
