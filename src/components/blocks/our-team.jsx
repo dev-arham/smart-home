@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
 import Image from 'next/image'
+import Autoplay from "embla-carousel-autoplay"
 
 const OurTeam = () => {
   const teamMembers = [
@@ -86,10 +87,17 @@ const OurTeam = () => {
         {/* Team Carousel */}
         <div className="relative w-full mx-auto">
           <Carousel
-            opts={{
+             opts={{
               align: "start",
               loop: true,
+              
             }}
+            plugins={[
+              Autoplay({
+                delay: 2000,
+                
+              }),
+            ]}
             className="w-full"
           >
             <CarouselContent className="-ml-2 md:-ml-4 py-5">

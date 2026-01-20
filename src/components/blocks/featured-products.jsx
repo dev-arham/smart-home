@@ -1,6 +1,8 @@
+'use client'
 import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import ProductCard from '@/components/ui/product-card'
+import Autoplay from "embla-carousel-autoplay"
 
 const FEATURED_PRODUCTS = [
   {
@@ -80,7 +82,14 @@ export default function FeaturedProducts() {
                 opts={{
                     align: "start",
                     loop: true,
+                    pauseOnHover: true,
                 }}
+                  plugins={[
+                  Autoplay({
+                    delay: 2000,
+                    stopOnInteraction: false,
+                  }),
+                ]}
                 className="w-full"
             >
                 <CarouselContent className="-ml-4">

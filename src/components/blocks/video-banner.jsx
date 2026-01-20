@@ -20,7 +20,7 @@ const VideoBanner = () => {
                         <DialogTrigger asChild>
                             <PlayCircle size={isMobile ? 80 : 150} strokeWidth={1} className='text-white cursor-pointer' />
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="sm:max-w-106.25">
                             <DialogHeader>
                                 <DialogTitle>Alert!</DialogTitle>
                                 <DialogDescription>

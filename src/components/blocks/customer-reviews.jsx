@@ -1,9 +1,10 @@
+'use client'
 import React from 'react'
 import { Card } from '@/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-
+import Autoplay from "embla-carousel-autoplay"
 const reviews = [
     {
         name: "Ahmad Khan",
@@ -52,7 +53,15 @@ const reviews = [
 const CustomerReviews = () => {
     return (
         <div className='w-full mx-auto overflow-x-hidden mb-20 -mt-20 max-sm:mb-10'>
-            <Carousel className="w-full z-3 cursor-grab">
+            <Carousel
+                opts={{ loop: true }}
+                 plugins={[
+                    Autoplay({
+                    delay: 2000,
+                    stopOnInteraction: false,
+                    }),
+                ]}
+                className="w-full z-3 cursor-grab">
                 <CarouselContent className="mx-10">
                     {reviews.map((review, index) => (
                         <CarouselItem key={index} className="md:basis-1/2 xl:basis-1/3 2xl:basis-1/4">
