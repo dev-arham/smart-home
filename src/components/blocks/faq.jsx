@@ -41,14 +41,14 @@ const Faq = () => {
   ]
 
   return (
-    <section className="w-full relative border-y mb-20 p-5">
-      <div className="absolute -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[14px_24px]">
-        <div className="-z-10 m-auto h-77.5 w-77.5 rounded-full bg-blue-400 opacity-20 blur-[100px]"></div>
+    <section className="w-full relative border-y border-border mb-20 p-5 pb-10">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-size-[14px_24px]">
+        <div className="-z-10 m-auto h-77.5 w-77.5 rounded-full bg-blue-400 dark:bg-blue-600 opacity-20 blur-[100px]"></div>
       </div>
       <div className="container mx-auto py-12 md:py-20 lg:py-24 mb-5 px-4 md:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-12 lg:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4 text-foreground">
             Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-2xl mx-auto">
@@ -63,9 +63,9 @@ const Faq = () => {
               <AccordionItem
                 key={faq.id}
                 value={faq.id}
-                className="border rounded-lg px-4 md:px-6 bg-card hover:shadow-md transition-shadow"
+                className="border border-border rounded-lg px-4 md:px-6 bg-card hover:shadow-md dark:hover:shadow-white/5 transition-shadow"
               >
-                <AccordionTrigger className="text-left text-base md:text-lg font-medium py-4 md:py-5 hover:no-underline">
+                <AccordionTrigger className="text-left text-base md:text-lg font-medium py-4 md:py-5 hover:no-underline text-foreground">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm md:text-base text-muted-foreground pb-4 md:pb-5 leading-relaxed">

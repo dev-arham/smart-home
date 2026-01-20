@@ -19,7 +19,7 @@ const page = () => {
   return (
     <div className='w-full'>
       <Header />
-      <HeroSlider className= "mt-20 max-sm:mt-10" />
+      <HeroSlider  />
       <HeroCards />
       <Categories />
       <FeaturedProducts />
