@@ -27,8 +27,13 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           <SidebarProvider open={false}>
+            
+            <section className="w-full">
             <AppSidebar />
-            {children}
+              <main>
+                {children}
+              </main>
+            </section>
           </SidebarProvider>
         </ThemeProvider>
       </body>

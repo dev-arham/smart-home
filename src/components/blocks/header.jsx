@@ -3,6 +3,7 @@ import { NavigationMenuDemo } from './navigation-menu'
 import { Input } from '../ui/input'
 import Image from 'next/image'
 import { SearchIcon } from 'lucide-react'
+import { Heart } from 'lucide-react'; 
 import { Button } from '../ui/button'
 import { User } from 'lucide-react'
 import { ShoppingBag } from 'lucide-react'
@@ -11,6 +12,9 @@ import { Menu } from 'lucide-react'
 import { SidebarTrigger } from '../ui/sidebar'
 import { ThemeToggle } from './theme-toggle'
 import UserAvatar from './user-avatar'
+import WishlistDrawer from './wishlist-drawer'
+import Link from 'next/link'
+
 
 const Header = () => {
   return (
@@ -55,9 +59,14 @@ const Header = () => {
             </div>
           </div>
           <UserAvatar />
-          <Button variant='ghost' size='icon' className='cursor-pointer'>
-            <ShoppingBag />
+          <Button variant='ghost' size='icon' className='cursor-pointer' asChild>
+            <Link href="/cart"><ShoppingBag /></Link>
           </Button>
+          <WishlistDrawer>
+            <Button variant='ghost' size='icon' className='cursor-pointer'>
+              <Heart />
+            </Button>
+          </WishlistDrawer>
           <ThemeToggle />
         </div>
       </div>
