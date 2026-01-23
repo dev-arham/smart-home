@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
   Accordion,
@@ -5,8 +6,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { useFadeIn } from '@/hooks/use-fade-in'
 
 const Faq = () => {
+  const headingFade = useFadeIn({ direction: 'fade', threshold: 0.2 })
+  const accordionFade = useFadeIn({ direction: 'up', threshold: 0.1, delay: 200 })
+  
   const faqData = [
     {
       id: "item-1",
@@ -47,7 +52,7 @@ const Faq = () => {
       </div>
       <div className="container mx-auto py-12 md:py-20 lg:py-24 mb-5 px-4 md:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-8 md:mb-12 lg:mb-16">
+        <div ref={headingFade.ref} style={headingFade.animationStyles} className="text-center mb-8 md:mb-12 lg:mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4 text-foreground">
             Frequently Asked Questions
           </h2>
@@ -57,7 +62,7 @@ const Faq = () => {
         </div>
 
         {/* FAQ Accordion */}
-        <div className="max-w-3xl mx-auto">
+        <div ref={accordionFade.ref} style={accordionFade.animationStyles} className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full space-y-3 md:space-y-4">
             {faqData.map((faq) => (
               <AccordionItem

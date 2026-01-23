@@ -3,6 +3,7 @@ import React from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import ProductCard from '@/components/ui/product-card'
 import Autoplay from "embla-carousel-autoplay"
+import { useFadeIn } from '@/hooks/use-fade-in'
 
 const FEATURED_PRODUCTS = [
   {
@@ -68,9 +69,11 @@ const FEATURED_PRODUCTS = [
 ]
 
 export default function FeaturedProducts() {
+  const headingFade = useFadeIn({ direction: 'fade', threshold: 0.2 })
+  
   return (
     <section className="container py-12 mx-auto px-4 md:px-6">
-        <div className="flex flex-col gap-4 mb-10 text-center">
+        <div ref={headingFade.ref} style={headingFade.animationStyles} className="flex flex-col gap-4 mb-10 text-center">
             <h2 className='text-5xl font-bold text-tertiary text-center mb-2 max-sm:text-3xl dark:text-tertiary-foreground'>Featured Products</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Discover our hand-picked selection of top-rated smart home devices designed to elevate your living experience.

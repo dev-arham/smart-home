@@ -5,18 +5,20 @@ import { Button } from '../ui/button'
 import { Sun } from 'lucide-react'
 import { Moon } from 'lucide-react'
 import { useIsMobile } from '@/hooks/use-mobile'
+import { useFadeIn } from '@/hooks/use-fade-in'
 
 const DayLightSection = () => {
 
     const [mode, setMode] = useState('day');
     const isMobile = useIsMobile();
+    const sectionFade = useFadeIn({ direction: 'fade', threshold: 0.2, duration: 900 })
 
     const changeMode = (mode) => {
         setMode(mode);
     };
 
     return (
-        <div className='relative container mx-auto mb-20 max-xl:px-5 max-sm:mb-10 overflow-hidden'>
+        <div ref={sectionFade.ref} style={sectionFade.animationStyles} className='relative container mx-auto mb-20 max-xl:px-5 max-sm:mb-10 overflow-hidden'>
             <Card className='relative overflow-hidden' >
                 <div 
                     className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out ${mode === 'day' ? 'opacity-100' : 'opacity-0'}`}
