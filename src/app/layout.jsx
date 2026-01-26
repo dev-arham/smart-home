@@ -1,12 +1,13 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
-import { Open_Sans } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/blocks/sidebar";
 
-const openSans = Open_Sans({
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-sans',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
 });
 
 export const metadata = {
@@ -16,9 +17,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className={openSans.variable}>
+    <html lang="en" suppressHydrationWarning className={poppins.variable}>
       <body
-        className="antialiased"
+        className={`${poppins.className} antialiased`}
       >
         <ThemeProvider
           attribute="class"

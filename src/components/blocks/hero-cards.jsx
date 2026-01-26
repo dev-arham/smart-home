@@ -8,7 +8,7 @@ const HeroCards = () => {
     const rightCard = useFadeIn({ direction: 'right', threshold: 0.2 })
 
     return (
-        <div className='flex justify-center items-center gap-5 container mx-auto mb-20 max-sm:flex-col max-xl:px-5 max-sm:mb-10'>
+        <div className='flex justify-center items-center gap-5  mx-auto mb-20 max-sm:flex-col max-xl:px-5 max-sm:mb-10'>
             <div ref={leftCard.ref} style={leftCard.animationStyles}>
                 <HeroCard item={{
                     id: 1,

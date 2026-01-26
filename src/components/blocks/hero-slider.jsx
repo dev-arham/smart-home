@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel"
 import { Button } from "../ui/button"
 import Autoplay from "embla-carousel-autoplay"
+import Fade from "embla-carousel-fade"
 import Image from "next/image"
 
 export function HeroSlider() {
@@ -31,14 +32,14 @@ export function HeroSlider() {
         }
     ]
   return (
-    <div className="w-full px-4 py-5 mt-30" >
-        <Carousel className="container mx-auto z-3" opts={{loop: true}} plugins={[Autoplay({delay: 2500, stopOnInteraction: true})]}>
-        <CarouselContent>
+    <div className="w-full h-screen" >
+        <Carousel className="h-screen mx-auto z-3" opts={{loop: true}} plugins={[Autoplay({delay: 2500, stopOnInteraction: true}), Fade()]}>
+        <CarouselContent className="h-screen">
             {slides.map((item, index) => (
-            <CarouselItem key={item.id}>
-                <div className="p-0">
-                <Card style={{backgroundImage: `url(${'/images/slider-bg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
-                    <CardContent className="flex h-[70vh] items-center justify-between px-20 max-sm:flex-col max-sm:h-[60vh] max-sm:p-5 select-none md:px-10 md:h-[50vh]">
+            <CarouselItem key={item.id} className="h-screen">
+                <div className="p-0 h-screen">
+                <Card className="h-screen border-none shadow-none" style={{backgroundImage: `url(${'/images/slider-bg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
+                    <CardContent className="flex h-screen items-center justify-between px-20 max-sm:flex-col max-sm:p-5 select-none md:px-10">
                         <div className="max-sm:w-full max-sm:mb-5 max-sm:text-center w-full">
                             <p className="text-primary text-sm font-bold uppercase mb-2 max-sm:text-xs max-sm:mb-1">{item.badge}</p>
                             <h2 className="text-6xl text-tertiary font-black capitalize mb-3 max-sm:text-4xl max-sm:mb-1 max-lg:text-4xl">{item.title}</h2>

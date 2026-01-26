@@ -12,6 +12,8 @@ import LookBook from '@/components/blocks/lookbook'
 import Newsletter from '@/components/blocks/newsletter'
 import OurTeam from '@/components/blocks/our-team'
 import Services from '@/components/blocks/services'
+import SmartHomeHero from '@/components/blocks/smart-home-hero'
+import StayConnected from '@/components/blocks/stay-connected'
 import VideoBanner from '@/components/blocks/video-banner'
 import React from 'react'
 
@@ -21,14 +23,16 @@ const page = () => {
       <Header />
       <HeroSlider  />
       <HeroCards />
-      <Categories />
-      <FeaturedProducts />
+      {/* <Categories /> */}
+      {/* <FeaturedProducts /> */}
       <DayLightSection />
+      <SmartHomeHero />
       <DisplayCards />
       <VideoBanner />
       <CustomerReviews />
       <Services />
       <LookBook />
+      <StayConnected />
       <OurTeam />
       <Faq />
       <Newsletter />
