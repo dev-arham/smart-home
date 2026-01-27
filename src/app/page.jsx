@@ -15,6 +15,7 @@ import Services from '@/components/blocks/services'
 import SmartHomeHero from '@/components/blocks/smart-home-hero'
 import StayConnected from '@/components/blocks/stay-connected'
 import VideoBanner from '@/components/blocks/video-banner'
+import FeaturesAutomation from '@/components/blocks/features-automation'
 import React from 'react'
 
 const page = () => {
@@ -26,6 +27,7 @@ const page = () => {
       {/* <Categories /> */}
       {/* <FeaturedProducts /> */}
       <DayLightSection />
+      <FeaturesAutomation />
       <DisplayCards />
       <SmartHomeHero />
       <VideoBanner />

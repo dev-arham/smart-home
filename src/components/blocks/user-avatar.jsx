@@ -11,7 +11,7 @@ export default async function UserAvatar() {
     if (!session)
         return (
             <Link href="/login">
-                <Button variant='ghost' size='lg' className='cursor-pointer'>
+                <Button size='lg' className='cursor-pointer bg-gray-900 hover:bg-gray-800 text-white rounded-full'>
                     <User /> <span className='max-sm:hidden'>Login/Register</span>
                 </Button>
             </Link>
