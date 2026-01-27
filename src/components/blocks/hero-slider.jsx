@@ -12,7 +12,6 @@ import {
 import { Button } from "../ui/button"
 import Autoplay from "embla-carousel-autoplay"
 import Fade from "embla-carousel-fade"
-import Image from "next/image"
 
 export function HeroSlider() {
     const slides = [
@@ -21,14 +20,28 @@ export function HeroSlider() {
             badge: "Upgrade your home and save big",
             title: "Imagine what home could be",
             subTitle: "Hurry and take up to 35% off on selected smart home products",
-            imageUrl: "/images/hero-one.png",
+            imageUrl: "/images/mtronic-pk-products-banner.webp",
         },
         {
             id: 2,
             badge: "Upgrade your home and save big",
             title: "7th Aniversary Sale Live Now",
             subTitle: "Enjoy great prices accross the range of smart home products",
-            imageUrl: "/images/hero-two.png",
+            imageUrl: "/images/slide.png",
+        },
+        {
+            id: 3,
+            badge: "Smart Living Solutions",
+            title: "Transform Your Living Space",
+            subTitle: "Discover the latest in home automation technology at unbeatable prices",
+            imageUrl: "/images/mtronic-german-engineering-banner.webp",
+        },
+        {
+            id: 4,
+            badge: "Limited Time Offer",
+            title: "Premium Smart Home Devices",
+            subTitle: "Get up to 40% discount on exclusive smart home collections",
+            imageUrl: "/images/luxury-living-bg.webp",
         }
     ]
   return (
@@ -37,17 +50,15 @@ export function HeroSlider() {
         <CarouselContent className="h-screen">
             {slides.map((item, index) => (
             <CarouselItem key={item.id} className="h-screen">
-                <div className="p-0 h-screen">
-                <Card className="h-screen border-none shadow-none" style={{backgroundImage: `url(${'/images/slider-bg.jpg'})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
-                    <CardContent className="flex h-screen items-center justify-between px-20 max-sm:flex-col max-sm:p-5 select-none md:px-10">
-                        <div className="max-sm:w-full max-sm:mb-5 max-sm:text-center w-full">
+                <div className="p-0 h-screen relative">
+                <Card className="h-screen border-none shadow-none" style={{backgroundImage: `url(${item.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center'}} >
+                    <div className="absolute inset-0 bg-black/40"></div>
+                    <CardContent className="relative flex h-screen items-center justify-center px-20 max-sm:p-5 select-none md:px-10">
+                        <div className="max-sm:w-full max-sm:text-center w-full text-center rounded-lg p-8 max-sm:p-5">
                             <p className="text-primary text-sm font-bold uppercase mb-2 max-sm:text-xs max-sm:mb-1">{item.badge}</p>
-                            <h2 className="text-6xl text-tertiary font-black capitalize mb-3 max-sm:text-4xl max-sm:mb-1 max-lg:text-4xl">{item.title}</h2>
-                            <p className="text-md text-muted-foreground mb-6 max-sm:text-xs max-sm:mb-4">{item.subTitle}</p>
+                            <h2 className="text-6xl text-white font-black capitalize mb-3 max-sm:text-4xl max-sm:mb-1 max-lg:text-4xl drop-shadow-lg">{item.title}</h2>
+                            <p className="text-md text-gray-100 mb-6 max-sm:text-xs max-sm:mb-4 drop-shadow-lg">{item.subTitle}</p>
                             <Button size='lg'>Shop Now</Button>
-                        </div>
-                        <div className="w-fit justify-items-end max-sm:px-10 max-sm:py-5">
-                            <Image src={item.imageUrl} alt={item.title} width={800} height={800} className="max-sm:mx-auto" />
                         </div>
                     </CardContent>
                 </Card>

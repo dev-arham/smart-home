@@ -151,7 +151,7 @@
   --font-serif: Lora, serif;
   --font-mono: JetBrains Mono, monospace;
 
-  --radius: 0.65rem;
+  --radius: 1rem;
 
   --shadow-2xs: 0 1px 3px 0px oklch(0.00 0 0 / 0.05);
   --shadow-xs: 0 1px 3px 0px oklch(0.00 0 0 / 0.05);

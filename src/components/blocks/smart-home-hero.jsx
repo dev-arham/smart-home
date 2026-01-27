@@ -10,7 +10,7 @@ const SmartHomeHero = () => {
     <div 
       ref={sectionFade.ref} 
       style={sectionFade.animationStyles}
-      className='w-full bg-white py-20 px-4 max-sm:py-10'
+      className='w-full bg-gray-100 py-20 px-4 max-sm:py-10'
     >
       <div className='container mx-auto flex items-center justify-between gap-10 max-lg:flex-col max-lg:text-center'>
         {/* Left Content */}

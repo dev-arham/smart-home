@@ -13,9 +13,9 @@ const VideoBanner = () => {
     const bannerFade = useFadeIn({ direction: 'up', threshold: 0.2, duration: 800 })
     
     return (
-        <div ref={bannerFade.ref} style={bannerFade.animationStyles} className='container mx-auto max-xl:p-5'>
-            <Card className='relative h-[80vh] flex items-center justify-center group overflow-hidden max-sm:h-[60vh]'>
-                <Image width={1500} height={700} src='/images/video-thumbnail.jpg' alt='video banner background' className='w-full h-full absolute object-cover rounded-xl z-1 group-hover:scale-110 transition-transform duration-300' />
+        <div ref={bannerFade.ref} style={bannerFade.animationStyles} className=' mx-auto max-xl:p-5'>
+            <Card className='relative h-[80vh] flex items-center justify-center group overflow-hidden max-sm:h-[60vh] rounded-none'>
+                <Image width={1500} height={700} src='/images/video-thumbnail.png' alt='video banner background' className='w-full h-full absolute object-cover  z-1 group-hover:scale-110 transition-transform duration-300' />
                 <div className='absolute z-2 w-full h-full bg-black/40 rounded-xl'></div>
                 <div className='z-2'>
                     <a href=""></a>

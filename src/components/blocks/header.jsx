@@ -18,7 +18,7 @@ import Link from 'next/link'
 
 const Header = () => {
   return (
-    <header className="w-full bg-transparent  dark:bg-background shadow-sm fixed top-0 left-0 z-50">
+    <header className="w-full bg-white/85 dark:bg-background fixed shadow-sm  top-0 left-0 z-50">
       <div className='topBar bg-tertiary text-tertiary-foreground py-2 text-center text-sm'>
         <div className='container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2 md:justify-center max-xl:px-5'>
           <div className="left max-sm:hidden w-full flex">
@@ -67,7 +67,7 @@ const Header = () => {
               <Heart />
             </Button>
           </WishlistDrawer>
-          <ThemeToggle className="cursor-pointer bg-transparent" />
+          {/* <ThemeToggle className="cursor-pointer bg-transparent" /> */}
         </div>
       </div>
     </header>

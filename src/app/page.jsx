@@ -26,8 +26,8 @@ const page = () => {
       {/* <Categories /> */}
       {/* <FeaturedProducts /> */}
       <DayLightSection />
-      <SmartHomeHero />
       <DisplayCards />
+      <SmartHomeHero />
       <VideoBanner />
       <CustomerReviews />
       <Services />

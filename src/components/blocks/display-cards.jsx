@@ -12,7 +12,7 @@ const DisplayCards = () => {
     const rightCard = useFadeIn({ direction: 'right', threshold: 0.2, delay: 300 })
     
     return (
-        <div className='container mx-auto flex items-center gap-5 mb-20 max-sm:flex-col max-xl:px-5 max-sm:mb-10'>
+        <div className='container mx-auto flex items-center gap-5 my-20 max-sm:flex-col max-xl:px-5 max-sm:mb-10'>
             <div ref={leftCard.ref} style={leftCard.animationStyles} className='w-full'>
                 <CategoryCard image='/images/card-bg-one.jpg' badge='Basic - Tech' title='Home Security Camera' />
             </div>

@@ -59,14 +59,14 @@ export function NavigationMenuDemo() {
 
   return (
     <NavigationMenu viewport={isMobile}>
-      <NavigationMenuList className="flex-wrap">
+      <NavigationMenuList className="flex-wrap ">
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/" className="bg-transparent text-[18px] text-gray-500 font-bold">Home</Link>
+            <Link href="/" className="bg-transparent text-[18px] hover:text-gray-900 hover:bg-transparent text-gray-500 font-bold">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-[18px] text-gray-500 font-bold">Shop</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-[18px] hover:text-gray-900 hover:bg-transparent text-gray-500 font-bold">Shop</NavigationMenuTrigger>
           <NavigationMenuContent className='z-5'>
             <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]">
               <li className="row-span-3">
@@ -104,18 +104,18 @@ export function NavigationMenuDemo() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/sale" className="bg-transparent text-[18px] text-gray-500 font-bold">Sale</Link>
+            <Link href="/sale" className="bg-transparent text-[18px] hover:text-gray-900 hover:bg-transparent text-gray-500 font-bold">Sale</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/about" className="bg-transparent text-[18px] text-gray-500 font-bold">About</Link>
+            <Link href="/about" className="bg-transparent text-[18px] hover:text-gray-900 hover:bg-transparent text-gray-500 font-bold">About</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/contact" className="bg-transparent text-[18px] text-gray-500 font-bold">Contact</Link>
+            <Link href="/contact" className="bg-transparent text-[18px] hover:text-gray-900 hover:bg-transparent text-gray-500 font-bold">Contact</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
