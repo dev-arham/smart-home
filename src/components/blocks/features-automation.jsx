@@ -4,6 +4,7 @@ import { MicSVG } from '@/components/ui/mic-svg'
 import { RobotSVG } from '@/components/ui/robot-svg'
 import { useFadeIn } from '@/hooks/use-fade-in'
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
 
 const FeaturesAutomation = () => {
   const fadeUp = useFadeIn({ direction: 'up', threshold: 0.3 })
@@ -21,6 +22,7 @@ const FeaturesAutomation = () => {
             {/* Icon with background */}
             <div className="flex justify-center md:justify-start">
               {/* <MicSVG width={100} height={100} /> */}
+              <Image src="/images/microphone.gif" alt="Microphone" width={80} height={80} />
             </div>
             
             {/* Label */}
@@ -53,6 +55,7 @@ const FeaturesAutomation = () => {
             {/* Icon with background */}
             <div className="flex justify-center md:justify-start">
               {/* <RobotSVG width={100} height={100} /> */}
+              <Image src="/images/robot.gif" alt="Robot" width={80} height={80} />
             </div>
             
             {/* Label */}
