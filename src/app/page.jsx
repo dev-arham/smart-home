@@ -29,7 +29,7 @@ const page = () => {
       <DayLightSection />
       <FeaturesAutomation />
       <DisplayCards />
-      <SmartHomeHero />
+      {/* <SmartHomeHero /> */}
       <VideoBanner />
       <CustomerReviews />
       <Services />
@@ -37,7 +37,7 @@ const page = () => {
       <StayConnected />
       <OurTeam />
       <Faq />
-      <Newsletter />
+      {/* <Newsletter /> */}
       <Footer />
     </div>
   )

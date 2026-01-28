@@ -1,6 +1,5 @@
 "use client"
 
-import { gsap } from "gsap"
 import {
   createElement,
   useCallback,
@@ -78,14 +77,8 @@ const TypingText = ({
 
   useEffect(() => {
     if (showCursor && cursorRef.current) {
-      gsap.set(cursorRef.current, { opacity: 1 })
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: cursorBlinkDuration,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-      })
+      // CSS animation ke through cursor blink karega (GSAP remove kiya)
+      cursorRef.current.style.animation = `blink ${cursorBlinkDuration * 2}s infinite`
     }
   }, [showCursor, cursorBlinkDuration])
 
@@ -169,6 +162,9 @@ const TypingText = ({
     {
       ref: containerRef,
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
+      style: {
+        ...props.style,
+      },
       ...props,
     },
     <span className="inline" style={{ color: getCurrentTextColor() }}>
@@ -182,10 +178,19 @@ const TypingText = ({
             : `ml-1 ${cursorClassName}`
         }`}
         ref={cursorRef}
+        style={{
+          animation: cursorCharacter === "|" ? undefined : "blink 1s infinite",
+        }}
       >
         {cursorCharacter === "|" ? "" : cursorCharacter}
       </span>
     ),
+    <style>{`
+      @keyframes blink {
+        0%, 49% { opacity: 1; }
+        50%, 100% { opacity: 0; }
+      }
+    `}</style>,
   )
 }
 

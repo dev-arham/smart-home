@@ -1,7 +1,5 @@
 'use client'
 import React from 'react'
-import { MicSVG } from '@/components/ui/mic-svg'
-import { RobotSVG } from '@/components/ui/robot-svg'
 import { useFadeIn } from '@/hooks/use-fade-in'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
