@@ -7,10 +7,32 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useFadeIn } from '@/hooks/use-fade-in'
+import { usePopUp } from '@/hooks/use-pop-up'
+
+// Individual FAQ Item component with pop-up animation
+const FaqItem = ({ faq, index }) => {
+  const popUp = usePopUp({ threshold: 0.1, delay: index * 150, duration: 500 })
+  
+  return (
+    <AccordionItem
+      ref={popUp.ref}
+      style={popUp.animationStyles}
+      key={faq.id}
+      value={faq.id}
+      className="border border-border rounded-lg px-4 md:px-6 bg-card hover:shadow-md dark:hover:shadow-white/5 transition-shadow"
+    >
+      <AccordionTrigger className="text-left text-base md:text-lg font-medium py-4 md:py-5 hover:no-underline text-foreground">
+        {faq.question}
+      </AccordionTrigger>
+      <AccordionContent className="text-sm md:text-base text-muted-foreground pb-4 md:pb-5 leading-relaxed">
+        {faq.answer}
+      </AccordionContent>
+    </AccordionItem>
+  )
+}
 
 const Faq = () => {
   const headingFade = useFadeIn({ direction: 'fade', threshold: 0.2 })
-  const accordionFade = useFadeIn({ direction: 'up', threshold: 0.1, delay: 200 })
   
   const faqData = [
     {
@@ -62,21 +84,10 @@ const Faq = () => {
         </div>
 
         {/* FAQ Accordion */}
-        <div ref={accordionFade.ref} style={accordionFade.animationStyles} className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full space-y-3 md:space-y-4">
-            {faqData.map((faq) => (
-              <AccordionItem
-                key={faq.id}
-                value={faq.id}
-                className="border border-border rounded-lg px-4 md:px-6 bg-card hover:shadow-md dark:hover:shadow-white/5 transition-shadow"
-              >
-                <AccordionTrigger className="text-left text-base md:text-lg font-medium py-4 md:py-5 hover:no-underline text-foreground">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm md:text-base text-muted-foreground pb-4 md:pb-5 leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+            {faqData.map((faq, index) => (
+              <FaqItem key={faq.id} faq={faq} index={index} />
             ))}
           </Accordion>
         </div>

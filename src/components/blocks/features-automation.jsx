@@ -1,16 +1,21 @@
 'use client'
 import React from 'react'
 import { useFadeIn } from '@/hooks/use-fade-in'
+import { usePopUp } from '@/hooks/use-pop-up'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
 
 const FeaturesAutomation = () => {
-  const fadeUp = useFadeIn({ direction: 'up', threshold: 0.3 })
+  const containerFade = useFadeIn({ direction: 'up', threshold: 0.3 })
+  const image1Pop = usePopUp({ threshold: 0.2, delay: 1000, duration: 500 })
+  const image2Pop = usePopUp({ threshold: 0.2, delay: 1150, duration: 500 })
+  const heading1Fade = useFadeIn({ direction: 'left', threshold: 0.2, delay: 200 })
+  const heading2Fade = useFadeIn({ direction: 'left', threshold: 0.2, delay: 400 })
   
   return (
     <div
-      ref={fadeUp.ref}
-      style={fadeUp.animationStyles}
+      ref={containerFade.ref}
+      style={containerFade.animationStyles}
       className=" p-5 bg-gray-100 mx-auto mb-16 max-xl:px-5 max-sm:text-sm"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 py-8">
@@ -18,7 +23,7 @@ const FeaturesAutomation = () => {
         <Card className="shadow-none rounded-none">
           <CardContent className="flex flex-col items-center justify-center text-center md:text-left md:items-start gap-6 pt-6">
             {/* Icon with background */}
-            <div className="flex justify-center md:justify-start">
+            <div ref={image1Pop.ref} style={image1Pop.animationStyles} className="flex justify-center md:justify-start">
               {/* <MicSVG width={100} height={100} /> */}
               <Image src="/images/microphone.gif" alt="Microphone" width={80} height={80} />
             </div>
@@ -29,7 +34,7 @@ const FeaturesAutomation = () => {
             </div>
             
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+            <h2 ref={heading1Fade.ref} style={heading1Fade.animationStyles} className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
               A home that listens to you
             </h2>
             
@@ -51,7 +56,7 @@ const FeaturesAutomation = () => {
         <Card className="shadow-none rounded-none">
           <CardContent className="flex flex-col items-center justify-center text-center md:text-left md:items-start gap-6 pt-6">
             {/* Icon with background */}
-            <div className="flex justify-center md:justify-start">
+            <div ref={image2Pop.ref} style={image2Pop.animationStyles} className="flex justify-center md:justify-start">
               {/* <RobotSVG width={100} height={100} /> */}
               <Image src="/images/robot.gif" alt="Robot" width={80} height={80} />
             </div>
@@ -62,7 +67,7 @@ const FeaturesAutomation = () => {
             </div>
             
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+            <h2 ref={heading2Fade.ref} style={heading2Fade.animationStyles} className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
               Let your home welcome you every time you walk in!
             </h2>
             

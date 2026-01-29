@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/myFont.woff2') format('woff2');
+  font-display: swap;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 

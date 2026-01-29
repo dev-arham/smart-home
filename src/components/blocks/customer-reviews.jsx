@@ -1,10 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Card } from '@/components/ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import Image from 'next/image'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import Autoplay from "embla-carousel-autoplay"
+import { usePopUp } from '@/hooks/use-pop-up'
+
 const reviews = [
     {
         name: "Ahmad Khan",
@@ -51,8 +53,11 @@ const reviews = [
 ];
 
 const CustomerReviews = () => {
+    const containerRef = useRef(null)
+    const popUp = usePopUp({ threshold: 0.3, delay: 0, duration: 600 })
+    
     return (
-        <div className='w-full mx-auto overflow-x-hidden mb-20 -mt-20 max-sm:mb-10'>
+        <div ref={popUp.ref} style={popUp.animationStyles} className='w-full mx-auto overflow-x-hidden mb-20 -mt-20 max-sm:mb-10 relative z-10'>
             <Carousel
                 opts={{ loop: true }}
                  plugins={[
@@ -64,9 +69,9 @@ const CustomerReviews = () => {
                 className="w-full z-3 cursor-grab">
                 <CarouselContent className="mx-10">
                     {reviews.map((review, index) => (
-                        <CarouselItem key={index} className="md:basis-1/2 xl:basis-1/3 2xl:basis-1/4">
+                        <CarouselItem key={index} className="md:basis-1/2 xl:basis-1/3 2xl:basis-1/3">
                             <div className="p-1">
-                                <Card className='select-none bg-secondary flex flex-col p-10 justify-between max-sm:p-5 max-sm:text-sm dark:bg-card'>
+                                <Card className='select-none bg-secondary flex flex-col p-10 justify-between max-sm:p-5 max-sm:text-sm dark:bg-card shadow-lg'>
                                     <div className='flex gap-5'>
                                         <Avatar className='w-16 h-16'>
                                             <AvatarImage src={review.image} />

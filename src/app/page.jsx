@@ -1,5 +1,4 @@
 import Categories from '@/components/blocks/categories'
-import CustomerReviews from '@/components/blocks/customer-reviews'
 import DayLightSection from '@/components/blocks/day-light-section'
 import DisplayCards from '@/components/blocks/display-cards'
 import Faq from '@/components/blocks/faq'
@@ -17,6 +16,7 @@ import StayConnected from '@/components/blocks/stay-connected'
 import VideoBanner from '@/components/blocks/video-banner'
 import FeaturesAutomation from '@/components/blocks/features-automation'
 import React from 'react'
+import CustomerReviews from '@/components/blocks/customer-reviews'
 
 const page = () => {
   return (

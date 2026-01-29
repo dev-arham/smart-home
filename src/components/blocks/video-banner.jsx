@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Card } from '../ui/card'
 import Image from 'next/image'
 import { PlayCircle } from 'lucide-react'
@@ -7,38 +7,63 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Button } from '../ui/button'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { useFadeIn } from '@/hooks/use-fade-in'
+import CustomerReviews from './customer-reviews'
 
 const VideoBanner = () => {
     const isMobile = useIsMobile();
     const bannerFade = useFadeIn({ direction: 'up', threshold: 0.2, duration: 800 })
+    const [showReviews, setShowReviews] = useState(false)
+    const containerRef = useRef(null)
+    
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && entry.boundingClientRect.top < window.innerHeight / 2) {
+                    setShowReviews(true)
+                } else if (entry.boundingClientRect.top > window.innerHeight) {
+                    setShowReviews(false)
+                }
+            },
+            { threshold: 0.1 }
+        )
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current)
+        }
+
+        return () => observer.disconnect()
+    }, [])
     
     return (
-        <div ref={bannerFade.ref} style={bannerFade.animationStyles} className=' mx-auto max-xl:p-5'>
-            <Card className='relative h-[80vh] flex items-center justify-center group overflow-hidden max-sm:h-[60vh] rounded-none'>
-                <Image width={1500} height={700} src='/images/video-thumbnail.png' alt='video banner background' className='w-full h-full absolute object-cover  z-1 group-hover:scale-110 transition-transform duration-300' />
-                <div className='absolute z-2 w-full h-full bg-black/40 rounded-xl'></div>
-                <div className='z-2'>
-                    <a href=""></a>
-                    <Dialog>
-                        <DialogTrigger asChild>
-                            <PlayCircle size={isMobile ? 80 : 150} strokeWidth={1} className='text-white cursor-pointer' />
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-106.25">
-                            <DialogHeader>
-                                <DialogTitle>Alert!</DialogTitle>
-                                <DialogDescription>
-                                    Your video will play here.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <DialogFooter>
-                                <DialogClose asChild>
-                                    <Button variant="outline">Okay</Button>
-                                </DialogClose>
-                            </DialogFooter>
-                        </DialogContent>
-                    </Dialog>
+        <div ref={containerRef} className='relative w-full'>
+            <div ref={bannerFade.ref} style={bannerFade.animationStyles} className='mx-auto max-xl:p-5'>
+                <div className='relative h-[80vh] max-sm:h-[60vh] rounded-none overflow-hidden flex items-center justify-center bg-black'>
+                    {/* Video */}
+                    <video
+                        width="100%"
+                        height="100%"
+                        autoPlay
+                        muted
+                        loop
+                        controls
+                        className='w-full h-full object-cover'
+                    >
+                        <source src="/images/MtronicHomePageVideo.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
-            </Card>
+            </div>
+            
+            {/* CustomerReviews - Show on scroll, overlay on top */}
+            <div className={`absolute left-0 right-0 top-0 h-[80vh] max-sm:h-[60vh] flex items-end transition-all duration-500 ease-out transform pointer-events-none ${
+                showReviews 
+                    ? 'opacity-100 pointer-events-auto' 
+                    : 'opacity-0'
+            }`}>
+                <div className='w-full'>
+                    {/* <CustomerReviews /> */}
+                </div>
+            </div>
         </div>
     )
 }
