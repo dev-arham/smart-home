@@ -98,13 +98,13 @@ const OurTeam = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4">
             Meet Our Team
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg lg:text-xl max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base md:text-lg lg:text-md max-w-6xl mx-auto">
             A diverse team of passionate professionals with unique skills driving innovation and excellence in every project.
           </p>
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[100px] md:auto-rows-[120px] lg:auto-rows-[140px] gap-4 md:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[150px] md:auto-rows-[150px] lg:auto-rows-[220px] gap-2 md:gap-2 max-w-6xl mx-auto">
           {teamMembers.map((member, index) => (
             <TeamCard key={member.id} member={member} index={index} />
           ))}
@@ -136,20 +136,22 @@ const TeamCard = ({ member, index }) => {
         <img
           src={member.image}
           alt={member.name}
-          className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
         />
         
         {/* Hover Overlay with Info */}
-        <div className="absolute inset-0 bg-linear-to-t from-blue-600/90 via-blue-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-3 md:p-4 rounded-full">
-          <h3 className="text-white font-bold text-center text-xs md:text-sm mb-1">
+        <div className="absolute inset-0 bg-linear-to-t from-sky-950/95 via-sky-800/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full">
+          <div className='flex flex-col items-center justify-end w-full h-full pb-5 px-11'>
+            <h3 className="text-blue-100 font-semibold text-center text-md md:text-[110%]">
             {member.name}
           </h3>
-          <p className="text-blue-100 font-medium text-center text-xs mb-1">
+          <p className="text-gray-200 font-medium text-center text-xs mb-1">
             {member.role}
           </p>
-          <p className="text-blue-50 text-center text-xs line-clamp-2 hidden md:block">
+          <p className="text-gray-200 text-center text-[10px] line-clamp-2 hidden md:block">
             {member.bio}
           </p>
+          </div>
         </div>
       </div>
     </div>
