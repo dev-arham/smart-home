@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductDetails from '@/components/blocks/product-details'
-import FeaturedProducts from '@/components/blocks/featured-products'
+import RelatedProducts from '@/components/blocks/related-products'
 import { Separator } from '@/components/ui/separator'
 
 // Mock Data Function
@@ -61,13 +61,13 @@ export default async function Page({ params }) {
     const product = await getProduct(pid)
 
     return (
-        <div className="container mx-auto px-4 py-8 md:px-6 lg:py-12">
+        <div className="container mx-auto px-4 py-8 md:px-6 lg:py-12 mt-25">
             
             <ProductDetails product={product} />
             
             <Separator className="my-16" />
             
-            <FeaturedProducts />
+            <RelatedProducts />
         </div>
     )
 }

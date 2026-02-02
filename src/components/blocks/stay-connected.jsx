@@ -42,7 +42,7 @@ const StayConnected = () => {
                 <br />
             </span>Stay Connected with <span className='text-[#0b75c1]'>us</span>
           </h1>
-          <p className='text-lg text-gray-600 max-sm:text-base'>
+          <p className='text-lg text-gray-600 max-sm:text-xs'>
             Stay connected with Aqua Electrical for the latest updates, exclusive offers, and smart home tips. Follow us on social media and subscribe to our newsletter to never miss out on exciting news and promotions. Join our community and be part of the smart home revolution!
           </p>
         </div>

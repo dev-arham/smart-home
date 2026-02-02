@@ -146,21 +146,22 @@ export default function ProductDetails({ product }) {
 
             {/* Right Column: Product Info */}
             <div className="flex gap-6 max-md:flex-col">
-                <div className="relative aspect-square overflow-hidden rounded-xl flex flex-11/12 items-center justify-center">
+                <div className="relative overflow-hidden rounded-xl flex flex-11/12 items-start justify-center bg-transparent pt-8">
                     {product.isNew && (
                         <Badge className="absolute left-4 top-4 z-10">New</Badge>
                     )}
                     {product.isSale && (
                         <Badge variant="destructive" className="absolute right-4 top-4 z-10">Sale</Badge>
                     )}
-                    <Image
-                        src={selectedImage}
-                        alt={product.title}
-                        width={500}
-                        height={500}
-                        className="object-contain justify-center w-full"
-                        priority
-                    />
+                        <Image
+                            src={selectedImage}
+                            alt={product.title}
+                            width={400}
+                            height={400}
+                            className="object-contain  w-full p-4"
+                            priority
+                        />
+                    
                 </div>
                 <div className="flex flex-col gap-4 flex-1/12 max-md:flex-row max-md:overflow-x-auto max-md:gap-4 max-md:flex-2/12">
                     {product.images.map((img, index) => (
@@ -175,9 +176,9 @@ export default function ProductDetails({ product }) {
                             <Image
                                 src={img}
                                 alt={`View ${index + 1}`}
-                                width={100}
-                                height={100}
-                                className="object-cover"
+                                width={80}
+                                height={80}
+                                className="object-contain p-1"
                             />
                         </button>
                     ))}

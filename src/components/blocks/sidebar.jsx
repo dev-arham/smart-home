@@ -14,42 +14,44 @@ import {
 } from "@/components/ui/sidebar"
 import { Store } from "lucide-react"
 import { Coins } from "lucide-react"
-import { File } from "lucide-react"
+import { Package } from "lucide-react"
 import { Info } from "lucide-react"
 import { Phone } from "lucide-react"
+import { ShoppingBag } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
-// Menu items.
+// Menu items - same as navigation menu
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "/",
         icon: Home,
     },
     {
-        title: "Shop",
-        url: "#",
-        icon: Store,
+        title: "All Products",
+        url: "/products",
+        icon: Package,
     },
     {
         title: "Sale",
-        url: "#",
+        url: "/sale",
         icon: Coins,
     },
     {
-        title: "Blog",
-        url: "#",
-        icon: File,
-    },
-    {
-        title: "Pages",
-        url: "#",
+        title: "About",
+        url: "/about",
         icon: Info,
     },
     {
         title: "Contact",
-        url: "#",
+        url: "/contact",
         icon: Phone,
+    },
+    {
+        title: "Shop",
+        url: "#",
+        icon: ShoppingBag,
     },
 ]
 
@@ -69,10 +71,10 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url} className="flex gap-2 items-center">
+                                        <Link href={item.url} className="flex gap-2 items-center">
                                             <item.icon width={19} />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}

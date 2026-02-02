@@ -98,7 +98,7 @@ const OurTeam = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3 md:mb-4">
             Meet Our Team
           </h2>
-          <p className="text-muted-foreground text-base md:text-lg lg:text-md max-w-6xl mx-auto">
+          <p className="text-muted-foreground text-base md:text-lg max-sm:text-xs lg:text-md max-w-6xl mx-auto">
             A diverse team of passionate professionals with unique skills driving innovation and excellence in every project.
           </p>
         </div>

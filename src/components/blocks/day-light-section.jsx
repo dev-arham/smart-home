@@ -20,7 +20,7 @@ const AnimatedContent = ({ mode, changeMode }) => {
         <CardContent className="h-full flex flex-col items-center justify-center px-20 w-4/5 mx-auto z-2 max-sm:px-5 max-sm:w-full">
             <p className="text-white text-2xl font-semibold uppercase mb-2 text-center max-sm:text-sm">CUSTOM SCENES</p>
             <div ref={sectionTop.ref} style={sectionTop.animationStyles}>
-                <h2 className="fade-out-top text-8xl text-white font-semibold mb-3 text-center max-sm:text-2xl md:text-8xl">Making life effortlessly easy!</h2>
+                <h2 className="fade-out-top text-8xl text-white font-semibold mb-3 text-center max-sm:text-5xl md:text-8xl">Making life effortlessly easy!</h2>
             </div>
             <TypingText 
                 text={["Walk into a low-lit, warm and cosy room to help you unwind before bed or have your home light up as the sun sets."]}
@@ -29,7 +29,7 @@ const AnimatedContent = ({ mode, changeMode }) => {
                 initialDelay={500}
                 loop={true}
                 showCursor={true}
-                className="w-2/3 text-lg text-white mb-10 text-center max-sm:text-xs max-sm:w-full max-sm:mb-5"
+                className="w-2/3 text-lg text-white mb-10 text-center max-sm:text-sm max-sm:w-full max-sm:mb-5"
             />
             <div className='flex gap-10 mb-5 max-sm:gap-2'>
                 <Button 

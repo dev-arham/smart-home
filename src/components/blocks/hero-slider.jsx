@@ -82,7 +82,7 @@ export function HeroSlider() {
                   }}
                 >
                   <div className="absolute inset-0 bg-black/40"></div>
-                  <CardContent className="relative flex h-screen items-center justify-center px-20 max-sm:p-5 select-none md:px-10">
+                  <CardContent className="relative flex h-screen items-center justify-center px-20 max-sm:p-5 select-none md:px-10 mt-10">
                     <div className="max-sm:w-full max-sm:text-center w-full text-center rounded-lg p-8 max-sm:p-5">
                       <p 
                         key={`badge-${index}-${activeIndex}`}
@@ -101,12 +101,12 @@ export function HeroSlider() {
                         initialDelay={200}
                         loop={false}
                         showCursor={false}
-                        className="fade-out-top text-8xl text-white font-semibold mb-3 text-center max-sm:text-2xl md:text-8xl"
+                        className="fade-out-top text-8xl text-white font-semibold mb-3 text-center max-sm:text-5xl md:text-8xl"
                     />
                       </h2>
                       <p 
                         key={`subtitle-${index}-${activeIndex}`}
-                        className="text-md text-gray-100 mb-6 max-sm:text-xs max-sm:mb-4 drop-shadow-lg"
+                        className="text-md text-gray-100 mb-6 max-sm:text-md max-sm:mb-4 drop-shadow-lg"
                         style={{ animation: 'fadeInUp 0.6s ease-out 0.3s forwards', opacity: 0 }}
                       >
                         {item.subTitle}

@@ -62,28 +62,34 @@ export function NavigationMenuDemo() {
       <NavigationMenuList className="flex-wrap ">
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/" className="bg-transparent text-[16px] font-normal text-white hover:text-gray-900 hover:bg-transparent ">Home</Link>
+            <Link href="/" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">Home</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/products" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">All Products</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/sale" className="bg-transparent text-[16px] font-normal text-white hover:text-gray-900 hover:bg-transparent ">Sale</Link>
+            <Link href="/sale" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">Sale</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/about" className="bg-transparent text-[16px] font-normal text-white hover:text-gray-900 hover:bg-transparent ">About</Link>
+            <Link href="/about" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">About</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/contact" className="bg-transparent text-[16px] font-normal text-white hover:text-gray-900 hover:bg-transparent ">Contact</Link>
+            <Link href="/contact" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">Contact</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-transparent text-[16px] font-normal text-white hover:text-gray-900 hover:bg-transparent ">Shop</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">Shop</NavigationMenuTrigger>
           <NavigationMenuContent className='z-5'>
             <ul className="grid gap-2 md:w-100 lg:w-125 lg:grid-cols-[1fr_1fr]">
               <li className="row-span-3">
