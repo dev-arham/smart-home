@@ -68,7 +68,7 @@ export function NavigationMenuDemo() {
 
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/products" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">All Products</Link>
+            <Link href="/product" className="bg-transparent text-[16px] font-normal text-gray-900 hover:text-gray-700 hover:bg-transparent ">All Products</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         
