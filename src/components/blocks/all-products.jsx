@@ -15,6 +15,7 @@ const products = [
         name: "Phase Selector 32A",
         tagline: "4 Position Phase Selector",
         image: "/images/products/AQUA 32A 4 POSITION PHASE SELECTOR.jpg",
+        hoverImage: "/images/products/AQUA 50A 4 POSITION PHASE SELECTOR.jpg",
         price: 2500,
         originalPrice: 3200,
         isNew: true,
@@ -24,6 +25,7 @@ const products = [
         name: "Phase Selector 50A",
         tagline: "4 Position Phase Selector",
         image: "/images/products/AQUA 50A 4 POSITION PHASE SELECTOR.jpg",
+        hoverImage: "/images/products/AQUA 32A 4 POSITION PHASE SELECTOR.jpg",
         price: 3500,
         originalPrice: 4200,
         isNew: true,
@@ -33,6 +35,7 @@ const products = [
         name: "Aqua Capacitor",
         tagline: "High quality capacitor",
         image: "/images/products/AQUA CAPACITOR 10.jpg",
+        hoverImage: "/images/products/AQUA LED DOWN LIGHT 12 WATT 3000K WARM.jpg",
         price: 850,
         originalPrice: 1100,
         isNew: false,
@@ -42,6 +45,7 @@ const products = [
         name: "COB Down Light 12W",
         tagline: "4000K Warm White Moveable",
         image: "/images/products/AQUA COB DOWN LIGHT 12-WATT 4000K WARM WHITE C-9 ( Moveable ).jpg",
+        hoverImage: "/images/products/AQUA LED DOWN LIGHT 12 WATT 3000K WARM.jpg",
         price: 1800,
         originalPrice: 2400,
         isNew: true,
@@ -51,6 +55,7 @@ const products = [
         name: "Desk Pop-up Sockets",
         tagline: "Silver with USB & Type-C",
         image: "/images/products/Aqua Desk Pop-up Lifting Sockets Silver 1-Speaker+2-MF+2USB+2C-Type.jpg",
+        hoverImage: "/images/products/AQUA SAPPHIRE 2 GANG SWITCH PLUS 1 DIMMER.jpg",
         price: 4500,
         originalPrice: 5500,
         isNew: true,
@@ -60,6 +65,7 @@ const products = [
         name: "LED Down Light 12W",
         tagline: "3000K Warm White",
         image: "/images/products/AQUA LED DOWN LIGHT 12 WATT 3000K WARM.jpg",
+        hoverImage: "/images/products/AQUA COB DOWN LIGHT 12-WATT 4000K WARM WHITE C-9 ( Moveable ).jpg",
         price: 1200,
         originalPrice: 1600,
         isNew: false,
@@ -69,6 +75,7 @@ const products = [
         name: "Sapphire 2 Gang Switch",
         tagline: "With 1 Dimmer",
         image: "/images/products/AQUA SAPPHIRE 2 GANG SWITCH PLUS 1 DIMMER.jpg",
+        hoverImage: "/images/products/AQUA SAPPHIRE 4 GANG SWITCH PLUS 2 SOCKET.jpg",
         price: 2800,
         originalPrice: 3500,
         isNew: true,
@@ -78,6 +85,7 @@ const products = [
         name: "Sapphire 4 Gang Switch",
         tagline: "With 2 Socket",
         image: "/images/products/AQUA SAPPHIRE 4 GANG SWITCH PLUS 2 SOCKET.jpg",
+        hoverImage: "/images/products/AQUA SAPPHIRE 2 GANG SWITCH PLUS 1 DIMMER.jpg",
         price: 3200,
         originalPrice: 4000,
         isNew: false,
@@ -87,6 +95,7 @@ const products = [
         name: "WiFi Smart Switch",
         tagline: "30 AMP Smart Control",
         image: "/images/products/Aqua Wifi Smart Switch 30 AMP.jpg",
+        hoverImage: "/images/products/AQUA CAPACITOR 10.jpg",
         price: 3800,
         originalPrice: 4800,
         isNew: true,
@@ -104,7 +113,7 @@ const ProductItem = ({ product, index }) => {
             style={animation.animationStyles}
             className="group"
         >
-            <Card className="relative overflow-hidden border border-gray-100  transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_rgb(250, 252, 255)] py-0 rounded-none">
+            <Card className="relative overflow-hidden border border-gray-100 transition-all duration-300 shadow-[0_4px_20px_rgba(37,99,235,0.3)] hover:shadow-[0_8px_30px_rgba(37,99,235,0.5)] py-0 rounded-none">
                 {/* New Badge */}
                 {product.isNew && (
                     <Badge variant="secondary" className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 flex items-center gap-0.5 sm:gap-1 bg-white/90 backdrop-blur-sm text-gray-700 text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5">
@@ -138,11 +147,19 @@ const ProductItem = ({ product, index }) => {
                 {/* Product Image Container */}
                 <Link href={`/product/${product.id}`} className="block">
                     <div className="relative bg-white h-[140px] sm:h-[200px] md:h-[250px] lg:h-80 overflow-hidden">
+                        {/* Default Image */}
                         <Image
                             src={product.image}
                             alt={product.name}
                             fill
-                            className="object-contain p-3 sm:p-5 md:p-6 lg:p-8 group-hover:scale-105 transition-transform duration-500"
+                            className="object-contain p-3 sm:p-5 md:p-6 lg:p-8 transition-all duration-500 group-hover:opacity-0 group-hover:scale-105"
+                        />
+                        {/* Hover Image */}
+                        <Image
+                            src={product.hoverImage || product.image}
+                            alt={`${product.name} - hover`}
+                            fill
+                            className="object-contain p-3 sm:p-5 md:p-6 lg:p-8 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
                         />
                     </div>
                 </Link>
