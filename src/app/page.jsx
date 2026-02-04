@@ -21,7 +21,7 @@ import CustomerReviews from '@/components/blocks/customer-reviews'
 const page = () => {
   return (
     <div className='w-full'>
-      <Header />
+      <Header fontColor="white" />
       <HeroSlider  />
       <HeroCards />
       {/* <Categories /> */}

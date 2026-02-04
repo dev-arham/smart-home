@@ -13,7 +13,7 @@ import HeaderClient from "./header-client";
 import NextImage from "next/image";
 import TypingText from "../ui/typing-text";
 
-const Header = () => {
+const Header = ({ fontColor = "gray-900" }) => {
   return (
     <HeaderClient>
       <div className="topBar bg-tertiary/80 text-tertiary-foreground py-2 text-center text-sm backdrop-blur-sm">
@@ -62,7 +62,7 @@ const Header = () => {
           />
         </div>
         <nav className="menu max-lg:hidden">
-          <NavigationMenuDemo />
+          <NavigationMenuDemo fontColor={fontColor} />
         </nav>
         <div className="hidden max-lg:block ml-auto">
           <SidebarTrigger />
