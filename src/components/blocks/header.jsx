@@ -46,7 +46,6 @@ const Header = ({ fontColor = "gray-900" }) => {
               loop={true}
               className="font-semibold"
             />
-            {/* <span><a href="#" className='font-bold underline'>Shop Now</a></span> */}
           </div>
           <div className="right hidden w-full xl:block"></div>
         </div>
