@@ -3,6 +3,9 @@ import "./globals.css";
 import { Poppins } from 'next/font/google'
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/blocks/sidebar";
+import { authClient } from '@/lib/auth/client';
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react';
+
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -21,22 +24,28 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.className} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
+        <NeonAuthUIProvider
+          authClient={authClient}
+          redirectTo="/account/settings"
+          emailOTP
         >
-          <SidebarProvider open={false}>
-            
-            <section className="w-full">
-            <AppSidebar />
-              <main>
-                {children}
-              </main>
-            </section>
-          </SidebarProvider>
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SidebarProvider open={false}>
+
+              <section className="w-full">
+                <AppSidebar />
+                <main>
+                  {children}
+                </main>
+              </section>
+            </SidebarProvider>
+          </ThemeProvider>
+        </NeonAuthUIProvider>
       </body>
     </html>
   );

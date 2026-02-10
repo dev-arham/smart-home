@@ -23,12 +23,7 @@ export function SignupForm({
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    const userData = {
-      name: e.target.name.value,
-      email: e.target.email.value,
-      password: e.target.password.value,
-    };
-
+    const userData = new FormData(e.target);
     await signUp(userData);
     router.replace('/login');
   }
@@ -47,15 +42,15 @@ export function SignupForm({
               </div>
               <Field>
                 <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                <Input id="name" type="text" placeholder="Arham" required />
+                <Input id="name" name="name" type="text" placeholder="Arham" required />
               </Field>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input id="email" type="email" placeholder="m@example.com" required />
+                <Input id="email" name="email" type="email" placeholder="m@example.com" required />
               </Field>
               <Field>
                 <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
                 <FieldDescription>
                   Must be at least 8 characters long.
                 </FieldDescription>

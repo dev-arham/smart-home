@@ -1,4 +1,5 @@
-import { getCurrentSession, signOut } from '@/server/auth';
+import { signOut } from '@/server/auth';
+import { auth } from '@/lib/auth';
 import React from 'react'
 import { Button } from '../ui/button';
 import { User } from 'lucide-react';
@@ -7,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import Link from 'next/link';
 
 export default async function UserAvatar() {
-    const session = await getCurrentSession();
+    const { data: session } = await auth.getSession();
     if (!session)
         return (
             <Link href="/login">
@@ -27,8 +28,8 @@ export default async function UserAvatar() {
                 <DropdownMenuItem className='font-bold'>
                     {session?.user?.email}
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                    Profile
+                <DropdownMenuItem asChild>
+                    <Link href="/account/settings">Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                     Settings

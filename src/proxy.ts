@@ -1,16 +1,20 @@
+import { neonAuthMiddleware } from '@neondatabase/auth/next/server';
+
+export default neonAuthMiddleware({
+    // Redirects unauthenticated users to sign-in page
+    loginUrl: '/login',
+});
+
 import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
-const protectedRoutes = ["/dashboard"];
+const protectedRoutes = ["/dashboard", "/account"];
 
 export async function proxy(request: NextRequest) {
     const pathName = request.nextUrl.pathname;
     const isProtectedRoute = protectedRoutes.includes(pathName);
 
-    const session = await auth.api.getSession({
-        headers: await headers()
-    })
+    const { data: session } = await auth.getSession();
 
     // THIS IS NOT SECURE!
     // This is the recommended approach to optimistically redirect users
@@ -28,5 +32,11 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/dashboard", "/login", "/signup"], // Specify the routes the middleware applies to
+    matcher: [
+        // Protected routes requiring authentication
+        '/login',
+        '/signup',
+        '/account/:path*',
+        '/dashboard/:path*',
+    ],
 };

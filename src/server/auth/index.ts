@@ -1,35 +1,29 @@
-"use server";
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers";
+'use server';
+import { auth } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
-export const getCurrentSession = async () => {
-    const session = await auth.api.getSession({
-        headers: await headers()
-    })
-    return session ?? null;
+export async function signIn(formData: FormData) {
+  const { data, error } = await auth.signIn.email({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  });
+
+  if (error) return { error: error.message };
+  redirect('/dashboard');
 }
 
-export const signIn = async ({ email, password }) => {
-    await auth.api.signInEmail({
-        body: {
-            email: email,
-            password: password,
-        }
-    })
+export async function signUp(formData: FormData) {
+  const { data, error } = await auth.signUp.email({
+    name: formData.get('name') as string,
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  });
+
+  if (error) return { error: error.message };
+  redirect('/dashboard');
 }
 
-export const signUp = async ({ email, password, name }) => {
-    await auth.api.signUpEmail({
-        body: {
-            email: email,
-            password: password,
-            name: name,
-        }
-    })
-}
-
-export const signOut = async () => {
-    await auth.api.signOut({
-        headers: await headers()
-    })
+export async function signOut() {
+  await auth.signOut();
+  redirect('/login');
 }
