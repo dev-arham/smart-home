@@ -9,7 +9,7 @@ import Link from 'next/link';
 
 export default async function UserAvatar() {
     const { data: session } = await auth.getSession();
-    const role = session.user.role ?? 'user';
+    const role = session?.user?.role ?? 'user';
     if (!session)
         return (
             <Link href="/login">
