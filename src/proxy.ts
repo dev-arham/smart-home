@@ -8,7 +8,7 @@ export default neonAuthMiddleware({
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 
-const protectedRoutes = ["/dashboard", "/account"];
+const protectedRoutes = ["/dashboard", "/account"];``
 
 export async function proxy(request: NextRequest) {
     const pathName = request.nextUrl.pathname;

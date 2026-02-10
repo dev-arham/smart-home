@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 export default async function UserAvatar() {
     const { data: session } = await auth.getSession();
+    const role = session.user.role ?? 'user';
     if (!session)
         return (
             <Link href="/login">
@@ -28,6 +29,11 @@ export default async function UserAvatar() {
                 <DropdownMenuItem className='font-bold'>
                     {session?.user?.email}
                 </DropdownMenuItem>
+                {role === 'admin' && (
+                    <DropdownMenuItem asChild>
+                        <Link href="/dashboard">Dashboard</Link>
+                    </DropdownMenuItem>
+                )}
                 <DropdownMenuItem asChild>
                     <Link href="/account/settings">Profile</Link>
                 </DropdownMenuItem>

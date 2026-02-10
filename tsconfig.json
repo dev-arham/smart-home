@@ -32,7 +32,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/api/auth/[...path]/route.js", "src/lib/auth/index.ts", "src/lib/auth/client.js", "src/app/auth/[path]/page.jsx"  ],
+, "src/app/api/auth/[...path]/route.js", "src/lib/auth/index.ts", "src/lib/auth/client.js", "src/app/auth/[path]/page.jsx", "src/components/blocks/user-avatar.jsx"  ],
   "exclude": [
     "node_modules"
   ]
