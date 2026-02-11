@@ -11,7 +11,7 @@ const columns = [
     header: "User",
     cell: (row) => (
       <div>
-        <div className="font-medium">{row.user.name}</div>
+        <div className="font-medium">{row.user_profile.fullName}</div>
         <div className="text-muted-foreground text-xs">{row.user.email}</div>
       </div>
     ),
@@ -59,7 +59,7 @@ const columns = [
   },
 ]
 
-function UsersTable({ data }) {
+function UsersTable( {data = []} ) {
   return (
     <DataTable
       columns={columns}

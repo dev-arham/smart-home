@@ -96,3 +96,12 @@ export const toggleUserActiveSchema = z.object({
   profileId: z.string().uuid(),
   isActive: z.coerce.boolean(),
 });
+
+// ── User profile (self-service) ─────────────────────────────────────
+
+export const updateProfileSchema = z.object({
+  fullName: z.string().min(1, "Full name is required").max(150),
+  phone: z.string().max(20).optional().default(""),
+  avatarUrl: z.string().optional().default(""),
+  marketingOptIn: z.coerce.boolean().default(false),
+});

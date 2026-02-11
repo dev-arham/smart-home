@@ -8,7 +8,7 @@ export default async function UsersPage({ searchParams }) {
   const page = Number(params?.page) || 1
   const search = params?.search || ""
 
-  const { data: users, total, totalPages } = await getAdminUsers({
+  const { data, total, totalPages } = await getAdminUsers({
     page,
     search,
     pageSize: 10,
@@ -22,7 +22,7 @@ export default async function UsersPage({ searchParams }) {
       />
       <Card>
         <CardContent className="p-0">
-          <UsersTable data={users} />
+          <UsersTable data={data} />
         </CardContent>
       </Card>
     </div>

@@ -109,10 +109,9 @@ export const sellTypeEnum = pgEnum("sell_type", ["unit", "box", "carton"]);
 export const userProfile = pgTable("user_profile", {
   id: uuid("id").primaryKey().defaultRandom(),
 
-  // Reference to Better Auth user
+  // Reference to auth user (no FK — user table is managed by Neon Auth)
   userId: text("user_id")
     .notNull()
-    .references(() => user.id, { onDelete: "cascade" })
     .unique(),
 
   // Profile

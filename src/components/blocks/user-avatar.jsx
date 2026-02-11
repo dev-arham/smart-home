@@ -35,10 +35,10 @@ export default async function UserAvatar() {
                     </DropdownMenuItem>
                 )}
                 <DropdownMenuItem asChild>
-                    <Link href="/account/settings">Profile</Link>
+                    <Link href="/profile">Profile</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                    Settings
+                <DropdownMenuItem asChild>
+                    <Link href="/account/settings">Settings</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem variant='destructive' onClick={signOut}>
                     Logout
