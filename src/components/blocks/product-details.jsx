@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { Star, Heart, Share2, Minus, Plus, Truck, ShieldCheck, RefreshCw } from 'lucide-react'
+import { Heart, Share2, Minus, Plus, Truck, ShieldCheck, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -10,8 +10,20 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { cn } from '@/lib/utils'
 
 export default function ProductDetails({ product }) {
-    const [selectedImage, setSelectedImage] = useState(product.images[0])
+    console.log("product in product-details.jsx", product)
+    
+    // Handle images - use thumbnailUrl as fallback if images array is empty
+    const allImages = product.images?.length > 0 
+        ? product.images 
+        : (product.thumbnailUrl ? [product.thumbnailUrl] : [])
+    
+    const [selectedImage, setSelectedImage] = useState(allImages[0] || '')
     const [quantity, setQuantity] = useState(1)
+
+    // Parse prices as numbers
+    const price = parseFloat(product.price) || 0
+    const compareAtPrice = parseFloat(product.compareAtPrice) || 0
+    const hasDiscount = compareAtPrice > price
 
     const decreaseQuantity = () => setQuantity(prev => Math.max(1, prev - 1))
     const increaseQuantity = () => setQuantity(prev => prev + 1)
@@ -29,40 +41,43 @@ export default function ProductDetails({ product }) {
                                 <span className="mx-2">/</span>
                             </li>
                             <li>
-                                <a href="#" className="hover:underline">Category</a>
+                                <a href={`/category/${product.category?.slug || ''}`} className="hover:underline">
+                                    {product.category?.name || 'Category'}
+                                </a>
                                 <span className="mx-2">/</span>
                             </li>
                             <li className="text-foreground font-medium">
-                                {product.title}
+                                {product.name}
                             </li>
                         </ol>
                     </nav>
                 </div>
                 <div>
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-muted-foreground">{product.category}</span>
-                        <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm font-medium">{product.rating}</span>
-                            <span className="text-sm text-muted-foreground">({product.reviews} reviews)</span>
-                        </div>
+                        <span className="text-sm font-medium text-muted-foreground">{product.category?.name}</span>
+                        {product.brand?.name && (
+                            <span className="text-sm text-muted-foreground">Brand: {product.brand.name}</span>
+                        )}
                     </div>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{product.title}</h1>
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{product.name}</h1>
+                    {product.sku && (
+                        <p className="text-sm text-muted-foreground mt-1">SKU: {product.sku}</p>
+                    )}
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <p className="text-3xl font-bold text-foreground">${product.price.toFixed(2)}</p>
-                    {product.originalPrice && (
+                    <p className="text-3xl font-bold text-foreground">Rs. {price.toLocaleString()}</p>
+                    {hasDiscount && (
                         <>
-                            <p className="text-lg text-muted-foreground line-through">${product.originalPrice.toFixed(2)}</p>
+                            <p className="text-lg text-muted-foreground line-through">Rs. {compareAtPrice.toLocaleString()}</p>
                             <Badge variant="secondary" className="text-destructive">
-                                {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                                {Math.round(((compareAtPrice - price) / compareAtPrice) * 100)}% OFF
                             </Badge>
                         </>
                     )}
                 </div>
 
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
                     {product.description}
                 </p>
 
@@ -110,29 +125,21 @@ export default function ProductDetails({ product }) {
                 </div>
 
                 <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="details">
-                        <AccordionTrigger>Product Details</AccordionTrigger>
-                        <AccordionContent>
-                            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                                {product.features.map((feature, i) => (
-                                    <li key={i}>{feature}</li>
-                                ))}
-                            </ul>
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="specs">
-                        <AccordionTrigger>Specifications</AccordionTrigger>
-                        <AccordionContent>
-                            <div className="grid grid-cols-2 gap-2 text-sm">
-                                {Object.entries(product.specs).map(([key, value]) => (
-                                    <React.Fragment key={key}>
-                                        <div className="text-muted-foreground font-medium">{key}</div>
-                                        <div>{value}</div>
-                                    </React.Fragment>
-                                ))}
-                            </div>
-                        </AccordionContent>
-                    </AccordionItem>
+                    {product.productAttributes?.length > 0 && (
+                        <AccordionItem value="specs">
+                            <AccordionTrigger>Specifications</AccordionTrigger>
+                            <AccordionContent>
+                                <div className="grid grid-cols-2 gap-2 text-sm">
+                                    {product.productAttributes.map((attr) => (
+                                        <React.Fragment key={attr.id}>
+                                            <div className="text-muted-foreground font-medium">{attr.attribute?.name}</div>
+                                            <div>{attr.value}</div>
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                            </AccordionContent>
+                        </AccordionItem>
+                    )}
                     <AccordionItem value="shipping">
                         <AccordionTrigger>Shipping & Returns</AccordionTrigger>
                         <AccordionContent className="text-muted-foreground">
@@ -147,15 +154,15 @@ export default function ProductDetails({ product }) {
             {/* Right Column: Product Info */}
             <div className="flex gap-6 max-md:flex-col">
                 <div className="relative overflow-hidden rounded-xl flex flex-11/12 items-start justify-center bg-transparent pt-8">
-                    {product.isNew && (
-                        <Badge className="absolute left-4 top-4 z-10">New</Badge>
+                    {product.isFeatured && (
+                        <Badge className="absolute left-4 top-4 z-10">Featured</Badge>
                     )}
-                    {product.isSale && (
+                    {hasDiscount && (
                         <Badge variant="destructive" className="absolute right-4 top-4 z-10">Sale</Badge>
                     )}
                         <Image
                             src={selectedImage}
-                            alt={product.title}
+                            alt={product.name}
                             width={400}
                             height={400}
                             className="object-contain  w-full p-4"
@@ -164,7 +171,7 @@ export default function ProductDetails({ product }) {
                     
                 </div>
                 <div className="flex flex-col gap-4 flex-1/12 max-md:flex-row max-md:overflow-x-auto max-md:gap-4 max-md:flex-2/12">
-                    {product.images.map((img, index) => (
+                    {allImages.map((img, index) => (
                         <button
                             key={index}
                             onClick={() => setSelectedImage(img)}

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Sparkles, ShoppingCart, Heart } from 'lucide-react'
@@ -8,101 +8,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 
-// Sample products data - you can replace this with actual data from your database
-const products = [
-    {
-        id: 1,
-        name: "Phase Selector 32A",
-        tagline: "4 Position Phase Selector",
-        image: "/images/products/AQUA 32A 4 POSITION PHASE SELECTOR.jpg",
-        hoverImage: "/images/products/AQUA 50A 4 POSITION PHASE SELECTOR.jpg",
-        price: 2500,
-        originalPrice: 3200,
-        isNew: true,
-    },
-    {
-        id: 2,
-        name: "Phase Selector 50A",
-        tagline: "4 Position Phase Selector",
-        image: "/images/products/AQUA 50A 4 POSITION PHASE SELECTOR.jpg",
-        hoverImage: "/images/products/AQUA 32A 4 POSITION PHASE SELECTOR.jpg",
-        price: 3500,
-        originalPrice: 4200,
-        isNew: true,
-    },
-    {
-        id: 3,
-        name: "Aqua Capacitor",
-        tagline: "High quality capacitor",
-        image: "/images/products/AQUA CAPACITOR 10.jpg",
-        hoverImage: "/images/products/AQUA LED DOWN LIGHT 12 WATT 3000K WARM.jpg",
-        price: 850,
-        originalPrice: 1100,
-        isNew: false,
-    },
-    {
-        id: 4,
-        name: "COB Down Light 12W",
-        tagline: "4000K Warm White Moveable",
-        image: "/images/products/AQUA COB DOWN LIGHT 12-WATT 4000K WARM WHITE C-9 ( Moveable ).jpg",
-        hoverImage: "/images/products/AQUA LED DOWN LIGHT 12 WATT 3000K WARM.jpg",
-        price: 1800,
-        originalPrice: 2400,
-        isNew: true,
-    },
-    {
-        id: 5,
-        name: "Desk Pop-up Sockets",
-        tagline: "Silver with USB & Type-C",
-        image: "/images/products/Aqua Desk Pop-up Lifting Sockets Silver 1-Speaker+2-MF+2USB+2C-Type.jpg",
-        hoverImage: "/images/products/AQUA SAPPHIRE 2 GANG SWITCH PLUS 1 DIMMER.jpg",
-        price: 4500,
-        originalPrice: 5500,
-        isNew: true,
-    },
-    {
-        id: 6,
-        name: "LED Down Light 12W",
-        tagline: "3000K Warm White",
-        image: "/images/products/AQUA LED DOWN LIGHT 12 WATT 3000K WARM.jpg",
-        hoverImage: "/images/products/AQUA COB DOWN LIGHT 12-WATT 4000K WARM WHITE C-9 ( Moveable ).jpg",
-        price: 1200,
-        originalPrice: 1600,
-        isNew: false,
-    },
-    {
-        id: 7,
-        name: "Sapphire 2 Gang Switch",
-        tagline: "With 1 Dimmer",
-        image: "/images/products/AQUA SAPPHIRE 2 GANG SWITCH PLUS 1 DIMMER.jpg",
-        hoverImage: "/images/products/AQUA SAPPHIRE 4 GANG SWITCH PLUS 2 SOCKET.jpg",
-        price: 2800,
-        originalPrice: 3500,
-        isNew: true,
-    },
-    {
-        id: 8,
-        name: "Sapphire 4 Gang Switch",
-        tagline: "With 2 Socket",
-        image: "/images/products/AQUA SAPPHIRE 4 GANG SWITCH PLUS 2 SOCKET.jpg",
-        hoverImage: "/images/products/AQUA SAPPHIRE 2 GANG SWITCH PLUS 1 DIMMER.jpg",
-        price: 3200,
-        originalPrice: 4000,
-        isNew: false,
-    },
-    {
-        id: 9,
-        name: "WiFi Smart Switch",
-        tagline: "30 AMP Smart Control",
-        image: "/images/products/Aqua Wifi Smart Switch 30 AMP.jpg",
-        hoverImage: "/images/products/AQUA CAPACITOR 10.jpg",
-        price: 3800,
-        originalPrice: 4800,
-        isNew: true,
-    },
-]
 
-const ProductItem = ({ product, index }) => {
+
+
+const ProductItem = ({ index, product }) => {
     const animation = usePopUp({ threshold: 0.1, duration: 500, delay: index * 100 })
 
     const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -149,14 +58,14 @@ const ProductItem = ({ product, index }) => {
                     <div className="relative bg-white h-[140px] sm:h-[200px] md:h-[250px] lg:h-80 overflow-hidden">
                         {/* Default Image */}
                         <Image
-                            src={product.image}
+                            src={product.thumbnailUrl}
                             alt={product.name}
                             fill
                             className="object-contain p-3 sm:p-5 md:p-6 lg:p-8 transition-all duration-500 group-hover:opacity-0 group-hover:scale-105"
                         />
                         {/* Hover Image */}
                         <Image
-                            src={product.hoverImage || product.image}
+                            src={product.thumbnailUrl}
                             alt={`${product.name} - hover`}
                             fill
                             className="object-contain p-3 sm:p-5 md:p-6 lg:p-8 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
@@ -212,7 +121,10 @@ const ProductItem = ({ product, index }) => {
     )
 }
 
-const AllProducts = () => {
+const AllProducts = ({ products }) => {
+    // Handle both array and paginated result object formats
+    const productList = Array.isArray(products) ? products : (products?.data ?? []);
+
     return (
         <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-[#fafcff] min-h-screen">
             <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
@@ -226,7 +138,7 @@ const AllProducts = () => {
 
                 {/* Products Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 md:gap-6">
-                    {products.toReversed().map((product, index) =>  (
+                    {productList.map((product, index) =>  (
                         <ProductItem key={product.id} product={product} index={index} />
                     ))}
                 </div>

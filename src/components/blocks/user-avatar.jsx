@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import Link from 'next/link';
 
 export default async function UserAvatar() {
-    const { data: session } = await auth.getSession();
+    const { data: session } = await auth;
     const role = session?.user?.role ?? 'user';
     if (!session)
         return (
