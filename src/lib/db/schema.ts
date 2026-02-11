@@ -1,5 +1,8 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index, uuid, varchar, pgEnum } from "drizzle-orm/pg-core";
+import {
+  pgTable, text, timestamp, boolean, index, uuid, varchar, pgEnum,
+  integer, numeric, uniqueIndex,
+} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -98,6 +101,8 @@ export const appRoleEnum = pgEnum("app_role", [
   "seller",
 ]);
 
+export const sellTypeEnum = pgEnum("sell_type", ["unit", "box", "carton"]);
+
 /**
  * User profile extension table
  */
@@ -132,10 +137,192 @@ export const userProfile = pgTable("user_profile", {
     .defaultNow(),
 });
 
-export const schema = {
-  user,
-  session,
-  account,
-  verification,
-  userProfile,
-};
+export const userProfileRelations = relations(userProfile, ({ one }) => ({
+  user: one(user, {
+    fields: [userProfile.userId],
+    references: [user.id],
+  }),
+}));
+
+export const categories = pgTable(
+  "categories",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    name: varchar("name", { length: 100 }).notNull(),
+    slug: varchar("slug", { length: 100 }).notNull().unique(),
+    parentId: uuid("parent_id").references(() => categories.id, { onDelete: "set null" }),
+    description: text("description"),
+    imageUrl: text("image_url"),
+    isActive: boolean("is_active").notNull().default(true),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("categories_parentId_idx").on(table.parentId),
+  ],
+);
+
+export const brands = pgTable("brands", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: varchar("name", { length: 100 }).notNull(),
+  slug: varchar("slug", { length: 100 }).notNull().unique(),
+  description: text("description"),
+  logoUrl: text("logo_url"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+
+export const products = pgTable(
+  "products",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    categoryId: uuid("category_id").references(() => categories.id, { onDelete: "set null" }),
+    brandId: uuid("brand_id").references(() => brands.id, { onDelete: "set null" }),
+    name: varchar("name", { length: 150 }).notNull(),
+    slug: varchar("slug", { length: 150 }).notNull().unique(),
+    sku: varchar("sku", { length: 50 }).notNull().unique(),
+    description: text("description"),
+
+    // Pricing
+    price: numeric("price", { precision: 10, scale: 2 }).notNull(),
+    compareAtPrice: numeric("compare_at_price", { precision: 10, scale: 2 }),
+
+    // Media
+    thumbnailUrl: text("thumbnail_url"),
+    images: text("images").array(),
+
+    // Status
+    isActive: boolean("is_active").notNull().default(true),
+    isFeatured: boolean("is_featured").notNull().default(false),
+
+    // Inventory (base-unit strategy)
+    stockUnits: integer("stock_units").notNull().default(0),
+    unitsPerBox: integer("units_per_box").notNull().default(1),
+    boxesPerCarton: integer("boxes_per_carton").notNull().default(1),
+    sellType: sellTypeEnum("sell_type").notNull().default("unit"),
+    lowStockThreshold: integer("low_stock_threshold").notNull().default(10),
+
+    // Audit
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("products_categoryId_idx").on(table.categoryId),
+    index("products_brandId_idx").on(table.brandId),
+    index("products_isActive_idx").on(table.isActive),
+  ],
+);
+
+export const attributes = pgTable("attributes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: varchar("name", { length: 100 }).notNull(),
+  dataType: varchar("data_type", { length: 50 }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
+export const categoryAttributes = pgTable(
+  "category_attributes",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    categoryId: uuid("category_id").references(() => categories.id, { onDelete: "cascade" }),
+    attributeId: uuid("attribute_id").references(() => attributes.id, { onDelete: "cascade" }),
+    isRequired: boolean("is_required").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    uniqueIndex("categoryAttributes_categoryId_attributeId_idx")
+      .on(table.categoryId, table.attributeId),
+  ],
+);
+
+export const productAttributes = pgTable(
+  "product_attributes",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    productId: uuid("product_id").references(() => products.id, { onDelete: "cascade" }),
+    attributeId: uuid("attribute_id").references(() => attributes.id, { onDelete: "cascade" }),
+    value: text("value").notNull(),
+  },
+  (table) => [
+    uniqueIndex("productAttributes_productId_attributeId_idx")
+      .on(table.productId, table.attributeId),
+  ],
+);
+
+// ---------------------------------------------------------------------------
+// Catalog Relations
+// ---------------------------------------------------------------------------
+
+export const categoriesRelations = relations(categories, ({ one, many }) => ({
+  parent: one(categories, {
+    fields: [categories.parentId],
+    references: [categories.id],
+    relationName: "categoryParentChild",
+  }),
+  children: many(categories, {
+    relationName: "categoryParentChild",
+  }),
+  products: many(products),
+  categoryAttributes: many(categoryAttributes),
+}));
+
+export const brandsRelations = relations(brands, ({ many }) => ({
+  products: many(products),
+}));
+
+export const productsRelations = relations(products, ({ one, many }) => ({
+  category: one(categories, {
+    fields: [products.categoryId],
+    references: [categories.id],
+  }),
+  brand: one(brands, {
+    fields: [products.brandId],
+    references: [brands.id],
+  }),
+  productAttributes: many(productAttributes),
+}));
+
+export const attributesRelations = relations(attributes, ({ many }) => ({
+  categoryAttributes: many(categoryAttributes),
+  productAttributes: many(productAttributes),
+}));
+
+export const categoryAttributesRelations = relations(categoryAttributes, ({ one }) => ({
+  category: one(categories, {
+    fields: [categoryAttributes.categoryId],
+    references: [categories.id],
+  }),
+  attribute: one(attributes, {
+    fields: [categoryAttributes.attributeId],
+    references: [attributes.id],
+  }),
+}));
+
+export const productAttributesRelations = relations(productAttributes, ({ one }) => ({
+  product: one(products, {
+    fields: [productAttributes.productId],
+    references: [products.id],
+  }),
+  attribute: one(attributes, {
+    fields: [productAttributes.attributeId],
+    references: [attributes.id],
+  }),
+}));

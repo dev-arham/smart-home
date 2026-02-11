@@ -31,7 +31,7 @@ export default async function UserAvatar() {
                 </DropdownMenuItem>
                 {role === 'admin' && (
                     <DropdownMenuItem asChild>
-                        <Link href="/dashboard">Dashboard</Link>
+                        <Link href="/admin">Dashboard</Link>
                     </DropdownMenuItem>
                 )}
                 <DropdownMenuItem asChild>

@@ -1,11 +1,9 @@
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 import { Poppins } from 'next/font/google'
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/blocks/sidebar";
 import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react';
-
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
+import { Toaster } from '@/components/ui/sonner';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -21,9 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className={poppins.variable}>
-      <body
-        className={`${poppins.className} antialiased`}
-      >
+      <body className={`${poppins.className} antialiased`}>
         <NeonAuthUIProvider
           authClient={authClient}
           redirectTo="/account/settings"
@@ -35,17 +31,10 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
-            <SidebarProvider open={false}>
-
-              <section className="w-full">
-                <AppSidebar />
-                <main>
-                  {children}
-                </main>
-              </section>
-            </SidebarProvider>
+            {children}
           </ThemeProvider>
         </NeonAuthUIProvider>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
