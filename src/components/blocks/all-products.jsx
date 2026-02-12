@@ -7,6 +7,7 @@ import { usePopUp } from '@/hooks/use-pop-up'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import AddToCartButton from '@/components/blocks/add-to-cart-button'
 
 
 
@@ -55,7 +56,7 @@ const ProductItem = ({ index, product }) => {
 
                 {/* Product Image Container */}
                 <Link href={`/product/${product.id}`} className="block">
-                    <div className="relative bg-white h-[140px] sm:h-[200px] md:h-[250px] lg:h-80 overflow-hidden">
+                    <div className="relative bg-white h-35 sm:h-50 md:h-62.5 lg:h-80 overflow-hidden">
                         {/* Default Image */}
                         <Image
                             src={product.thumbnailUrl}
@@ -89,19 +90,20 @@ const ProductItem = ({ index, product }) => {
 
                     {/* Action Buttons */}
                     <div className="flex items-center justify-center gap-1 sm:gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                        <Button 
-                            size="sm" 
-                            className="bg-linear-to-r from-blue-500 to-blue-800 rounded-full hover:bg-primary/90 text-white shadow-lg text-[10px] sm:text-xs md:text-sm px-2 sm:px-3 h-7 sm:h-8"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                // Add to cart logic here
-                                console.log('Added to cart:', product.name)
+                        <AddToCartButton
+                            product={{
+                                id: product.id,
+                                title: product.name,
+                                price: product.price,
+                                image: product.thumbnailUrl,
                             }}
+                            size="sm"
+                            className="bg-linear-to-r from-blue-500 to-blue-800 rounded-full hover:bg-primary/90 text-white shadow-lg text-[10px] sm:text-xs md:text-sm px-2 sm:px-3 h-7 sm:h-8 cursor-pointer"
                         >
                             <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-0.5 sm:mr-1" />
                             <span className="hidden sm:inline">Add to Cart</span>
                             <span className="sm:hidden">Add</span>
-                        </Button>
+                        </AddToCartButton>
                         <Button 
                             size="icon" 
                             variant="outline"

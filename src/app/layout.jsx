@@ -4,6 +4,7 @@ import { Poppins } from 'next/font/google'
 import { authClient } from '@/lib/auth/client';
 import { NeonAuthUIProvider } from '@neondatabase/auth/react';
 import { Toaster } from '@/components/ui/sonner';
+import Providers from "./providers";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
           authClient={authClient}
           redirectTo="/account/settings"
           emailOTP
+          toaster={false}
         >
           <ThemeProvider
             attribute="class"
@@ -31,10 +33,12 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
+            <Providers>
             {children}
+            {/* <Toaster  position="top-right" /> */}
+            </Providers>
           </ThemeProvider>
         </NeonAuthUIProvider>
-        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

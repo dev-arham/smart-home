@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import Link from 'next/link';
 
 export default async function UserAvatar() {
-    const { data: session } = await auth;
+    const { data: session } = await auth.getSession();
     const role = session?.user?.role ?? 'user';
     if (!session)
         return (
@@ -21,7 +21,7 @@ export default async function UserAvatar() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant='ghost' size='lg' className='cursor-pointer'>
+                <Button variant='ghost' size='lg' className='cursor-pointer text-gray-900 hover:bg-gray-100 rounded-full'>
                     <UserCircle /> {session?.user?.name}
                 </Button>
             </DropdownMenuTrigger>

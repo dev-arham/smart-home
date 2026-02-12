@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { cn } from '@/lib/utils'
+import AddToCartButton from '@/components/blocks/add-to-cart-button'
 
 export default function ProductDetails({ product }) {
     console.log("product in product-details.jsx", product)
@@ -95,7 +96,16 @@ export default function ProductDetails({ product }) {
                                 <Plus className="h-3 w-3" />
                             </Button>
                         </div>
-                        <Button className="flex-1 h-12 text-base" size="lg">Add to Cart</Button>
+                        <AddToCartButton
+                            product={{
+                                id: product.id,
+                                title: product.name,
+                                price: price,
+                                image: product.thumbnailUrl || allImages[0],
+                            }}
+                            className="flex-1 h-12 text-base"
+                            size="lg"
+                        />
                     </div>
 
                     <div className="flex gap-4 pt-4">
