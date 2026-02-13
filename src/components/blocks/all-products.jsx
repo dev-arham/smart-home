@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import AddToCartButton from '@/components/blocks/add-to-cart-button'
+import WishlistButton from './wishlist-button'
 
 
 
@@ -104,18 +105,17 @@ const ProductItem = ({ index, product }) => {
                             <span className="hidden sm:inline">Add to Cart</span>
                             <span className="sm:hidden">Add</span>
                         </AddToCartButton>
-                        <Button 
-                            size="icon" 
-                            variant="outline"
-                            className="bg-Transparent rounded-full hover:bg-red-50 hover:text-red-500 hover:border-red-200 shadow-lg h-7 w-7 sm:h-8 sm:w-8"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                // Add to wishlist logic here
-                                console.log('Added to wishlist:', product.name)
+                        <WishlistButton
+                            product={{
+                                id: product.id,
+                                title: product.name,
+                                price: product.price,
+                                image: product.thumbnailUrl || allImages[0],
                             }}
-                        >
-                            <Heart className="w-3 h-3 sm:w-4 sm:h-4" />
-                        </Button>
+                            variant="icon"
+                            className="rounded-full border-gray-300 text-gray-700 shadow-lg h-7 sm:h-8 w-7 sm:w-8 p-0 cursor-pointer"
+                        />
+                       
                     </div>
                 </CardContent>
             </Card>

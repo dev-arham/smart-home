@@ -2,13 +2,14 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { Heart, Share2, Minus, Plus, Truck, ShieldCheck, RefreshCw } from 'lucide-react'
+import { Share2, Minus, Plus, Truck, ShieldCheck, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { cn } from '@/lib/utils'
 import AddToCartButton from '@/components/blocks/add-to-cart-button'
+import WishlistButton from '@/components/blocks/wishlist-button'
 
 export default function ProductDetails({ product }) {
     console.log("product in product-details.jsx", product)
@@ -110,9 +111,16 @@ export default function ProductDetails({ product }) {
 
                     <div className="flex gap-4 pt-4">
                         <Button className="flex-1 h-12 text-base" size="lg" variant='outline'>Buy Now</Button>
-                        <Button variant="outline" size="icon" className="h-12 w-12 shrink-0">
-                            <Heart className="h-5 w-5" />
-                        </Button>
+                        <WishlistButton
+                            product={{
+                                id: product.id,
+                                title: product.name,
+                                price: price,
+                                image: product.thumbnailUrl || allImages[0],
+                            }}
+                            variant="icon"
+                            className="h-12 w-12 shrink-0"
+                        />
                         <Button variant="ghost" size="icon" className="h-12 w-12 shrink-0">
                             <Share2 className="h-5 w-5" />
                         </Button>

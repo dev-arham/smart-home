@@ -1,10 +1,13 @@
+"use client";
+
 import React from 'react'
 import Image from 'next/image'
-import { Star, ShoppingCart, Heart } from 'lucide-react'
+import { Star, ShoppingCart } from 'lucide-react'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './card'
 import { Button } from './button'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import WishlistButton from '@/components/blocks/wishlist-button'
 
 /**
  * ProductCard Component
@@ -65,14 +68,11 @@ export default function ProductCard({
         </div>
 
         {/* Wishlist Button */}
-        <Button
-          variant="secondary"
-          size="icon"
-          className="absolute right-3 top-3 h-8 w-8 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
-          aria-label="Add to wishlist"
-        >
-          <Heart className="h-4 w-4" />
-        </Button>
+        <WishlistButton
+          product={product}
+          variant="icon"
+          className="absolute right-3 top-3 opacity-0 transition-opacity group-hover:opacity-100"
+        />
       </div>
 
       <CardHeader className="px-4">
