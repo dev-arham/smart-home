@@ -30,7 +30,10 @@ export default function AddToCartButton({
     toast.success("Product added to cart", {
       id: `cart-${product.id}`,
       description: product.title || product.name,
-    });
+       position: "top-right"
+    }
+
+  );
   };
 
   return (
