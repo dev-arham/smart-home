@@ -170,9 +170,12 @@ export default function Cart() {
                 <span className="font-semibold">Grand Total</span>
                 <span className="font-bold text-lg">Rs. {grandTotal.toLocaleString()}</span>
               </div>
-              <Button className="w-full mt-4" size="lg">
+             
+               <Link href="/checkout" className="block">
+                 <Button className="w-full mt-4" size="lg">
                 Proceed to Checkout
               </Button>
+              </Link>
               <Link href="/product" className="block">
                 <Button variant="outline" className="w-full">
                   <ArrowLeft className="h-4 w-4 mr-2" />
