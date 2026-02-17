@@ -174,8 +174,8 @@ export default function WishlistDrawer({ children }) {
           <SheetHeader className="relative p-6 pb-4">
             <SheetTitle className="flex items-center gap-3 text-xl">
               <div className="relative">
-                <div className="absolute inset-0 bg-linear-to-r from-blue-700 to-blue-900 rounded-full blur-md opacity-50 animate-pulse" />
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-linear-to-r from-blue-700 to-blue-900 shadow-lg">
+                <div className="absolute inset-0 bg-linear-to-r from-rose-700 to-rose-900 rounded-full blur-md opacity-50 animate-pulse" />
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-linear-to-r from-rose-500 to-rose-600 shadow-lg">
                   <Heart className="h-5 w-5 text-white fill-white" />
                 </div>
               </div>

@@ -112,17 +112,17 @@ export function NavigationMenuDemo({ fontColor = "gray-900" }) {
               <li className="row-span-3">
                 <div>
                   <NavigationMenuLink asChild>
-                    <Link href="#">Cam Switches</Link>
+                    <Link href="/category/cam-switches">Cam Switches</Link>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <Link href="#">LED Lights</Link>
+                    <Link href="/category/led-lights">LED Lights</Link>
                   </NavigationMenuLink>
                   <NavigationMenuLink asChild>
-                    <Link href="#">Capacitors</Link>
+                    <Link href="/category/capacitors">Capacitors</Link>
                   </NavigationMenuLink>
                   
                   <NavigationMenuLink asChild>
-                    <Link href="#" className="flex-row items-center gap-2 ">All Categories<ArrowRight /></Link>
+                    <Link href="/category" className="flex-row items-center gap-2 ">All Categories<ArrowRight /></Link>
                   </NavigationMenuLink>
                 </div>
               </li>
