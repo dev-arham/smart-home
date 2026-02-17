@@ -11,7 +11,6 @@ export const metadata = {
 
 const ProductsPage = async () => {
     const products = await getProducts();
-    console.log("products in page.jsx", products)
 
     return (
         <main>

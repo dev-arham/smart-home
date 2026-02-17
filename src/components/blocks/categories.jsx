@@ -124,7 +124,7 @@ function ProductsGrid({ products }) {
         const onSale = compareAt && compareAt > price;
 
         return (
-          <Link key={product.id} href={`/product/${product.slug}`}>
+          <Link key={product.id} href={`/product/${product.id}`}>
             <Card className="group overflow-hidden rounded-lg border-muted bg-card transition-all hover:shadow-md h-full">
               <div className="relative aspect-square overflow-hidden bg-muted">
                 <Image

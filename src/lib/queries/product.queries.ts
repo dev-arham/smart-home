@@ -226,7 +226,7 @@ export async function getRelatedProducts(productId: string, limit: number = 4) {
       sql`${products.id} != ${productId}`
     ),
     limit,
-    with: { brand: true },
+    with: { brand: true, category: true },
   });
 }
 

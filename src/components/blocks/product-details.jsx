@@ -12,7 +12,6 @@ import AddToCartButton from '@/components/blocks/add-to-cart-button'
 import WishlistButton from '@/components/blocks/wishlist-button'
 
 export default function ProductDetails({ product }) {
-    console.log("product in product-details.jsx", product)
     
     // Handle images - use thumbnailUrl as fallback if images array is empty
     const allImages = product.images?.length > 0 
