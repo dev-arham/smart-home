@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import Header from "@/components/blocks/header";
+import Footer from "@/components/blocks/footer";
 
 export default function CheckoutPage() {
   const cartItems = useSelector((state) => state.cart.items);
@@ -24,6 +26,8 @@ export default function CheckoutPage() {
   const total = subtotal + shipping; // Add tax/shipping logic here if needed
 
   return (
+    <>
+    <Header/>
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">Checkout</h1>
@@ -171,5 +175,7 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
