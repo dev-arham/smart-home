@@ -110,7 +110,7 @@ const ProductItem = ({ index, product }) => {
                                 id: product.id,
                                 title: product.name,
                                 price: product.price,
-                                image: product.thumbnailUrl || product.images?.[0],
+                                image: product.thumbnailUrl,
                             }}
                             variant="icon"
                             className="rounded-full border-gray-300 text-gray-700 shadow-lg h-7 sm:h-8 w-7 sm:w-8 p-0 cursor-pointer"

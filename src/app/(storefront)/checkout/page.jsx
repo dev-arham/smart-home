@@ -20,7 +20,8 @@ export default function CheckoutPage() {
 
   // Calculate totals
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const total = subtotal; // Add tax/shipping logic here if needed
+  const shipping = 250; // Fixed shipping cost
+  const total = subtotal + shipping; // Add tax/shipping logic here if needed
 
   return (
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
@@ -118,7 +119,7 @@ export default function CheckoutPage() {
                             </p>
                           </div>
                           <p className="font-semibold text-sm">
-                            ${(item.price * item.quantity).toFixed(2)}
+                            Rs {(item.price * item.quantity).toFixed(2)}
                           </p>
                         </div>
                         <Separator className="my-2" />
@@ -139,16 +140,16 @@ export default function CheckoutPage() {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Subtotal:</span>
-                        <span>${subtotal.toFixed(2)}</span>
+                        <span>Rs {subtotal.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-sm text-muted-foreground">
                         <span>Shipping:</span>
-                        <span>Free</span>
+                        <span>Rs 250</span>
                       </div>
                       <Separator className="my-4" />
                       <div className="flex justify-between text-lg font-bold">
                         <span>Total:</span>
-                        <span>${total.toFixed(2)}</span>
+                        <span>Rs {total.toFixed(2)}</span>
                       </div>
                     </div>
 
