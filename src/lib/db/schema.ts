@@ -79,6 +79,8 @@ export const verification = pgTable(
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
+  orders: many(orders),
+  shippingAddresses: many(shippingAddresses),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -102,6 +104,13 @@ export const appRoleEnum = pgEnum("app_role", [
 ]);
 
 export const sellTypeEnum = pgEnum("sell_type", ["unit", "box", "carton"]);
+
+export const orderStatusEnum = pgEnum("order_status", [
+  "pending",
+  "confirmed",
+  "delivered",
+  "cancelled",
+]);
 
 /**
  * User profile extension table
@@ -267,6 +276,74 @@ export const productAttributes = pgTable(
 );
 
 // ---------------------------------------------------------------------------
+// Order Tables
+// ---------------------------------------------------------------------------
+
+export const shippingAddresses = pgTable("shipping_addresses", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").references(() => user.id, { onDelete: "set null" }),
+  customerName: varchar("customer_name", { length: 150 }).notNull(),
+  phone: varchar("phone", { length: 20 }).notNull(),
+  address: text("address").notNull(),
+  city: varchar("city", { length: 100 }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+
+export const orders = pgTable(
+  "orders",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    orderNumber: varchar("order_number", { length: 30 }).notNull().unique(),
+    userId: text("user_id").references(() => user.id, { onDelete: "set null" }),
+    shippingAddressId: uuid("shipping_address_id")
+      .notNull()
+      .references(() => shippingAddresses.id, { onDelete: "restrict" }),
+    status: orderStatusEnum("status").notNull().default("pending"),
+    subtotal: numeric("subtotal", { precision: 10, scale: 2 }).notNull(),
+    shippingFee: numeric("shipping_fee", { precision: 10, scale: 2 }).notNull().default("0"),
+    totalAmount: numeric("total_amount", { precision: 10, scale: 2 }).notNull(),
+    notes: text("notes"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("orders_userId_idx").on(table.userId),
+    index("orders_status_idx").on(table.status),
+  ],
+);
+
+export const orderItems = pgTable(
+  "order_items",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    orderId: uuid("order_id")
+      .notNull()
+      .references(() => orders.id, { onDelete: "cascade" }),
+    productId: uuid("product_id")
+      .notNull()
+      .references(() => products.id, { onDelete: "restrict" }),
+    sellType: sellTypeEnum("sell_type").notNull(),
+    quantity: integer("quantity").notNull(),
+    unitPrice: numeric("unit_price", { precision: 10, scale: 2 }).notNull(),
+    snapshotUnitsPerBox: integer("snapshot_units_per_box").notNull().default(1),
+    snapshotBoxesPerCarton: integer("snapshot_boxes_per_carton").notNull().default(1),
+    lineTotal: numeric("line_total", { precision: 10, scale: 2 }).notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("orderItems_orderId_idx").on(table.orderId),
+    index("orderItems_productId_idx").on(table.productId),
+  ],
+);
+
+// ---------------------------------------------------------------------------
 // Catalog Relations
 // ---------------------------------------------------------------------------
 
@@ -297,6 +374,7 @@ export const productsRelations = relations(products, ({ one, many }) => ({
     references: [brands.id],
   }),
   productAttributes: many(productAttributes),
+  orderItems: many(orderItems),
 }));
 
 export const attributesRelations = relations(attributes, ({ many }) => ({
@@ -323,5 +401,40 @@ export const productAttributesRelations = relations(productAttributes, ({ one })
   attribute: one(attributes, {
     fields: [productAttributes.attributeId],
     references: [attributes.id],
+  }),
+}));
+
+// ---------------------------------------------------------------------------
+// Order Relations
+// ---------------------------------------------------------------------------
+
+export const shippingAddressesRelations = relations(shippingAddresses, ({ one, many }) => ({
+  user: one(user, {
+    fields: [shippingAddresses.userId],
+    references: [user.id],
+  }),
+  orders: many(orders),
+}));
+
+export const ordersRelations = relations(orders, ({ one, many }) => ({
+  user: one(user, {
+    fields: [orders.userId],
+    references: [user.id],
+  }),
+  shippingAddress: one(shippingAddresses, {
+    fields: [orders.shippingAddressId],
+    references: [shippingAddresses.id],
+  }),
+  orderItems: many(orderItems),
+}));
+
+export const orderItemsRelations = relations(orderItems, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderItems.orderId],
+    references: [orders.id],
+  }),
+  product: one(products, {
+    fields: [orderItems.productId],
+    references: [products.id],
   }),
 }));

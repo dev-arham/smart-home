@@ -11,6 +11,7 @@ import {
   Warehouse,
   Users,
   Store,
+  ClipboardList,
 } from "lucide-react";
 
 import {
@@ -39,6 +40,7 @@ const catalogNav = [
 ];
 
 const managementNav = [
+  { title: "Orders", href: "/admin/orders", icon: ClipboardList },
   { title: "Inventory", href: "/admin/inventory", icon: Warehouse },
   { title: "Users", href: "/admin/users", icon: Users },
 ];
