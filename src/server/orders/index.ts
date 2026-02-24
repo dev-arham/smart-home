@@ -23,6 +23,7 @@ import {
 export async function placeOrder(_prevState: unknown, formData: FormData) {
   const session = await auth.getSession();
   const userId = session?.data?.user?.id ?? null;
+  console.log("user id ",userId)
 
   let items;
   try {
