@@ -205,6 +205,7 @@ export default function CheckoutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left Column - Form Fields */}
             <div className="lg:col-span-2">
+            
               <Card>
                 <CardHeader>
                   <CardTitle>Shipping Information</CardTitle>

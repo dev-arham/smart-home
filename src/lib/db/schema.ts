@@ -76,11 +76,15 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
-export const userRelations = relations(user, ({ many }) => ({
+export const userRelations = relations(user, ({ many, one }) => ({
   sessions: many(session),
   accounts: many(account),
   orders: many(orders),
   shippingAddresses: many(shippingAddresses),
+  profile: one(userProfile, {
+    fields: [user.id],
+    references: [userProfile.userId],
+  }),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -118,10 +122,7 @@ export const orderStatusEnum = pgEnum("order_status", [
 export const userProfile = pgTable("user_profile", {
   id: uuid("id").primaryKey().defaultRandom(),
 
-  // Reference to auth user (no FK — user table is managed by Neon Auth)
-  userId: text("user_id")
-    .notNull()
-    .unique(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
 
   // Profile
   fullName: varchar("full_name", { length: 150 }),
@@ -145,12 +146,6 @@ export const userProfile = pgTable("user_profile", {
     .defaultNow(),
 });
 
-export const userProfileRelations = relations(userProfile, ({ one }) => ({
-  user: one(user, {
-    fields: [userProfile.userId],
-    references: [user.id],
-  }),
-}));
 
 export const categories = pgTable(
   "categories",

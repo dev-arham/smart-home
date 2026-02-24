@@ -1,7 +1,7 @@
 'use server';
 import { auth } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { userProfile } from '@/lib/db/schema';
+import { user, userProfile } from '@/lib/db/schema';
 import { redirect } from 'next/navigation';
 
 export async function signIn(formData: FormData) {
@@ -24,8 +24,15 @@ export async function signUp(formData: FormData) {
 
   if (error) return { error: error.message };
 
-  // Create a user_profile row for the new user
+  // Create a user row first (Neon Auth doesn't sync to the local user table),
+  // then create the user_profile row.
   if (data?.user?.id) {
+    await db.insert(user).values({
+      id: data.user.id,
+      name,
+      email: formData.get('email') as string,
+    }).onConflictDoNothing();
+
     await db.insert(userProfile).values({
       userId: data.user.id,
       fullName: name,

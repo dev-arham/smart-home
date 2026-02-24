@@ -25,7 +25,6 @@ export function SignupForm({
     // Handle form submission logic here
     const userData = new FormData(e.target);
     await signUp(userData);
-    router.replace('/login');
   }
 
   return (

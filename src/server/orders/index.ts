@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { auth } from "@/lib/auth";
 import { requireAdmin } from "@/lib/auth/admin";
 import {
   createOrderSchema,
@@ -15,6 +14,7 @@ import {
   cancelOrder as cancelOrderService,
   markOrderDelivered as markOrderDeliveredService,
 } from "@/lib/services/order.service";
+import { auth } from "@/lib/auth";
 
 // ---------------------------------------------------------------------------
 // Place order (guest or authenticated)

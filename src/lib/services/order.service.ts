@@ -5,6 +5,7 @@ import {
   orderItems,
   shippingAddresses,
   products,
+  user,
 } from "@/lib/db/schema";
 import { getConversionFactor } from "@/lib/queries/inventory.queries";
 import { generateOrderNumber } from "@/lib/utils/order-number";
@@ -12,6 +13,23 @@ import type {
   CreateOrderInput,
   OrderActionResult,
 } from "@/lib/models/order.model";
+
+/**
+ * Extract a human-readable message from drizzle/pg errors.
+ * Drizzle wraps the original pg DatabaseError in `cause`.
+ */
+function extractDbError(err: unknown, fallback: string): string {
+  if (err instanceof Error) {
+    // drizzle-orm stores the original pg error in .cause
+    const cause = (err as Error & { cause?: Error }).cause;
+    if (cause?.message) return cause.message;
+
+    // If the message looks like a raw query dump, return the fallback instead
+    if (err.message.startsWith("Failed query:")) return fallback;
+    return err.message;
+  }
+  return fallback;
+}
 
 // ---------------------------------------------------------------------------
 // createOrder — pending, no stock deduction
@@ -33,10 +51,21 @@ export async function createOrder(
 
   return db
     .transaction(async (tx) => {
+      // Verify userId exists in the user table before using it as a FK
+      let verifiedUserId: string | null = null;
+      if (userId) {
+        const [existingUser] = await tx
+          .select({ id: user.id })
+          .from(user)
+          .where(eq(user.id, userId))
+          .limit(1);
+        verifiedUserId = existingUser ? existingUser.id : null;
+      }
+
       // Step 1: Create shipping address
       const [shippingAddr] = await tx
         .insert(shippingAddresses)
-        .values({ userId, customerName, phone, address, city })
+        .values({ userId: verifiedUserId, customerName, phone, address, city })
         .returning({ id: shippingAddresses.id });
 
       // Step 2: Snapshot product data and compute line totals
@@ -121,7 +150,7 @@ export async function createOrder(
           .insert(orders)
           .values({
             orderNumber,
-            userId,
+            userId: verifiedUserId,
             shippingAddressId: shippingAddr.id,
             status: "pending",
             subtotal: subtotal.toFixed(2),
@@ -138,7 +167,7 @@ export async function createOrder(
             .insert(orders)
             .values({
               orderNumber,
-              userId,
+              userId: verifiedUserId,
               shippingAddressId: shippingAddr.id,
               status: "pending",
               subtotal: subtotal.toFixed(2),
@@ -164,8 +193,7 @@ export async function createOrder(
       };
     })
     .catch((err) => {
-      const message =
-        err instanceof Error ? err.message : "Failed to create order.";
+      const message = extractDbError(err, "Failed to create order.");
       return { success: false as const, error: message };
     });
 }
@@ -267,8 +295,7 @@ export async function confirmOrder(
       return { success: true as const, orderId };
     })
     .catch((err) => {
-      const message =
-        err instanceof Error ? err.message : "Failed to confirm order.";
+      const message = extractDbError(err, "Failed to confirm order.");
       return { success: false as const, error: message };
     });
 }
@@ -363,8 +390,7 @@ export async function cancelOrder(
       return { success: true as const, orderId };
     })
     .catch((err) => {
-      const message =
-        err instanceof Error ? err.message : "Failed to cancel order.";
+      const message = extractDbError(err, "Failed to cancel order.");
       return { success: false as const, error: message };
     });
 }
@@ -406,8 +432,7 @@ export async function markOrderDelivered(
       return { success: true as const, orderId };
     })
     .catch((err) => {
-      const message =
-        err instanceof Error ? err.message : "Failed to mark order as delivered.";
+      const message = extractDbError(err, "Failed to mark order as delivered.");
       return { success: false as const, error: message };
     });
 }
