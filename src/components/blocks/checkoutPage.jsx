@@ -59,7 +59,7 @@ export default function CheckoutPage() {
         description: "Your order has been placed successfully.",
         position: "top-right",
       });
-    //   router.push(`/order-success?orderNumber=${state.orderNumber}`);
+      router.push(`/order-success`);
     } else if (state.error) {
       toast.error("Order Failed", {
         description: state.error,
