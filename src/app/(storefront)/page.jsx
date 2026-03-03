@@ -17,12 +17,14 @@ import VideoBanner from '@/components/blocks/video-banner'
 import FeaturesAutomation from '@/components/blocks/features-automation'
 import React from 'react'
 import CustomerReviews from '@/components/blocks/customer-reviews'
+import HeroComponent from '@/components/blocks/HeroComponent'
 
 const page = () => {
   return (
     <div className='w-full'>
       <Header fontColor="white" />
-      <HeroSlider  />
+      {/* <HeroSlider  /> */}
+      <HeroComponent/>
       <HeroCards />
       {/* <Categories /> */}
       {/* <FeaturedProducts /> */}
