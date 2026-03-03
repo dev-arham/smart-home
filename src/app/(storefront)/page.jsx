@@ -18,27 +18,29 @@ import FeaturesAutomation from '@/components/blocks/features-automation'
 import React from 'react'
 import CustomerReviews from '@/components/blocks/customer-reviews'
 import HeroComponent from '@/components/blocks/HeroComponent'
+import GlobalOperationLocalizationSection from '@/components/blocks/GlobalOperationLocalizationSection'
 
 const page = () => {
   return (
-    <div className='w-full'>
-      <Header fontColor="white" />
+    <div className='w-full '>
+      <Header />
+      <HeroComponent />
+      <GlobalOperationLocalizationSection/>
       {/* <HeroSlider  /> */}
-      <HeroComponent/>
-      <HeroCards />
+      {/* <HeroCards /> */}
       {/* <Categories /> */}
       {/* <FeaturedProducts /> */}
-      <DayLightSection />
-      <FeaturesAutomation />
-      <DisplayCards />
+      {/* <DayLightSection /> */}
+      {/* <FeaturesAutomation /> */}
+      {/* <DisplayCards /> */}
       {/* <SmartHomeHero /> */}
-      <VideoBanner />
+      {/* <VideoBanner />
       <CustomerReviews />
       <Services />
       <LookBook />
       <StayConnected />
       <OurTeam />
-      <Faq />
+      <Faq /> */}
       {/* <Newsletter /> */}
       <Footer />
     </div>

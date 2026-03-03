@@ -12,45 +12,13 @@ import Link from "next/link";
 import HeaderClient from "./header-client";
 import NextImage from "next/image";
 import TypingText from "../ui/typing-text";
+import { ThemeToggle } from "./theme-toggle";
 
 const Header = ({ fontColor = "gray-900" }) => {
   return (
     <HeaderClient>
-      {/* <div className="  topBar bg-tertiary/80 text-tertiary-foreground py-2 text-center text-sm backdrop-blur-sm">
-        <div className="container mx-auto flex items-center justify-between px-1 max-sm:px-5 max-sm:py-2 md:justify-center max-xl:px-5">
-          <div className="left max-sm:hidden w-full h-8 flex items-center justify-center">
-            <p>
-              Need help? Call us{" "}
-              <a href="tel:+923368882782">
-                <span className="font-bold underline">+92 336 8882782</span>
-              </a>
-            </p>
-          </div>
-          <div className="hidden max-sm:block">
-            <a href="tel:+923368882782">
-              <Phone className="text-white" />
-            </a>
-          </div>
-          <div className="center w-full flex gap-2 justify-center max-xl:justify-end max-sm:items-start">
-            <TypingText
-              text={[
-                "Winter Sale Upto 50% off!",
-                "Get exclusive discounts now!",
-                "Shop smart home products!",
-              ]}
-              typingSpeed={50}
-              deletingSpeed={30}
-              pauseDuration={2000}
-              showCursor={true}
-              cursorCharacter="|"
-              loop={true}
-              className="font-semibold"
-            />
-          </div>
-          <div className="right hidden w-full xl:block"></div>
-        </div>
-      </div> */}
-      <div className="container  mx-auto flex items-center justify-between text-center px-4 py-2 max-sm:px-5 max-sm:py-2 gap-8">
+
+      <div className="container mx-auto flex items-center justify-between text-center px-4 py-2 max-sm:px-5 max-sm:py-2 gap-8">
         <div className="logo max-sm:w-auto *:">
           <NextImage
             src="/images/aqua-logo-transparent.png"
@@ -75,14 +43,15 @@ const Header = ({ fontColor = "gray-900" }) => {
             asChild
           >
             <Link href="/cart">
-              <ShoppingBag color="gray" className="" />
+              <ShoppingBag color="black" className="" />
             </Link>
           </Button>
           <WishlistDrawer>
             <Button variant="ghost" size="icon" className="cursor-pointer">
-              <Heart color="gray" className="" />
+              <Heart color="black" className="" />
             </Button>
           </WishlistDrawer>
+          {/* <ThemeToggle  className="text-black"/> */}
         </div>
       </div>
     </HeaderClient>
