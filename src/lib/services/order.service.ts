@@ -38,13 +38,14 @@ function extractDbError(err: unknown, fallback: string): string {
 export async function createOrder(
   input: CreateOrderInput,
 ): Promise<OrderActionResult> {
+
   const {
     customerName,
     phone,
     address,
     city,
     items,
-    userId = null,
+    userId,
     notes = "",
     shippingFee = 250,
   } = input;
@@ -55,7 +56,7 @@ export async function createOrder(
       let verifiedUserId: string | null = null;
       if (userId) {
         const [existingUser] = await tx
-          .select({ id: user.id })
+          .select()
           .from(user)
           .where(eq(user.id, userId))
           .limit(1);
@@ -120,8 +121,8 @@ export async function createOrder(
         if (item.quantity > availableUnits) {
           throw new Error(
             `Insufficient stock for product ${item.productId}: ` +
-              `requested ${item.quantity} ${item.sellType}(s), ` +
-              `available ${availableUnits}`,
+            `requested ${item.quantity} ${item.sellType}(s), ` +
+            `available ${availableUnits}`,
           );
         }
 
@@ -272,8 +273,8 @@ export async function confirmOrder(
           const available = Math.floor(currentStock / factor);
           throw new Error(
             `Insufficient stock for product ${item.product_id}: ` +
-              `need ${unitsToDeduct} units, have ${currentStock} ` +
-              `(${available} ${item.sell_type}(s) available)`,
+            `need ${unitsToDeduct} units, have ${currentStock} ` +
+            `(${available} ${item.sell_type}(s) available)`,
           );
         }
 
@@ -327,7 +328,7 @@ export async function cancelOrder(
       if (order.status !== "pending" && order.status !== "confirmed") {
         throw new Error(
           `Cannot cancel order: current status is "${order.status}". ` +
-            `Only pending or confirmed orders can be cancelled.`,
+          `Only pending or confirmed orders can be cancelled.`,
         );
       }
 

@@ -1,8 +1,8 @@
+import { authClient } from '@/lib/auth/client';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 import { Poppins } from 'next/font/google'
-import { authClient } from '@/lib/auth/client';
-import { NeonAuthUIProvider } from '@neondatabase/auth/react';
 import { Toaster } from '@/components/ui/sonner';
 import Providers from "./providers";
 
@@ -34,8 +34,8 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             <Providers>
-            {children}
-            {/* <Toaster  position="top-right" /> */}
+              {children}
+              <Toaster position="top-right" />
             </Providers>
           </ThemeProvider>
         </NeonAuthUIProvider>

@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@neondatabase/auth':
-        specifier: 0.1.0-beta.21
-        version: 0.1.0-beta.21(dc3b0c1f406d1a49533869b716487370)
+        specifier: 0.2.0-beta.1
+        version: 0.2.0-beta.1(dc3b0c1f406d1a49533869b716487370)
       '@radix-ui/react-accordion':
         specifier: ^1.2.12
         version: 1.2.12(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -920,8 +920,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  '@neondatabase/auth@0.1.0-beta.21':
-    resolution: {integrity: sha512-j1pMr/j5AawxB0K0FltyHzlfWTJ6hsSvqOKQQ5lL8fKpwvmrzD2i+BOQAfMiQm5C3IQ7fltSDuCDT6v43orkBQ==}
+  '@neondatabase/auth@0.2.0-beta.1':
+    resolution: {integrity: sha512-XX8h0oMQChzhk9FYaIjDjPRCLosNb08QpS/SxaqUuBonWUguaR0+7lyqa1MtSHkns8Sunp+SRPw9vuLY4Qv9hQ==}
     peerDependencies:
       next: '>=16.0.6'
       react: '>=18.0.0'
@@ -3211,7 +3211,7 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@daveyplate/better-auth-ui@3.3.9(a6e32610fa7be6e99159dc1a4c652246)':
+  '@daveyplate/better-auth-ui@3.3.9(94b5bf3a1e44f8d785ec69c43e0149e0)':
     dependencies:
       '@better-auth/passkey': 1.4.18(@better-auth/core@1.4.10(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-call@1.1.7(zod@4.3.6))(jose@6.1.3)(kysely@0.28.9)(nanostores@1.1.0))(@better-auth/utils@0.3.0)(@better-fetch/fetch@1.1.21)(better-auth@1.4.10(drizzle-kit@0.31.8)(drizzle-orm@0.45.1(@types/pg@8.16.0)(kysely@0.28.9)(pg@8.16.3))(next@16.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(pg@8.16.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(better-call@1.1.7(zod@4.3.6))(nanostores@1.1.0)
       '@better-fetch/fetch': 1.1.21
@@ -3252,7 +3252,7 @@ snapshots:
       react-qr-code: 2.0.18(react@19.2.0)
       sonner: 2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwind-merge: 3.4.0
-      tailwindcss: 4.1.17
+      tailwindcss: 4.1.18
       ua-parser-js: 2.0.9
       vaul: 1.1.2(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       zod: 4.3.6
@@ -3677,14 +3677,14 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@neondatabase/auth-ui@0.1.0-alpha.11(5ab5c21625fec53b0ea3b6a2ad03f735)':
+  '@neondatabase/auth-ui@0.1.0-alpha.11(c85d6ca16deb41a3c914fdc00701bf9d)':
     dependencies:
       '@captchafox/react': 1.10.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@daveyplate/better-auth-ui': 3.3.9(a6e32610fa7be6e99159dc1a4c652246)
+      '@daveyplate/better-auth-ui': 3.3.9(94b5bf3a1e44f8d785ec69c43e0149e0)
       '@hcaptcha/react-hcaptcha': 1.17.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@hookform/resolvers': 5.2.2(react-hook-form@7.71.1(react@19.2.0))
       '@marsidev/react-turnstile': 1.4.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@neondatabase/auth': 0.1.0-beta.21(dc3b0c1f406d1a49533869b716487370)
+      '@neondatabase/auth': 0.2.0-beta.1(dc3b0c1f406d1a49533869b716487370)
       '@radix-ui/react-avatar': 1.1.11(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@radix-ui/react-checkbox': 1.3.3(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@radix-ui/react-context': 1.1.3(@types/react@19.2.7)(react@19.2.0)
@@ -3711,7 +3711,7 @@ snapshots:
       react-qr-code: 2.0.18(react@19.2.0)
       sonner: 2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwind-merge: 3.4.0
-      tailwindcss: 4.1.17
+      tailwindcss: 4.1.18
       tw-animate-css: 1.4.0
       ua-parser-js: 2.0.9
       vaul: 1.1.2(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -3727,9 +3727,9 @@ snapshots:
       - '@types/react-dom'
       - better-auth
 
-  '@neondatabase/auth@0.1.0-beta.21(dc3b0c1f406d1a49533869b716487370)':
+  '@neondatabase/auth@0.2.0-beta.1(dc3b0c1f406d1a49533869b716487370)':
     dependencies:
-      '@neondatabase/auth-ui': 0.1.0-alpha.11(5ab5c21625fec53b0ea3b6a2ad03f735)
+      '@neondatabase/auth-ui': 0.1.0-alpha.11(c85d6ca16deb41a3c914fdc00701bf9d)
       '@supabase/auth-js': 2.79.0
       better-auth: 1.4.6(next@16.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       jose: 6.1.2
