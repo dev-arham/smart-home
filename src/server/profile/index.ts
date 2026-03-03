@@ -12,10 +12,10 @@ import { updateProfileSchema } from "@/lib/validations/admin.validations";
  * Creates a profile row if one doesn't exist yet (for users who signed up before profiles were added).
  */
 export async function getProfile() {
-  const session = await auth.getSession();
-  if (!session?.data?.user) return null;
+  const { data: session } = await auth.getSession();
+  if (!session?.user) return null;
 
-  const userId = session.data.user.id;
+  const userId = session.user.id;
 
   let [profile] = await db
     .select()
@@ -29,7 +29,7 @@ export async function getProfile() {
       .insert(userProfile)
       .values({
         userId,
-        fullName: session.data.user.name ?? "",
+        fullName: session.user.name ?? "",
       })
       .onConflictDoNothing()
       .returning();
@@ -46,14 +46,14 @@ export async function getProfile() {
 
   return {
     ...profile,
-    email: session.data.user.email,
-    name: session.data.user.name,
+    email: session.user.email,
+    name: session.user.name,
   };
 }
 
 export async function updateProfile(_prevState: unknown, formData: FormData) {
-  const session = await auth.getSession();
-  if (!session?.data?.user) {
+  const { data: session } = await auth.getSession();
+  if (!session?.user) {
     return { success: false, error: "Not authenticated." };
   }
 
@@ -73,7 +73,7 @@ export async function updateProfile(_prevState: unknown, formData: FormData) {
     };
   }
 
-  const userId = session.data.user.id;
+  const userId = session.user.id;
 
   // Upsert: update if exists, create if not
   const [existing] = await db

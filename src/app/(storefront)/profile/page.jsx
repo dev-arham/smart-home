@@ -4,7 +4,7 @@ import { getProfile } from "@/server/profile"
 import { ProfileForm } from "@/components/forms/profile-form"
 
 export default async function ProfilePage() {
-  const session = await auth.getSession()
+  const { data: session } = await auth.getSession()
   if (!session?.data?.user) redirect("/login")
 
   const profile = await getProfile()

@@ -1,14 +1,13 @@
-import { neonAuthMiddleware } from '@neondatabase/auth/next/server';
+import { auth } from '@/lib/auth';
 
-export default neonAuthMiddleware({
+export default auth.middleware({
     // Redirects unauthenticated users to sign-in page
     loginUrl: '/login',
 });
 
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
 
-const protectedRoutes = ["/dashboard", "/account", "/admin"];``
+const protectedRoutes = ["/dashboard", "/account", "/admin"]; ``
 
 export async function proxy(request: NextRequest) {
     const pathName = request.nextUrl.pathname;
