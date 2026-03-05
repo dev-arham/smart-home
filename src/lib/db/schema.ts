@@ -4,11 +4,27 @@ import {
   integer, numeric, uniqueIndex,
 } from "drizzle-orm/pg-core";
 
+export const appRoleEnum = pgEnum("app_role", [
+  "customer",
+  "admin",
+]);
+
+export const sellTypeEnum = pgEnum("sell_type", ["unit", "box", "carton"]);
+
+export const orderStatusEnum = pgEnum("order_status", [
+  "pending",
+  "confirmed",
+  "delivered",
+  "cancelled",
+]);
+
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
+  phone: varchar("phone", { length: 20 }),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
+  role: appRoleEnum("role").notNull().default("customer"),
   image: text("image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
@@ -80,11 +96,7 @@ export const userRelations = relations(user, ({ many, one }) => ({
   sessions: many(session),
   accounts: many(account),
   orders: many(orders),
-  shippingAddresses: many(shippingAddresses),
-  profile: one(userProfile, {
-    fields: [user.id],
-    references: [userProfile.userId],
-  }),
+  shippingAddresses: many(shippingAddresses)
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -100,51 +112,6 @@ export const accountRelations = relations(account, ({ one }) => ({
     references: [user.id],
   }),
 }));
-
-export const appRoleEnum = pgEnum("app_role", [
-  "customer",
-  "admin",
-  "seller",
-]);
-
-export const sellTypeEnum = pgEnum("sell_type", ["unit", "box", "carton"]);
-
-export const orderStatusEnum = pgEnum("order_status", [
-  "pending",
-  "confirmed",
-  "delivered",
-  "cancelled",
-]);
-
-/**
- * User profile extension table
- */
-export const userProfile = pgTable("user_profile", {
-  id: uuid("id").primaryKey().defaultRandom(),
-
-  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
-
-  // Profile
-  fullName: varchar("full_name", { length: 150 }),
-  phone: varchar("phone", { length: 20 }),
-  avatarUrl: text("avatar_url"),
-
-  // App-specific role & status
-  role: appRoleEnum("role").notNull().default("customer"),
-  isActive: boolean("is_active").notNull().default(true),
-
-  // Preferences / flags
-  marketingOptIn: boolean("marketing_opt_in").notNull().default(false),
-
-  // Audit
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-});
 
 
 export const categories = pgTable(

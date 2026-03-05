@@ -18,7 +18,6 @@ import {
   categoryAttributes,
   productAttributes,
   user,
-  userProfile,
 } from "@/lib/db/schema";
 
 // ── Dashboard ────────────────────────────────────────────────────────
@@ -335,7 +334,7 @@ export async function getAdminAttributes() {
 
 interface AdminUserFilters {
   search?: string;
-  role?: "customer" | "admin" | "seller";
+  role?: "customer" | "admin";
   isActive?: boolean;
   page?: number;
   pageSize?: number;
@@ -362,11 +361,7 @@ export async function getAdminUsers(filters: AdminUserFilters = {}) {
   }
 
   if (role) {
-    conditions.push(eq(userProfile.role, role));
-  }
-
-  if (isActive !== undefined) {
-    conditions.push(eq(userProfile.isActive, isActive));
+    conditions.push(eq(user.role, role));
   }
 
   const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
@@ -375,7 +370,6 @@ export async function getAdminUsers(filters: AdminUserFilters = {}) {
   const [{ count: total }] = await db
     .select({ count: sql<number>`COUNT(*)::int` })
     .from(user)
-    .leftJoin(userProfile, eq(userProfile.userId, user.id))
     .where(whereClause);
 
   // Paginated rows
@@ -383,7 +377,6 @@ export async function getAdminUsers(filters: AdminUserFilters = {}) {
   const data = await db
     .select()
     .from(user)
-    .leftJoin(userProfile, eq(userProfile.userId, user.id))
     .where(whereClause)
     .orderBy(desc(user.createdAt))
     .limit(pageSize)

@@ -4,6 +4,7 @@ import { getOrders } from "@/lib/queries/order.queries";
 import Header from "@/components/blocks/header";
 import Footer from "@/components/blocks/footer";
 import OrderDetails from "@/components/blocks/OrderDetails";
+import { headers } from "next/headers";
 
 export const metadata = {
   title: "My Orders",
@@ -13,9 +14,11 @@ export const metadata = {
 export default async function OrdersPage({ params }) {
   const { id } = await params;
 
-  const { data: session } = await auth.getSession();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
   const userId = session?.user?.id;
-  console.log("Session User ID:", userId);
 
   if (!userId) {
     redirect("/login");
@@ -43,8 +46,6 @@ export default async function OrdersPage({ params }) {
     page: 1,
     pageSize: 20,
   });
-
-  console.log("Orders Result:", result);  
 
   return (
     <div className="flex min-h-screen flex-col mt-10">

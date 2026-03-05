@@ -3,9 +3,9 @@
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
-import { userProfile } from "@/lib/db/schema";
 import { requireAdmin } from "@/lib/auth/admin";
 import { updateUserRoleSchema, toggleUserActiveSchema } from "@/lib/validations/admin.validations";
+import { user } from "@/lib/db/schema";
 
 export async function updateUserRole(_prevState: unknown, formData: FormData) {
   const admin = await requireAdmin();
@@ -24,19 +24,19 @@ export async function updateUserRole(_prevState: unknown, formData: FormData) {
   const { profileId, role } = parsed.data;
 
   // Guard: can't change own role
-  const profile = await db.query.userProfile.findFirst({
-    where: eq(userProfile.id, profileId),
+  const profile = await db.query.user.findFirst({
+    where: eq(user.id, profileId),
   });
 
-  if (profile?.userId === admin.userId) {
+  if (profile?.id === admin.userId) {
     return { success: false, error: "You cannot change your own role." };
   }
 
   try {
     await db
-      .update(userProfile)
+      .update(user)
       .set({ role, updatedAt: new Date() })
-      .where(eq(userProfile.id, profileId));
+      .where(eq(user.id, profileId));
 
     revalidatePath("/admin/users");
     return { success: true };
@@ -46,28 +46,28 @@ export async function updateUserRole(_prevState: unknown, formData: FormData) {
   }
 }
 
-export async function toggleUserActive(profileId: string, isActive: boolean) {
-  const admin = await requireAdmin();
+// export async function toggleUserActive(profileId: string, isActive: boolean) {
+//   const admin = await requireAdmin();
 
-  // Guard: can't deactivate self
-  const profile = await db.query.userProfile.findFirst({
-    where: eq(userProfile.id, profileId),
-  });
+//   // Guard: can't deactivate self
+//   const profile = await db.query.user.findFirst({
+//     where: eq(user.id, profileId),
+//   });
 
-  if (profile?.userId === admin.userId) {
-    return { success: false, error: "You cannot deactivate your own account." };
-  }
+//   if (profile?.id === admin.userId) {
+//     return { success: false, error: "You cannot deactivate your own account." };
+//   }
 
-  try {
-    await db
-      .update(userProfile)
-      .set({ isActive, updatedAt: new Date() })
-      .where(eq(userProfile.id, profileId));
+//   try {
+//     await db
+//       .update(user)
+//       .set({ isActive, updatedAt: new Date() })
+//       .where(eq(user.id, profileId));
 
-    revalidatePath("/admin/users");
-    return { success: true };
-  } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Failed to toggle user status.";
-    return { success: false, error: message };
-  }
-}
+//     revalidatePath("/admin/users");
+//     return { success: true };
+//   } catch (err: unknown) {
+//     const message = err instanceof Error ? err.message : "Failed to toggle user status.";
+//     return { success: false, error: message };
+//   }
+// }

@@ -1,10 +1,5 @@
 import { auth } from '@/lib/auth';
-
-export default auth.middleware({
-    // Redirects unauthenticated users to sign-in page
-    loginUrl: '/login',
-});
-
+import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from "next/server";
 
 const protectedRoutes = ["/dashboard", "/account", "/admin"]; ``
@@ -13,7 +8,9 @@ export async function proxy(request: NextRequest) {
     const pathName = request.nextUrl.pathname;
     const isProtectedRoute = protectedRoutes.includes(pathName);
 
-    const { data: session } = await auth.getSession();
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
 
     // THIS IS NOT SECURE!
     // This is the recommended approach to optimistically redirect users

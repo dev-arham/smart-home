@@ -18,13 +18,16 @@ import { eq } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { user } from "@/lib/db/schema";
+import { headers } from "next/headers";
 
 // ---------------------------------------------------------------------------
 // Place order (guest or authenticated)
 // ---------------------------------------------------------------------------
 
 export async function placeOrder(_prevState: unknown, formData: FormData) {
-  const { data: session } = await auth.getSession();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   const sessionUser = session?.user ?? null;
   let userId: string | null = null;
 

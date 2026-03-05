@@ -11,23 +11,19 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { signOut } from "@/server/auth";
+import { authClient } from "@/lib/auth/client";
 
 export default function UserAvatar() {
-  const [session, setSession] = useState(undefined); // undefined = loading
 
-  useEffect(() => {
-    fetch("/api/auth/get-session")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => setSession(data?.user ?? null))
-      .catch(() => setSession(null));
-  }, []);
+  const { data } = authClient.useSession();
+  const user = data?.user ?? undefined;
 
   // Loading state — render nothing to avoid layout shift
-  if (session === undefined) {
+  if (user === undefined) {
     return <div className="h-10 w-24" />;
   }
 
-  if (!session) {
+  if (!user) {
     return (
       <Link href="/login">
         <Button
@@ -41,10 +37,6 @@ export default function UserAvatar() {
     );
   }
 
-  const role = session?.role ?? "user";
-  const id = session?.id ?? "unknown";
-  console.log("User Session:", id);
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,14 +46,14 @@ export default function UserAvatar() {
           className="cursor-pointer text-gray-300 hover:bg-gray-100 rounded-full"
         >
           <UserCircle />
-          {session?.name}
+          {user?.name}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem className="font-bold">
-          {session?.email}
+          {user?.email}
         </DropdownMenuItem>
-        {role === "admin" && (
+        {user.role === "admin" && (
           <DropdownMenuItem asChild>
             <Link href="/admin">Dashboard</Link>
           </DropdownMenuItem>
@@ -73,7 +65,7 @@ export default function UserAvatar() {
           <Link href="/account/settings">Settings</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href={`/orders/${session?.id}`}>My Orders</Link>
+          <Link href={`/orders/${user?.id}`}>My Orders</Link>
         </DropdownMenuItem>
         <DropdownMenuItem variant="destructive" onClick={signOut}>
           Logout

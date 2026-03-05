@@ -89,7 +89,7 @@ export const adjustStockSchema = z.object({
 
 export const updateUserRoleSchema = z.object({
   profileId: z.string().uuid(),
-  role: z.enum(["customer", "admin", "seller"]),
+  role: z.enum(["customer", "admin"]),
 });
 
 export const toggleUserActiveSchema = z.object({

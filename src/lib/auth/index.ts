@@ -1,6 +1,27 @@
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+import { betterAuth, number } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "@/lib/db"; // your drizzle instance
+import { nextCookies } from "better-auth/next-js";
 
-export const auth = createNeonAuth({
-    baseUrl: process.env.NEON_AUTH_BASE_URL!,
-    cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
+export const auth = betterAuth({
+    user: {
+        additionalFields: {
+            role: {
+                type: ["customer", "admin"],
+                required: true,
+                defaultValue: "customer",
+            },
+            phone: {
+                type: "string",
+                required: false
+            }
+        },
+    },
+    emailAndPassword: {
+        enabled: true,
+    },
+    database: drizzleAdapter(db, {
+        provider: "pg", // or "mysql", "sqlite"
+    }),
+    plugins: [nextCookies()]
 });

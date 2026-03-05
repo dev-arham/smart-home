@@ -3,8 +3,7 @@
 import { useTransition } from "react"
 import { toast } from "sonner"
 
-import { updateUserRole, toggleUserActive } from "@/server/admin/users"
-import { Switch } from "@/components/ui/switch"
+import { updateUserRole } from "@/server/admin/users"
 import {
   Select,
   SelectContent,
@@ -31,17 +30,6 @@ function UserActions({ user, profile }) {
     })
   }
 
-  function handleActiveToggle(checked) {
-    startTransition(async () => {
-      const result = await toggleUserActive(profile.id, checked)
-      if (result.success) {
-        toast.success(checked ? "User activated" : "User deactivated")
-      } else {
-        toast.error(result.error)
-      }
-    })
-  }
-
   return (
     <div className="flex items-center justify-end gap-3">
       <Select
@@ -53,15 +41,9 @@ function UserActions({ user, profile }) {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="customer">Customer</SelectItem>
-          <SelectItem value="seller">Seller</SelectItem>
           <SelectItem value="admin">Admin</SelectItem>
         </SelectContent>
       </Select>
-      <Switch
-        checked={profile.isActive}
-        onCheckedChange={handleActiveToggle}
-        disabled={isPending}
-      />
     </div>
   )
 }

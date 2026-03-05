@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export type AdminSession = {
   userId: string;
@@ -14,7 +15,9 @@ export type AdminSession = {
  * is authenticated but does not hold the "admin" role.
  */
 export async function requireAdmin(): Promise<AdminSession> {
-  const { data: session } = await auth.getSession();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   if (!session?.user) {
     redirect("/login");

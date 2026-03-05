@@ -2,9 +2,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export default async function OrderSuccess() {
-  const { data: session } = await auth.getSession();
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   const userId = session?.user?.id;
 
   return (
