@@ -2,6 +2,23 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { FlickeringGrid } from '../ui/flickering-grid'
 import { Marquee } from '../ui/marquee'
+import { 
+    Tv, 
+    Lightbulb, 
+    Refrigerator, 
+    Laptop, 
+    Fan, 
+    Microwave, 
+    Speaker, 
+    Watch, 
+    Camera, 
+    Thermometer, 
+    AirVent,
+    Lamp,
+    WashingMachine,
+    Coffee,
+    MonitorSpeaker
+} from 'lucide-react'
 
 function useInView(options = {}) {
     const ref = useRef(null)
@@ -244,13 +261,99 @@ const Showcase = () => {
                 </div>
             </div>
 
-            {/* // TODO: to be replaced with actual icons/text for features */}
+            {/* Colorful Icons Marquee */}
             <Marquee className="mt-20 [--duration:20s]">
-                <div className="flex items-center gap-6 text-lg whitespace-nowrap uppercase">
-                    <span className="font-medium"> icons to be added </span>
-                    <span className="font-medium"> ++++++ </span>
-                    <span className="font-medium"> icons to be added </span>
-                    <span className="font-medium"> ++++++ </span>
+                <div className="flex items-center gap-8 text-lg whitespace-nowrap">
+                    <div className="flex flex-col items-center gap-2">
+                        <Tv className="w-8 h-8" style={{ color: '#3B82F6' }} />
+                        <span className="font-medium text-muted-foreground">Smart TV</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Lightbulb className="w-8 h-8" style={{ color: '#FBBF24' }} />
+                        <span className="font-medium text-muted-foreground">Smart Lights</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Refrigerator className="w-8 h-8" style={{ color: '#10B981' }} />
+                        <span className="font-medium text-muted-foreground">Refrigerator</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <AirVent className="w-8 h-8" style={{ color: '#06B6D4' }} />
+                        <span className="font-medium text-muted-foreground">Air Conditioning</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <WashingMachine className="w-8 h-8" style={{ color: '#8B5CF6' }} />
+                        <span className="font-medium text-muted-foreground">Washing Machine</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Coffee className="w-8 h-8" style={{ color: '#A855F7' }} />
+                        <span className="font-medium text-muted-foreground">Coffee Maker</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Speaker className="w-8 h-8" style={{ color: '#EF4444' }} />
+                        <span className="font-medium text-muted-foreground">Smart Speaker</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Camera className="w-8 h-8" style={{ color: '#F59E0B' }} />
+                        <span className="font-medium text-muted-foreground">Security Camera</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Thermometer className="w-8 h-8" style={{ color: '#EC4899' }} />
+                        <span className="font-medium text-muted-foreground">Thermostat</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Laptop className="w-8 h-8" style={{ color: '#6366F1' }} />
+                        <span className="font-medium text-muted-foreground">Laptop</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Fan className="w-8 h-8" style={{ color: '#14B8A6' }} />
+                        <span className="font-medium text-muted-foreground">Smart Fan</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Microwave className="w-8 h-8" style={{ color: '#F97316' }} />
+                        <span className="font-medium text-muted-foreground">Microwave</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Lamp className="w-8 h-8" style={{ color: '#FACC15' }} />
+                        <span className="font-medium text-muted-foreground">Table Lamp</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <Watch className="w-8 h-8" style={{ color: '#84CC16' }} />
+                        <span className="font-medium text-muted-foreground">Smart Watch</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+                    
+                    <div className="flex flex-col items-center gap-2">
+                        <MonitorSpeaker className="w-8 h-8" style={{ color: '#22D3EE' }} />
+                        <span className="font-medium text-muted-foreground">Monitor</span>
+                    </div>
+                    <span className="text-muted-foreground/30">•</span>
+
                 </div>
             </Marquee>
         </section>
