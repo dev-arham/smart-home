@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 const cards = [
   {
     id: 1,
-    title: 'Introducing Roma Urban Smart Touch Switches',
+    title: 'Traditional Switches',
     description:
       'Elegant smart switch that brings effortless control and modern living to your home',
     buttonText: 'Explore',
@@ -12,29 +12,21 @@ const cards = [
   },
   {
     id: 2,
-    title: 'Transform Your Living Space',
+    title: 'Smart Switches',
     description:
       'Experience the future of home automation with intelligent lighting control',
     buttonText: 'Learn More',
     image: '/images/InspiredCard2.png',
   },
-  {
-    id: 3,
-    title: 'Premium Home Automation',
-    description:
-      'Elevate your lifestyle with cutting-edge smart home technology',
-    buttonText: 'Discover',
-    image: '/images/InspiredCard1.png',
-  },
 ];
 
 export default function StayInspiredCards() {
   return (
-    <section className="relative bg-gray-100 py-3 sm:py-4">
+    <section className="relative z-10 mt-5 space-y-4">
       {cards.map((card, index) => (
         <div
           key={card.id}
-          className="sticky top-0 max-md:top-20 h-[85svh] w-full p-2 sm:h-[80svh] sm:p-4 md:h-[95svh] md:p-6 lg:h-screen"
+          className="sticky top-24 h-[85svh] w-full rounded-2xl bg-gray-100 p-2 sm:h-[80svh] sm:p-4 md:h-[85svh] md:p-6"
           style={{ zIndex: index + 1 }}
         >
           <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] shadow-2xl sm:rounded-3xl">

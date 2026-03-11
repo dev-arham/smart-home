@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import HeroLottie from "./HeroLottie";
 import StayInspired from "./StayInspired";
+import StayInspiredCards from "./StayInspiredCards";
+import HeroAbout from "./hero-about";
 
 export default function HeroComponent() {
   return (
@@ -39,15 +41,6 @@ export default function HeroComponent() {
             >
               <Link href="/category">Explore Products</Link>
             </Button>
-
-            {/* <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full border-cyan-300/40 bg-transparent text-cyan-100 hover:bg-cyan-300/10 sm:w-auto"
-            >
-              <Link href="/contact">Talk to an Expert</Link>
-            </Button> */}
           </div>
         </div>
 
@@ -58,7 +51,11 @@ export default function HeroComponent() {
           </div>
         </div>
       </div>
-      <StayInspired />
+      <div className="relative px-4 pb-4">
+        <StayInspired />
+        <HeroAbout />
+        <StayInspiredCards />
+      </div>
     </section>
   );
 }
