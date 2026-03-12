@@ -205,7 +205,8 @@ const Showcase = () => {
                                 <img
                                     src="images/showcase-image.png"
                                     alt="Smart Light"
-                                    className={`relative z-10 object-contain w-[150px] h-[150px] sm:w-[190px] sm:h-[190px] lg:w-[230px] lg:h-[230px] showcase-light-img ${lightCardInView ? 'is-visible' : ''}`}
+
+                                    className={`rotate-140 relative z-10 object-contain w-[150px] h-[150px] sm:w-[190px] sm:h-[190px] lg:w-[230px] lg:h-[230px] showcase-light-img ${lightCardInView ? 'is-visible' : ''}`}
                                     style={{
                                         opacity: imageOpacity,
                                         filter: `drop-shadow(0 0 ${18 + warmth * 35}px ${glowInner})`,
