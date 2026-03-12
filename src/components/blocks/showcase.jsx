@@ -351,7 +351,7 @@ const Showcase = () => {
                         <Speaker className="w-8 h-8" style={{ color: '#EF4444' }} />
                         <span className="font-medium text-muted-foreground">Smart Speaker</span>
                     </div> */}
-                    <span className="text-muted-foreground/30">•</span>
+                    {/* <span className="text-muted-foreground/30">•</span> */}
                     
                     <div className="flex flex-col items-center gap-2">
                         <Camera className="w-8 h-8" style={{ color: '#F59E0B' }} />
@@ -369,7 +369,7 @@ const Showcase = () => {
                         <Laptop className="w-8 h-8" style={{ color: '#6366F1' }} />
                         <span className="font-medium text-muted-foreground">Laptop</span>
                     </div> */}
-                    <span className="text-muted-foreground/30">•</span>
+                    {/* <span className="text-muted-foreground/30">•</span> */}
                     
                     <div className="flex flex-col items-center gap-2">
                         <Fan className="w-8 h-8" style={{ color: '#14B8A6' }} />
