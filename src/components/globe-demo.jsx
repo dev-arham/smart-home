@@ -1,66 +1,23 @@
 "use client";
-
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Building2,
-  Globe2,
-  Handshake,
-  Users,
-} from "lucide-react";
-import { useCountUp } from "@/hooks/use-count-up";
+import React from "react";
+import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 
-const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
+const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,
 });
 
-function Counter({ stat, isInView, index }) {
-  const count = useCountUp(stat.value, 1600 + index * 180, isInView);
-  const Icon = stat.icon;
-
-  return (
-    <div
-      className="group rounded-2xl bg-linear-to-br from-sky-200/60 via-white/80 to-cyan-200/60 p-px transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_30px_-18px_rgba(2,132,199,0.45)]"
-      style={{
-        opacity: isInView ? 1 : 0,
-        transform: isInView ? "translateY(0px)" : "translateY(12px)",
-        transitionDelay: `${index * 90}ms`,
-      }}
-    >
-      <div className="h-full rounded-2xl border border-white/70 bg-white/65 p-4 shadow-sm backdrop-blur-xl sm:p-5">
-        <div className="flex items-start gap-3">
-          <div className="mt-0.5 rounded-xl border border-sky-100 bg-sky-50/90 p-2.5 text-sky-700 transition-colors duration-300 group-hover:bg-sky-100">
-            <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-          </div>
-          <div>
-            <div className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl lg:text-4xl">
-              {count}
-              {stat.suffix && <span className="text-slate-900">{stat.suffix}</span>}
-            </div>
-            <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">
-              {stat.label}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function Global() {
-  const [isInView, setIsInView] = useState(false);
-  const sectionRef = useRef(null);
-
+export default function GlobeDemo() {
   const globeConfig = {
     pointSize: 4,
-    globeColor: "#ffffff",
+    globeColor: "#062056",
     showAtmosphere: true,
-    atmosphereColor: "#bae6fd",
-    atmosphereAltitude: 0.15,
-    emissive: "#0ea5e9",
+    atmosphereColor: "#FFFFFF",
+    atmosphereAltitude: 0.1,
+    emissive: "#062056",
     emissiveIntensity: 0.1,
     shininess: 0.9,
-    polygonColor: "rgba(14, 165, 233, 0.7)",
+    polygonColor: "rgba(255,255,255,0.7)",
     ambientLight: "#38bdf8",
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
@@ -73,7 +30,7 @@ export default function Global() {
     autoRotate: true,
     autoRotateSpeed: 0.5,
   };
-  const colors = ["#0ea5e9", "#06b6d4", "#0284c7"];
+  const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
   const sampleArcs = [
     {
       order: 1,
@@ -437,155 +394,40 @@ export default function Global() {
     },
   ];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
-      },
-      {
-        threshold: 0.18,
-        rootMargin: "0px 0px -8% 0px",
-      }
-    );
-
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
-
-  const stats = [
-    {
-      value: 140,
-      suffix: "+",
-      label: "Countries and regions",
-      icon: Globe2,
-    },
-    {
-      value: 40,
-      suffix: "+",
-      label: "Subsidiary corporations",
-      icon: Building2,
-    },
-    {
-      value: 2300,
-      suffix: "+",
-      label: "Global distributors",
-      icon: Handshake,
-    },
-    {
-      value: 66,
-      suffix: "%",
-      label: "International talent localization rate",
-      icon: Users,
-    },
-  ];
-
-  const orbitDots = [
-    { top: "10%", left: "58%", delay: "0s" },
-    { top: "22%", left: "80%", delay: "1s" },
-    { top: "46%", left: "88%", delay: "1.8s" },
-    { top: "72%", left: "74%", delay: "0.6s" },
-    { top: "82%", left: "52%", delay: "1.2s" },
-    { top: "66%", left: "26%", delay: "2.1s" },
-    { top: "38%", left: "16%", delay: "0.9s" },
-  ];
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative isolate w-full overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-24"
-    >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(56,189,248,0.14),transparent_45%),radial-gradient(circle_at_100%_100%,rgba(14,165,233,0.12),transparent_40%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.3)_1px,transparent_1px)] bg-size-[32px_32px] opacity-[0.18]" />
-      </div>
-
-      <div className="container relative mx-auto px-4 sm:px-6">
-        <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
-          <div
-            className="w-full"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? "translateY(0px)" : "translateY(16px)",
-              transition: "all 700ms cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="h-12 w-2 shrink-0 rounded bg-linear-to-b from-sky-500 to-cyan-300" />
-              <div>
-                <h2 className="text-3xl font-semibold leading-tight text-slate-900 md:text-4xl xl:text-[2.7rem] xl:leading-[1.08]">
-                  Global Operation Localization
-                </h2>
-              </div>
-            </div>
-
-            <p className="mt-6 text-base font-medium text-slate-600 sm:mt-7 sm:text-lg">
-              International subsidiaries all over the world
-            </p>
-
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-slate-600">
-              Our extensive network of subsidiaries and distributors ensures
-              seamless service delivery and support worldwide, backed by a
-              highly skilled international team committed to excellence.
-            </p>
-
-            <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-              {stats.map((stat, index) => (
-                <Counter
-                  key={index}
-                  stat={stat}
-                  isInView={isInView}
-                  index={index}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div
-            className="relative mx-auto w-full aspect-square max-w-[400px] sm:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? "translateY(0px)" : "translateY(18px)",
-              transition: "all 800ms cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-          >
-            <World data={sampleArcs} globeConfig={globeConfig} />
-
-          </div>
+    <div
+      className="flex flex-row items-center justify-center py-20 h-screen md:h-auto dark:bg-black bg-white relative w-full">
+      <div
+        className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+          }}
+          className="div">
+          <h2
+            className="text-center text-xl md:text-4xl font-bold text-black dark:text-white">
+            We sell soap worldwide
+          </h2>
+          <p
+            className="text-center text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-md mt-2 mx-auto">
+            This globe is interactive and customizable. Have fun with it, and
+            don&apos;t forget to share it. :)
+          </p>
+        </motion.div>
+        <div
+          className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40" />
+        <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
+          <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes floatDot {
-          0%,
-          100% {
-            transform: translate3d(0, 0, 0);
-            opacity: 0.45;
-          }
-          50% {
-            transform: translate3d(0, -9px, 0);
-            opacity: 1;
-          }
-        }
-
-        @keyframes dashFlow {
-          from {
-            stroke-dashoffset: 80;
-          }
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-      `}</style>
-    </section>
+    </div>
   );
 }

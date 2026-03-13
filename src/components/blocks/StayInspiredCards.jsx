@@ -8,7 +8,7 @@ const cards = [
     description:
       'Elegant smart switch that brings effortless control and modern living to your home',
     buttonText: 'Explore',
-    image: '/images/InspiredCard1.png',
+    image: '/images/traditional-switches-banner.png',
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const cards = [
     description:
       'Experience the future of home automation with intelligent lighting control',
     buttonText: 'Learn More',
-    image: '/images/InspiredCard2.png',
+    image: '/images/smart-swithes-banner.png',
   },
 ];
 

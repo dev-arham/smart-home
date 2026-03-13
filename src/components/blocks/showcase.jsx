@@ -2,17 +2,17 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { FlickeringGrid } from '../ui/flickering-grid'
 import { Marquee } from '../ui/marquee'
-import { 
-    Tv, 
-    Lightbulb, 
-    Refrigerator, 
-    Laptop, 
-    Fan, 
-    Microwave, 
-    Speaker, 
-    Watch, 
-    Camera, 
-    Thermometer, 
+import {
+    Tv,
+    Lightbulb,
+    Refrigerator,
+    Laptop,
+    Fan,
+    Microwave,
+    Speaker,
+    Watch,
+    Camera,
+    Thermometer,
     AirVent,
     Lamp,
     WashingMachine,
@@ -64,7 +64,7 @@ const Showcase = () => {
 
         const tick = () => {
             if (!running) return
-            const next = lerp(currentWarmth.current, targetWarmth.current, 0.18)
+            const next = lerp(currentWarmth.current, targetWarmth.current, 0.08) // Lowered for buttery smooth inertia
             if (Math.abs(next - currentWarmth.current) > 0.001) {
                 currentWarmth.current = next
                 setWarmth(next)
@@ -107,10 +107,10 @@ const Showcase = () => {
         isDragging.current = false
     }, [])
 
-    // Color math
-    const r = 255
-    const g = Math.round(220 - warmth * 100)
-    const b = Math.round(180 - warmth * 155)
+    // Color math (Cool blue → Warm orange)
+    const r = Math.round(210 + warmth * 45)      // 210 -> 255
+    const g = Math.round(240 - warmth * 70)      // 240 -> 170
+    const b = Math.round(255 - warmth * 195)     // 255 -> 60
     const lightColor = `rgb(${r}, ${g}, ${b})`
     const glowInner = `rgba(${r}, ${g}, ${b}, ${0.5 + warmth * 0.35})`
     const glowOuter = `rgba(${r}, ${g}, ${b}, ${0.12 + warmth * 0.18})`
@@ -120,10 +120,8 @@ const Showcase = () => {
     // factor 0.1→2.1 keeps original colours at warmth≈0.45 while going dark/bright at extremes
     const bgFactor = Math.min(2.2, 0.1 + warmth * 2.0)
     const clamp = (v) => Math.round(Math.min(255, v))
-    const containerBg = `linear-gradient(135deg,
-        rgb(${clamp(30 * bgFactor)}, ${clamp(28 * bgFactor)}, ${clamp(42 * bgFactor)}),
-        rgb(${clamp(37 * bgFactor)}, ${clamp(35 * bgFactor)}, ${clamp(51 * bgFactor)}))`
-    const darkOverlayOpacity = Math.max(0, 0.85 - warmth * 0.85)
+    const containerBg = 'transparent'
+    const darkOverlayOpacity = 0
     const imageOpacity = 0.5 + warmth * 0.5
 
     return (
@@ -138,18 +136,7 @@ const Showcase = () => {
             />
 
             <div className='relative z-10 container mx-auto'>
-                <div
-                    ref={headingRef}
-                    className={`max-w-2xl mb-10 md:mb-14 showcase-reveal ${headingInView ? 'is-visible' : ''}`}
-                >
-                    <h2 className='text-3xl sm:text-4xl lg:text-5xl font-semibold capitalize leading-tight'>
-                        Control all your devices from one place
-                    </h2>
-                    <p className='text-base sm:text-lg text-muted-foreground mt-4'>
-                        Designed to make controlling, automating and monitoring your smart home intuitive and fun.
-                    </p>
-                </div>
-                <div className='flex flex-col lg:flex-row gap-6 lg:gap-2  z-100'>
+                <div className='flex flex-col items-center lg:flex-row gap-6 lg:gap-2  z-100'>
 
                     <div
                         ref={lightCardRef}
@@ -157,76 +144,80 @@ const Showcase = () => {
                         style={{ transitionDelay: '0.15s' }}
                     >
                         <div
-                            className='relative rounded-3xl overflow-hidden flex h-[360px] sm:h-[420px] lg:h-[520px]'
-                            style={{
-                                background: containerBg,
-                                transition: 'background 80ms linear',
-                                willChange: 'background',
-                            }}
+                            ref={headingRef}
+                            className={`max-w-2xl mb-10 md:mb-14 showcase-reveal ${headingInView ? 'is-visible' : ''}`}
                         >
+                            <h2 className='text-3xl sm:text-4xl lg:text-5xl font-semibold capitalize leading-tight'>
+                                Control all your devices from one place
+                            </h2>
+                            <p className='text-base sm:text-lg text-muted-foreground mt-4'>
+                                Designed to make controlling, automating and monitoring your smart home intuitive and fun.
+                            </p>
+                        </div>
+                        <div
+                            className='relative flex h-[360px] sm:h-[420px] lg:h-[450px] w-full items-center'
+                        >
+                            {/* Connecting dashed line */}
                             <div
-                                className="absolute inset-0 pointer-events-none z-10"
+                                className="absolute border-t-[2px] border-dashed border-[#e4e4e7] -z-10"
                                 style={{
-                                    background: `rgba(0,0,0,${darkOverlayOpacity})`,
-                                    boxShadow: `inset 0 0 120px rgba(0,0,0,${Math.min(0.9, darkOverlayOpacity + 0.12)})`,
-                                    transition: 'background 80ms linear, box-shadow 80ms linear',
+                                    left: '30%',
+                                    right: '15%', // connects into slider area
+                                    top: '50%',
                                 }}
                             />
 
-                            <div
-                                className="absolute inset-0 pointer-events-none"
-                                style={{
-                                    background: `
-                                        radial-gradient(ellipse 55% 55% at 42% 48%, ${glowInner} 0%, transparent 100%),
-                                        radial-gradient(ellipse 80% 70% at 42% 50%, ${glowOuter} 0%, transparent 100%)
-                                    `,
-                                    willChange: 'background',
-                                }}
-                            />
-
-                            <div className="relative flex-1 flex items-center justify-center">
-                                <div
-                                    className="absolute rounded-full pointer-events-none showcase-glow-pulse w-[200px] h-[200px] sm:w-[260px] sm:h-[260px] lg:w-[300px] lg:h-[300px]"
-                                    style={{
-                                        background: `radial-gradient(circle, ${glowInner} 0%, transparent 70%)`,
-                                        filter: 'blur(40px)',
-                                        willChange: 'filter, background, transform',
-                                    }}
-                                />
-                                <div
-                                    className="absolute rounded-full pointer-events-none w-[100px] h-[100px] sm:w-[130px] sm:h-[130px] lg:w-[160px] lg:h-[160px]"
-                                    style={{
-                                        backgroundColor: lightColor,
-                                        opacity: 0.22 + warmth * 0.22,
-                                        filter: 'blur(30px)',
-                                        willChange: 'opacity, background-color',
-                                    }}
-                                />
-                                <img
-                                    src="images/showcase-image.png"
-                                    alt="Smart Light"
-
-                                    className={`rotate-140 relative z-10 object-contain w-[150px] h-[150px] sm:w-[190px] sm:h-[190px] lg:w-[230px] lg:h-[230px] showcase-light-img ${lightCardInView ? 'is-visible' : ''}`}
-                                    style={{
-                                        opacity: imageOpacity,
-                                        filter: `drop-shadow(0 0 ${18 + warmth * 35}px ${glowInner})`,
-                                        willChange: 'filter, opacity',
-                                    }}
-                                    draggable={false}
-                                />
+                            {/* Light Image */}
+                            <div className="absolute left-[5%] sm:left-[10%] lg:left-[15%] top-1/2 -translate-y-1/2 z-10 pointer-events-none">
+                                <div className="relative w-[180px] sm:w-[240px] lg:w-[320px]">
+                                    <img
+                                        src="images/showcase-image.png"
+                                        alt="Smart Light"
+                                        className={`w-full h-full object-contain rotate-140 showcase-light-img ${lightCardInView ? 'is-visible' : ''}`}
+                                        style={{
+                                            filter: `drop-shadow(0 20px 40px rgba(0,0,0,0.08))`,
+                                        }}
+                                        draggable={false}
+                                    />
+                                    {/* LED Color tint overlay localized to the center bulb area */}
+                                    <div
+                                        className="absolute top-[48%] left-[48%] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none mix-blend-overlay"
+                                        style={{
+                                            width: '55%',
+                                            height: '55%',
+                                            background: `radial-gradient(circle, ${lightColor} 0%, rgba(${r}, ${g}, ${b}, 0.2) 50%, transparent 80%)`,
+                                            filter: 'blur(4px)',
+                                            opacity: 0.9,
+                                            willChange: 'background, opacity',
+                                        }}
+                                    />
+                                    <div
+                                        className="absolute top-[48%] left-[48%] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none mix-blend-color"
+                                        style={{
+                                            width: '45%',
+                                            height: '45%',
+                                            background: `radial-gradient(circle, ${lightColor} 0%, transparent 70%)`,
+                                            filter: 'blur(8px)',
+                                            opacity: 0.7 + warmth * 0.3,
+                                            willChange: 'background, opacity',
+                                        }}
+                                    />
+                                </div>
                             </div>
 
-                            <div className={`flex flex-col items-center justify-center pr-5 sm:pr-7 pl-2 z-20 select-none showcase-slider-entry ${lightCardInView ? 'is-visible' : ''}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="w-4 h-4 sm:w-5 sm:h-5 mb-3 sm:mb-4 shrink-0 transition-colors duration-500"
-                                    style={{ color: warmth > 0.4 ? `rgba(251,191,36,${0.5 + warmth * 0.5})` : '#3a3a48' }}
+                            {/* Slider Section */}
+                            <div className={`absolute right-4 sm:right-[15%] lg:right-[15%] flex flex-col items-center justify-center z-20 select-none showcase-slider-entry ${lightCardInView ? 'is-visible' : ''}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+                                    className="w-5 h-5 sm:w-6 sm:h-6 mb-4 sm:mb-6 shrink-0 transition-colors duration-500"
+                                    style={{ color: '#a1a1aa' }}
                                 >
-                                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                                 </svg>
 
                                 <div
                                     ref={sliderRef}
-                                    className="relative w-10 sm:w-8 touch-none cursor-ns-resize h-[200px] sm:h-[260px] lg:h-[320px]"
+                                    className="relative w-14 sm:w-16 touch-none cursor-ns-resize h-[200px] sm:h-[260px] lg:h-[300px] rounded-2xl bg-white/90 backdrop-blur-sm border border-gray-200/60 overflow-hidden"
+                                    style={{ boxShadow: '0 8px 32px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04)' }}
                                     onPointerDown={handlePointerDown}
                                     onPointerMove={handlePointerMove}
                                     onPointerUp={handlePointerUp}
@@ -239,62 +230,33 @@ const Showcase = () => {
                                     aria-valuenow={pct}
                                 >
                                     <div
-                                        className="absolute inset-y-0 left-1/2 -translate-x-1/2 rounded-full w-[6px]"
+                                        className="absolute bottom-0 left-0 w-full pointer-events-none"
                                         style={{
-                                            backgroundColor: '#1e1e2a',
-                                            boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)',
+                                            height: `${Math.max(5, pct)}%`,
+                                            backgroundColor: `rgba(${r}, ${g}, ${b}, 0.5)`
                                         }}
                                     >
-                                        <div
-                                            className="absolute bottom-0 left-0 w-full rounded-full pointer-events-none"
-                                            style={{
-                                                height: `${pct}%`,
-                                                background: `linear-gradient(to top, #d97706, ${lightColor})`,
-                                                boxShadow: `0 0 8px ${glowOuter}`,
-                                            }}
-                                        />
+                                        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-6 h-[3px] rounded-full bg-black/10" />
                                     </div>
-                                    <div
-                                        className="absolute left-1/2 pointer-events-none"
-                                        style={{
-                                            bottom: `${pct}%`,
-                                            transform: 'translate(-50%, 50%)',
-                                            width: '22px',
-                                            height: '22px',
-                                            borderRadius: '50%',
-                                            background: `radial-gradient(circle at 40% 38%, #fff 0%, ${lightColor} 100%)`,
-                                            border: '2.5px solid rgba(255,255,255,0.85)',
-                                            boxShadow: `0 0 14px ${glowInner}, 0 2px 6px rgba(0,0,0,0.4)`,
-                                        }}
-                                    />
                                 </div>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    className="w-3 h-3 sm:w-[14px] sm:h-[14px] mt-3 sm:mt-4 shrink-0 transition-colors duration-500"
-                                    style={{ color: warmth < 0.4 ? `rgba(147,197,253,${1 - warmth})` : '#3a3a48' }}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
+                                    className="w-4 h-4 sm:w-5 sm:h-5 mt-4 sm:mt-6 shrink-0 transition-colors duration-500"
+                                    style={{ color: '#d4d4d8' }}
                                 >
-                                    <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                                 </svg>
-                            </div>
-
-                            <div className="absolute bottom-4 left-5 sm:bottom-5 sm:left-7 z-20">
-                                <p className="text-[9px] sm:text-[10px] text-white/30 uppercase tracking-[0.2em] font-medium">Color Temp</p>
-                                <p className="text-sm sm:text-base font-semibold mt-0.5"
-                                    style={{ color: lightColor }}
-                                >
-                                    {Math.round(2700 + warmth * 3800)}K
-                                </p>
                             </div>
                         </div>
                     </div>
 
                     <div
                         ref={demoCardRef}
-                        className={`w-full h-full lg:flex-1 flex justify-center showcase-reveal showcase-reveal--card ${demoCardInView ? 'is-visible' : ''}`}
+                        className={`w-full h-full lg:flex-1 flex justify-center items-start showcase-reveal showcase-reveal--card ${demoCardInView ? 'is-visible' : ''}`}
                         style={{ transitionDelay: '0.3s' }}
                     >
-                        <div className="demo-frame-wrapper h-90 sm:h-105 lg:h-130">
-                            <Android className="h-full w-full">
+                        <div className="demo-frame-wrapper h-180 lg:h-160 flex justify-start">
+                            <Android className="h-full w-fit">
                                 <iframe
                                     id="HAdemo"
                                     title="Home Assistant Demo"
@@ -316,91 +278,49 @@ const Showcase = () => {
                         <span className="font-medium text-muted-foreground">Smart TV</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
+
                     <div className="flex flex-col items-center gap-2">
                         <Lightbulb className="w-8 h-8" style={{ color: '#FBBF24' }} />
                         <span className="font-medium text-muted-foreground">Smart Lights</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
+
                     <div className="flex flex-col items-center gap-2">
                         <Refrigerator className="w-8 h-8" style={{ color: '#10B981' }} />
                         <span className="font-medium text-muted-foreground">Refrigerator</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
+
                     <div className="flex flex-col items-center gap-2">
                         <AirVent className="w-8 h-8" style={{ color: '#06B6D4' }} />
                         <span className="font-medium text-muted-foreground">Air Conditioning</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
-                    {/* <div className="flex flex-col items-center gap-2">
-                        <WashingMachine className="w-8 h-8" style={{ color: '#8B5CF6' }} />
-                        <span className="font-medium text-muted-foreground">Washing Machine</span>
-                    </div>
-                    <span className="text-muted-foreground/30">•</span>
-                    
-                    <div className="flex flex-col items-center gap-2">
-                        <Coffee className="w-8 h-8" style={{ color: '#A855F7' }} />
-                        <span className="font-medium text-muted-foreground">Coffee Maker</span>
-                    </div>
-                    <span className="text-muted-foreground/30">•</span>
-                    
-                    <div className="flex flex-col items-center gap-2">
-                        <Speaker className="w-8 h-8" style={{ color: '#EF4444' }} />
-                        <span className="font-medium text-muted-foreground">Smart Speaker</span>
-                    </div> */}
-                    {/* <span className="text-muted-foreground/30">•</span> */}
-                    
+
                     <div className="flex flex-col items-center gap-2">
                         <Camera className="w-8 h-8" style={{ color: '#F59E0B' }} />
                         <span className="font-medium text-muted-foreground">Security Camera</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
-                    {/* <div className="flex flex-col items-center gap-2">
-                        <Thermometer className="w-8 h-8" style={{ color: '#EC4899' }} />
-                        <span className="font-medium text-muted-foreground">Thermostat</span>
-                    </div>
-                    <span className="text-muted-foreground/30">•</span>
-                    
-                    <div className="flex flex-col items-center gap-2">
-                        <Laptop className="w-8 h-8" style={{ color: '#6366F1' }} />
-                        <span className="font-medium text-muted-foreground">Laptop</span>
-                    </div> */}
-                    {/* <span className="text-muted-foreground/30">•</span> */}
-                    
+
                     <div className="flex flex-col items-center gap-2">
                         <Fan className="w-8 h-8" style={{ color: '#14B8A6' }} />
                         <span className="font-medium text-muted-foreground">Smart Fan</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
+
                     <div className="flex flex-col items-center gap-2">
-                        <SquareMinus  className="w-8 h-8" style={{ color: '#F97316' }} />
+                        <SquareMinus className="w-8 h-8" style={{ color: '#F97316' }} />
                         <span className="font-medium text-muted-foreground">Smart Switches</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
+
                     <div className="flex flex-col items-center gap-2">
                         <Lamp className="w-8 h-8" style={{ color: '#FACC15' }} />
                         <span className="font-medium text-muted-foreground">Table Lamp</span>
                     </div>
                     <span className="text-muted-foreground/30">•</span>
-                    
-                    {/* <div className="flex flex-col items-center gap-2">
-                        <Watch className="w-8 h-8" style={{ color: '#84CC16' }} />
-                        <span className="font-medium text-muted-foreground">Smart Watch</span>
-                    </div> */}
-                    {/* <span className="text-muted-foreground/30">•</span> */}
-                    
-                    {/* <div className="flex flex-col items-center gap-2">
-                        <MonitorSpeaker className="w-8 h-8" style={{ color: '#22D3EE' }} />
-                        <span className="font-medium text-muted-foreground">Monitor</span>
-                    </div> */}
-                    {/* <span className="text-muted-foreground/30">•</span> */}
-                                        
+
                 </div>
             </Marquee>
         </section>

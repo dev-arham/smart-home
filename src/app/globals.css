@@ -9,6 +9,7 @@
 /* @import "@neondatabase/auth/ui/tailwind"; */
 
 @custom-variant dark (&:is(.dark *));
+
 html,
 body {
   width: 100%;
@@ -19,21 +20,29 @@ body {
 }
 
 .demo-frame-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
   max-width: 540px;
-    margin-inline: auto;
-    position: relative;
+  margin-inline: auto;
+  position: relative;
 }
+
+@media screen and (max-width: 640px) {
+  .demo-frame-wrapper {
+    justify-content: center;
+    max-width: 100%;
+  }
+}
+
 .demo-frame-wrapper #HAdemo {
-    border: 0;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    z-index: 1;
+  border: 0;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
 /* @theme inline {
@@ -298,20 +307,24 @@ body {
   --shadow-2xl: var(--shadow-2xl);
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
   @keyframes marquee {
-  from {
-    transform: translateX(0);
+    from {
+      transform: translateX(0);
     }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
+
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
+
   @keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
+    from {
+      transform: translateY(0);
     }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
+
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
     }
   }
 }
@@ -331,6 +344,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -344,8 +358,9 @@ body {
   opacity: 0;
   transform: translateY(36px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .showcase-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -355,6 +370,7 @@ body {
 .showcase-reveal--card {
   transform: translateY(48px) scale(0.97);
 }
+
 .showcase-reveal--card.is-visible {
   transform: translateY(0) scale(1);
 }
@@ -364,8 +380,9 @@ body {
   opacity: 0;
   transform: scale(0.85);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
 }
+
 .showcase-light-img.is-visible {
   opacity: 1;
   transform: scale(1);
@@ -376,8 +393,9 @@ body {
   opacity: 0;
   transform: translateX(24px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s,
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
 }
+
 .showcase-slider-entry.is-visible {
   opacity: 1;
   transform: translateX(0);
@@ -385,15 +403,19 @@ body {
 
 /* Ambient glow pulse on the light */
 @keyframes showcaseGlowPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.08);
     opacity: 0.82;
   }
 }
+
 .showcase-glow-pulse {
   animation: showcaseGlowPulse 4s ease-in-out infinite;
 }
