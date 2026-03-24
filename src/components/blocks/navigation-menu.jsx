@@ -17,10 +17,10 @@ import {
 import { ArrowRight } from "lucide-react"
 
 
-export function NavigationMenuDemo({}) {
+export function NavigationMenuDemo({ }) {
   const isMobile = useIsMobile()
-  
-  
+
+
 
   return (
     <NavigationMenu viewport={isMobile}>
@@ -31,9 +31,15 @@ export function NavigationMenuDemo({}) {
           </NavigationMenuLink>
         </NavigationMenuItem>
 
-         <NavigationMenuItem>
+        <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/category" className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}>Categories</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/aqua-smart" className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}>Aqua Smart</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
@@ -41,22 +47,22 @@ export function NavigationMenuDemo({}) {
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/about" className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}>About</Link>
           </NavigationMenuLink>
-        </NavigationMenuItem>  
+        </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/product" className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}> Products</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        
-        
 
-      
+
+
+
         <NavigationMenuItem className="hidden md:block">
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/contact" className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}>Contact</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        
+
       </NavigationMenuList>
     </NavigationMenu>
   )

@@ -26,7 +26,7 @@ export default function StayInspiredCards() {
       {cards.map((card, index) => (
         <div
           key={card.id}
-          className="sticky top-24 h-[85svh] w-full rounded-2xl bg-gray-100 p-2 sm:h-[80svh] sm:p-4 md:h-[85svh] md:p-6"
+          className="sticky top-24 h-[70svh] w-full rounded-3xl bg-gray-100 p-2 sm:h-[80svh] sm:p-4 md:h-[85svh] md:p-6"
           style={{ zIndex: index + 1 }}
         >
           <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] shadow-2xl sm:rounded-3xl">
@@ -34,7 +34,7 @@ export default function StayInspiredCards() {
               src={card.image}
               alt={card.title}
               fill
-              className="md:object-cover object-center transition-transform duration-300 hover:scale-105"
+              className="md:object-cover object-cover object-center transition-transform duration-300 hover:scale-105"
               sizes="100vw"
               priority={index === 0}
             />

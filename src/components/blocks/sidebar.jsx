@@ -20,6 +20,7 @@ import { Phone } from "lucide-react"
 import { ShoppingBag } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { Zap } from "lucide-react"
 
 // Menu items - same as navigation menu
 const items = [
@@ -29,14 +30,14 @@ const items = [
         icon: Home,
     },
     {
-        title: "All Products",
-        url: "/products",
+        title: "Categories",
+        url: "/categories",
         icon: Package,
     },
     {
-        title: "Sale",
-        url: "/sale",
-        icon: Coins,
+        title: "Aqua Smart",
+        url: "/aqua-smart",
+        icon: Zap,
     },
     {
         title: "About",
@@ -44,14 +45,14 @@ const items = [
         icon: Info,
     },
     {
+        title: "Products",
+        url: "/products",
+        icon: ShoppingBag,
+    },
+    {
         title: "Contact",
         url: "/contact",
         icon: Phone,
-    },
-    {
-        title: "Shop",
-        url: "#",
-        icon: ShoppingBag,
     },
 ]
 
