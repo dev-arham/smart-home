@@ -125,14 +125,14 @@ const Showcase = () => {
     const imageOpacity = 0.5 + warmth * 0.5
 
     return (
-        <section className='relative py-16 md:py-24 px-4 overflow-hidden'>
+        <section className='relative py-16 md:py-24 px-4'>
             <FlickeringGrid
-                className="absolute inset-0 z-0 mask-[radial-gradient(450px_circle_at_center,white,transparent)]"
-                squareSize={4}
-                gridGap={6}
+                className="absolute w-fit inset-0 top-0 left-0 sm:-top-50 sm:left-100 z-0 mask-[radial-gradient(450px_circle_at_center,white,transparent)]"
+                squareSize={12}
+                gridGap={16}
                 color="#60A5FA"
-                maxOpacity={0.5}
-                flickerChance={0.1}
+                maxOpacity={0.8}
+                flickerChance={0.05}
             />
 
             <div className='relative z-10 container mx-auto'>
@@ -168,8 +168,8 @@ const Showcase = () => {
                             />
 
                             {/* Light Image */}
-                            <div className="absolute left-[5%] sm:left-[10%] lg:left-[15%] top-1/2 -translate-y-1/2 z-10 pointer-events-none">
-                                <div className="relative w-[180px] sm:w-[240px] lg:w-[320px]">
+                            <div className="absolute left-0 max-lg:left-[5%] xl:left-[10%] top-1/2 -translate-y-1/2 z-10 pointer-events-none">
+                                <div className="relative w-65 sm:w-60 lg:w-[400px]">
                                     <img
                                         src="images/showcase-image.png"
                                         alt="Smart Light"
@@ -206,7 +206,7 @@ const Showcase = () => {
                             </div>
 
                             {/* Slider Section */}
-                            <div className={`absolute right-4 sm:right-[15%] lg:right-[15%] flex flex-col items-center justify-center z-20 select-none showcase-slider-entry ${lightCardInView ? 'is-visible' : ''}`}>
+                            <div className={`absolute right-0 max-lg:right-[10%] xl:right-[10%] flex flex-col items-center justify-center z-20 select-none showcase-slider-entry ${lightCardInView ? 'is-visible' : ''}`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"
                                     className="w-5 h-5 sm:w-6 sm:h-6 mb-4 sm:mb-6 shrink-0 transition-colors duration-500"
                                     style={{ color: '#a1a1aa' }}
@@ -255,7 +255,7 @@ const Showcase = () => {
                         className={`w-full h-full lg:flex-1 flex justify-center items-start showcase-reveal showcase-reveal--card ${demoCardInView ? 'is-visible' : ''}`}
                         style={{ transitionDelay: '0.3s' }}
                     >
-                        <div className="demo-frame-wrapper h-[37rem] sm:h-160 lg:h-160 max-w-full overflow-hidden flex justify-center">
+                        <div className="demo-frame-wrapper h-200 sm:h-200 lg:h-190 max-w-full overflow-hidden flex flex-col justify-center items-center">
                             <Android className="h-full w-auto max-w-full shrink-0">
                                 <iframe
                                     id="HAdemo"

@@ -32,9 +32,17 @@ export function NavigationMenuDemo({ }) {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/category" className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}>Categories</Link>
-          </NavigationMenuLink>
+          <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>
+            <span className={`bg-transparent text-[16px] font-normal text-black hover:bg-transparent`}>Categories</span>
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid grid-cols-4 min-w-150 gap-3">
+              <ListItem href="/category/small-switches" title="Small Switches" />
+              <ListItem href="/category/led-lights" title="LED Lights" />
+              <ListItem href="/category/circuit-breakers" title="Circuit Breakers" />
+              <ListItem href="/category/accessories" title="Accessories" />
+            </ul>
+          </NavigationMenuContent>
         </NavigationMenuItem>
 
         <NavigationMenuItem>

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 import dynamic from "next/dynamic";
+import { FlickeringGrid } from "../ui/flickering-grid";
 
 const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
   ssr: false,
@@ -502,14 +503,19 @@ export default function Global() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate w-full overflow-hidden bg-slate-50 py-16 sm:py-20 lg:py-24"
+      className="relative w-full py-8"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(56,189,248,0.14),transparent_45%),radial-gradient(circle_at_100%_100%,rgba(14,165,233,0.12),transparent_40%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.3)_1px,transparent_1px)] bg-size-[32px_32px] opacity-[0.18]" />
-      </div>
 
+      <FlickeringGrid
+        className="absolute inset-0 z-0 mask-[radial-gradient(450px_circle_at_center,white,transparent)]"
+        squareSize={8}
+        gridGap={6}
+        color="#60A5FA"
+        maxOpacity={0.5}
+        flickerChance={0.1}
+      />
       <div className="container relative mx-auto px-4 sm:px-6">
+
         <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
           <div
             className="w-full"

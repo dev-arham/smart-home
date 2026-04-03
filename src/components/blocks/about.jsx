@@ -3,14 +3,15 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { 
-  Award, 
-  Users, 
-  Target, 
-  Heart, 
-  Zap, 
-  Shield, 
-  Clock, 
+import { motion } from 'framer-motion'
+import {
+  Award,
+  Users,
+  Target,
+  Heart,
+  Zap,
+  Shield,
+  Clock,
   CheckCircle,
   ArrowRight,
   Lightbulb,
@@ -62,56 +63,65 @@ const milestones = [
 export default function About() {
   return (
     <section className="bg-white">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-transparent">
-        <div className="absolute inset-0 bg-[url('/images/pattern.png')] opacity-5" />
-        <div className="container mx-auto px-4 py-20 lg:py-28">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Powering Smart Homes Across{" "}
-                <span className="text-gray-900">Pakistan</span>
-              </h1>
-              <p className="text-lg text-foreground/70 leading-relaxed max-w-xl">
-                At Aqua Electrical, we're passionate about transforming ordinary homes into 
-                intelligent living spaces. With over 15 years of experience, we bring you 
-                the best in smart home automation.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" className="bg-gray-900 hover:bg-[#c91a2b]">
-                  <Link href="/products">
-                    Explore Products
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/contact">
-                    Contact Us
-                  </Link>
-                </Button>
-              </div>
+      {/* Cinematic Hero Banner */}
+      <div className="relative w-full h-[60vh] min-h-[500px] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2670&auto=format&fit=crop"
+            alt="Smart Home Interconnected"
+            className="w-full h-full object-cover object-center transform scale-105 duration-1000"
+          />
+          <div className="absolute inset-0 bg-zinc-950/60" /> {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-900/40" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 text-center text-white mt-16 md:mt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+            className="max-w-4xl mx-auto space-y-6"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/30 backdrop-blur-md text-cyan-300 text-[11px] md:text-[13px] font-bold tracking-[0.2em] relative uppercase mb-2 group cursor-default">
+              <Zap className="w-4 h-4 text-cyan-400" />
+              Our Story
             </div>
-            <div className="relative mt-4 ">
-              <div className="absolute -inset-4  rounded-3xl blur-2xl" />
-              <div className="relative aspect-square rounded-2xl overflow-hidden ">
-                <img
-                  src="https://img.freepik.com/free-photo/3d-rendering-vintage-colorful-living-room-with-retro-style_105762-2265.jpg"
-                  alt="Smart Home"
-                  fill
-                  className="object-contain w-full h-full rounded-2xl"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-          </div>
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05]">
+              Powering Smart Homes Across <span className="text-cyan-400">Pakistan</span>
+            </h1>
+
+            <p className="text-base md:text-xl text-zinc-300/90 leading-relaxed max-w-2xl mx-auto font-light">
+              At Aqua Electrical, we're passionate about transforming ordinary homes into
+              intelligent living spaces. With over 15 years of experience, we bring you
+              the best in smart home automation.
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="flex flex-wrap items-center justify-center gap-4 pt-6"
+            >
+              <Button asChild size="lg" className="bg-cyan-600 hover:bg-cyan-500 text-white rounded-full px-8 h-12 shadow-[0_10px_20px_rgba(8,145,178,0.3)] transition-all">
+                <Link href="/products">
+                  Explore Products <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-white rounded-full backdrop-blur-sm px-8 h-12 transition-all">
+                <Link href="/contact">
+                  Contact Us
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
-      
-
       {/* Our Story Section */}
-      <div className="py-2 bg-[#faf8f5]">
+      <div className="py-20 bg-[#faf8f5]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -167,17 +177,17 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-foreground/70 leading-relaxed">
                 <p>
-                  Aqua Electrical began in 2009 as a humble electrical supply store in Karachi. 
-                  Our founder, Ahmed Khan, had a vision: to bring modern electrical solutions 
+                  Aqua Electrical began in 2009 as a humble electrical supply store in Karachi.
+                  Our founder, Ahmed Khan, had a vision: to bring modern electrical solutions
                   to every Pakistani home.
                 </p>
                 <p>
-                  Over the years, we've grown from a single shop to a nationwide network, 
-                  embracing smart home technology along the way. Today, we're proud to be 
+                  Over the years, we've grown from a single shop to a nationwide network,
+                  embracing smart home technology along the way. Today, we're proud to be
                   Pakistan's most trusted name in home automation.
                 </p>
                 <p>
-                  Our journey has been driven by one simple belief — that everyone deserves 
+                  Our journey has been driven by one simple belief — that everyone deserves
                   a home that's safe, efficient, and intelligently connected.
                 </p>
               </div>
@@ -243,8 +253,8 @@ export default function About() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="group border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
                 <CardHeader>
@@ -262,11 +272,11 @@ export default function About() {
         </div>
       </div>
 
-      <OurTeam/>
+      <OurTeam />
 
-     
 
-      
+
+
     </section>
   )
 }

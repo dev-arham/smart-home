@@ -113,7 +113,7 @@ export default function ImmersiveSlider() {
       </AnimatePresence>
 
       {/* Main Content Engine */}
-      <div className="relative z-20 flex h-full w-full items-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 max-w-[100vw] mx-auto mt-10 sm:mt-0">
+      <div className="relative z-20 container flex h-full items-center mx-auto px-4 md:px-0 mt-10 sm:mt-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={`content-${current}`}

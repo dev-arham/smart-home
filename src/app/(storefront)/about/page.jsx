@@ -8,11 +8,11 @@ export const metadata = {
 }
 
 export default function AboutPage() {
-  return( 
-  <>
-  <Header/>
-  <About />
-  <Footer/>
-  </>
+  return (
+    <>
+      <Header />
+      <About />
+      <Footer />
+    </>
   )
 }

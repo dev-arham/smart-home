@@ -22,11 +22,11 @@ const cards = [
 
 export default function StayInspiredCards() {
   return (
-    <section className="relative z-10 mt-5 space-y-4">
+    <section className="relative container mx-auto z-10 grid grid-cols-2 gap-8 py-10">
       {cards.map((card, index) => (
         <div
           key={card.id}
-          className="sticky top-24 h-[70svh] w-full rounded-3xl bg-gray-100 p-2 sm:h-[80svh] sm:p-4 md:h-[85svh] md:p-6"
+          className="w-full rounded-3xl sm:h-[80svh] md:h-[85svh] border shadow"
           style={{ zIndex: index + 1 }}
         >
           <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] shadow-2xl sm:rounded-3xl">
