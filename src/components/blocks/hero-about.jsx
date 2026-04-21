@@ -24,12 +24,12 @@ const HeroAbout = () => {
                 style={{ opacity, scale, y: yTransform }}
                 className='z-20 flex max-w-4xl flex-col items-center justify-center space-y-10 text-center px-4 sticky top-[20vh] pt-50 will-change-transform transform-gpu'
             >
-                <h2 className="bg-linear-to-b from-slate-900 to-slate-400 bg-clip-text text-[clamp(4rem,10vw,10rem)] font-bold leading-none tracking-tight text-transparent">
+                <h2 className="bg-linear-to-b from-slate-700 to-slate-400 bg-clip-text text-[clamp(4rem,10vw,10rem)] font-bold leading-none tracking-tight text-transparent">
                     About Us
                 </h2>
 
-                <p className="max-w-2xl text-lg md:text-2xl font-light text-slate-900 leading-relaxed">
-                    Pioneering the future of smart living. We seamlessly integrate cutting-edge <span className="text-cyan-700 font-semibold">architectural technology</span> into your everyday environment.
+                <p className="max-w-2xl text-lg md:text-2xl font-light text-slate-200 leading-relaxed">
+                    Pioneering the future of smart living. We seamlessly integrate cutting-edge <span className="text-gradient-brand font-semibold">architectural technology</span> into your everyday environment.
                 </p>
 
                 <motion.div

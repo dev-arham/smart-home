@@ -11,18 +11,19 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Aqua Electrical",
-  description: "Smart Home Accessories Store",
+  title: "Aqua Electrical — Smart & Traditional Electrical, Reimagined",
+  description:
+    "Premium smart-home and traditional electrical products engineered for modern living. Explore the Aqua Smart and Aqua Electrical collections.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className={poppins.variable}>
-      <body className={`${poppins.className} antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} dark`}>
+      <body suppressHydrationWarning className={`${poppins.className} antialiased bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Providers>

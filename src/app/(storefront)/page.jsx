@@ -1,44 +1,40 @@
-import Footer from '@/components/blocks/footer'
-import Header from '@/components/blocks/header'
-import React from 'react'
-import ImmersiveSlider from '@/components/blocks/immersive-slider'
-import Global from '@/components/blocks/Global'
-import ContactUS from '@/components/blocks/ContactUs'
-import HomeVideo from '@/components/blocks/HomeVideo'
-import Showcase from '@/components/blocks/showcase'
-import StayInspired from '@/components/blocks/StayInspired'
-import HeroAbout from '@/components/blocks/hero-about'
-import StayInspiredCards from '@/components/blocks/StayInspiredCards'
-import { FlickeringGrid } from '@/components/ui/flickering-grid'
+import Header from "@/components/blocks/header";
+import Footer from "@/components/blocks/footer";
+import HeroV2 from "@/components/blocks/v2/hero-v2";
+import DualCollections from "@/components/blocks/v2/dual-collections";
+import BrandStory from "@/components/blocks/v2/brand-story";
+import WhyChooseUs from "@/components/blocks/v2/why-choose-us";
+import ProductEcosystem from "@/components/blocks/v2/product-ecosystem";
+import ParallaxInfographics from "@/components/blocks/v2/parallax-infographics";
+import InnovationSpotlight from "@/components/blocks/v2/innovation-spotlight";
+import TrustStats from "@/components/blocks/v2/trust-stats";
+import FinalCTA from "@/components/blocks/v2/final-cta";
+import HeroAbout from "@/components/blocks/hero-about";
+import HomeVideo from "@/components/blocks/HomeVideo";
 
-const page = () => {
+export default function HomePage() {
   return (
-    <div className='w-full'>
+    <div className="relative w-full overflow-x-clip bg-background text-foreground selection:bg-accent/30 selection:text-foreground">
+      <div className="bg-noise mix-blend-overlay fixed inset-0 z-50 pointer-events-none opacity-40" />
       <Header />
-      <ImmersiveSlider />
-      <section className='relative overflow-visible'>
-          <FlickeringGrid
-            className="absolute inset-0 z-0 mask-[radial-gradient(450px_circle_at_center,white,transparent)]"
-            squareSize={10}
-            gridGap={6}
-            color="#60A5FA"
-            maxOpacity={0.5}
-            flickerChance={0.1}
-          />
-          <HeroAbout />
-          <StayInspiredCards />
-      </section>
-      <Global />
-      <section className='relative overflow-visible bg-slate-950 text-white'>
-        <div className="relative z-10 px-4 pb-4 ">
-          <StayInspired />
+      <main>
+        <HeroV2 />
+        <DualCollections />
+        <div className="relative">
+          <div className="pointer-events-none absolute inset-0 bg-background" />
+          <div className="relative">
+            <HeroAbout />
+          </div>
         </div>
-      </section>
-      <HomeVideo />
-      <Showcase />
+        <BrandStory />
+        <HomeVideo />
+        <WhyChooseUs />
+        <ProductEcosystem />
+        <ParallaxInfographics />
+        <InnovationSpotlight />
+        <TrustStats />
+      </main>
       <Footer />
     </div>
-  )
+  );
 }
-
-export default page

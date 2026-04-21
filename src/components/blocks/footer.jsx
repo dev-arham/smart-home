@@ -14,43 +14,46 @@ import {
   MapPin,
   Phone,
   Mail,
+  Sparkles,
+  Zap,
+  ArrowUpRight,
 } from "lucide-react";
 
 const LINKS = [
+  {
+    title: "Collections",
+    items: [
+      { label: "Aqua Smart", href: "/aqua-smart", icon: Sparkles },
+      { label: "Aqua Electrical", href: "/aqua-electrical", icon: Zap },
+      { label: "All Products", href: "/category" },
+      { label: "New Arrivals", href: "/category?sort=new" },
+    ],
+  },
   {
     title: "Company",
     items: [
       { label: "About Us", href: "/about" },
       { label: "Our Team", href: "#" },
       { label: "Careers", href: "#" },
-      { label: "Contact Us", href: "/contact" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
-    title: "Products",
+    title: "Support",
     items: [
-      { label: "Smart Switches", href: "#" },
-      { label: "Lighting Control", href: "#" },
-      { label: "Home Automation", href: "#" },
-      { label: "All Products", href: "/category" },
-    ],
-  },
-  {
-    title: "Resources",
-    items: [
-      { label: "Blog", href: "#" },
+      { label: "Help Center", href: "#" },
       { label: "FAQs", href: "#" },
-      { label: "Support", href: "#" },
-      { label: "Documentation", href: "#" },
+      { label: "Warranty", href: "#" },
+      { label: "Installation", href: "#" },
     ],
   },
   {
     title: "Legal",
     items: [
-      { label: "Terms of Service", href: "#" },
-      { label: "Privacy Policy", href: "#" },
-      { label: "Return Policy", href: "#" },
-      { label: "Cookie Policy", href: "#" },
+      { label: "Terms", href: "#" },
+      { label: "Privacy", href: "#" },
+      { label: "Returns", href: "#" },
+      { label: "Cookies", href: "#" },
     ],
   },
 ];
@@ -64,52 +67,85 @@ const SOCIAL_LINKS = [
 
 const YEAR = new Date().getFullYear();
 
-export const title = "Company Footer";
-
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0f0f0f] text-white">
-      {/* Top Section: Brand + Newsletter */}
-      <div className="mx-auto container px-4 pb-12 pt-16 sm:px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    <footer className="relative isolate overflow-hidden border-t border-white/5 bg-background text-foreground">
+      {/* Ambient blue glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background:
+            "radial-gradient(900px 400px at 50% 0%, oklch(0.62 0.22 252 / 0.14), transparent 60%)",
+        }}
+      />
+
+      {/* ── Top section: Brand + Newsletter ── */}
+      <div className="mx-auto container px-4 pb-14 pt-16 sm:px-6 md:px-12">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.3fr_1fr]">
           {/* Brand */}
-          <div className="space-y-4 text-center lg:text-left">
+          <div className="space-y-5 text-center lg:text-left">
             <Link href="/" className="inline-block">
               <Image
                 src="/images/aqua-logo-transparent.png"
                 alt="Aqua Electrical"
-                width={120}
-                height={60}
-                className="mx-auto brightness-0 invert lg:mx-0"
+                width={140}
+                height={70}
+                className="mx-auto h-auto w-[120px] brightness-0 invert lg:mx-0"
               />
             </Link>
-            <p className="text-white/50 text-sm leading-relaxed max-w-md mx-auto lg:mx-0">
-              Aqua Electrical is your go-to destination for high-quality smart
-              home products and services. We bring intelligent living solutions
-              to elevate your everyday experience.
+            <p className="mx-auto max-w-md text-sm leading-relaxed text-foreground/55 lg:mx-0">
+              Aqua is a premium electrical brand built on two ideas — products
+              that last decades, and a smart layer that never gets in your way.
+              Engineered in-house since 1985.
             </p>
+
+            {/* Collection pills */}
+            <div className="flex flex-wrap justify-center gap-2 lg:justify-start">
+              <Link
+                href="/aqua-smart"
+                className="group inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1.5 text-xs font-medium text-foreground transition-all hover:border-primary/60 hover:bg-primary/20"
+              >
+                <Zap className="h-3.5 w-3.5 text-accent" />
+                Aqua Smart
+                <ArrowUpRight className="h-3.5 w-3.5 text-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+              <Link
+                href="/aqua-electrical"
+                className="group inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 text-xs font-medium text-foreground transition-all hover:border-accent/60 hover:bg-accent/20"
+              >
+                Aqua Electrical
+                <ArrowUpRight className="h-3.5 w-3.5 text-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
           </div>
 
           {/* Newsletter */}
-          <div className="lg:ml-auto lg:max-w-sm w-full space-y-4">
-            <h4 className="text-base font-semibold">Stay Updated</h4>
-            <p className="text-white/50 text-sm leading-relaxed">
-              Subscribe to our newsletter for the latest products, offers, and
-              smart home tips.
-            </p>
+          <div className="w-full space-y-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.22em] text-foreground/50">
+                Stay in the loop
+              </p>
+              <h4 className="mt-1.5 text-base font-semibold text-foreground">
+                One email a month. Zero fluff.
+              </h4>
+              <p className="mt-1 text-xs text-foreground/55 leading-relaxed">
+                New drops, install tips, and the rare sale worth knowing about.
+              </p>
+            </div>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="flex flex-row items-stretch gap-2  sm:items-center"
+              className="flex items-stretch gap-2"
             >
               <Input
                 type="email"
                 placeholder="Enter your email"
-                className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-0 focus-visible:border-white/30 h-11 rounded-lg flex-1"
+                className="h-11 flex-1 rounded-full border-white/10 bg-white/[0.04] text-foreground placeholder:text-foreground/40 focus-visible:border-accent/50 focus-visible:ring-0"
               />
               <Button
                 type="submit"
                 size="icon"
-                className="h-11 w-11 rounded-lg bg-white text-[#0f0f0f] hover:bg-white/90 shrink-0"
+                className="h-11 w-11 shrink-0 rounded-full bg-accent text-accent-foreground hover:bg-accent/90"
               >
                 <Send className="h-4 w-4" />
               </Button>
@@ -118,24 +154,27 @@ export default function Footer() {
         </div>
       </div>
 
-      <Separator className="bg-white/10" />
+      <Separator className="bg-white/5" />
 
-      {/* Middle Section: Link Columns */}
+      {/* ── Middle: Link columns ── */}
       <div className="mx-auto container px-4 py-12 sm:px-6 md:px-12">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {LINKS.map(({ title, items }) => (
             <div key={title}>
-              <h5 className="text-sm font-semibold uppercase tracking-wider mb-5 text-white/80">
+              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-foreground/80">
                 {title}
               </h5>
               <ul className="space-y-3">
-                {items.map(({ label, href }) => (
-                  <li key={label}>
+                {items.map((item) => (
+                  <li key={item.label}>
                     <Link
-                      href={href}
-                      className="text-white/40 hover:text-white text-sm transition-colors duration-200"
+                      href={item.href}
+                      className="group inline-flex items-center gap-1.5 text-sm text-foreground/55 transition-colors duration-200 hover:text-foreground"
                     >
-                      {label}
+                      {item.icon ? (
+                        <item.icon className="h-3.5 w-3.5 opacity-70 transition-opacity group-hover:opacity-100" />
+                      ) : null}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -145,68 +184,72 @@ export default function Footer() {
         </div>
       </div>
 
-      <Separator className="bg-white/10" />
+      <Separator className="bg-white/5" />
 
-      {/* Contact Strip */}
+      {/* ── Contact strip ── */}
       <div className="mx-auto container px-4 py-8 sm:px-6 md:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-white/5">
-              <Phone className="h-4 w-4 text-white/60" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
+              <Phone className="h-4 w-4 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-white/40">Call us</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/40">
+                Call us
+              </p>
               <a
                 href="tel:+923368882782"
-                className="text-sm text-white/70 hover:text-white transition-colors"
+                className="text-sm text-foreground/75 transition-colors hover:text-foreground"
               >
                 +92 336 8882782
               </a>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-white/5">
-              <Mail className="h-4 w-4 text-white/60" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
+              <Mail className="h-4 w-4 text-accent" />
             </div>
             <div>
-              <p className="text-xs text-white/40">Email us</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/40">
+                Email us
+              </p>
               <a
-                href="mailto:aquaelectrical@gmail.com"
-                className="text-sm text-white/70 hover:text-white transition-colors"
+                href="mailto:hello@aquaelectrical.com"
+                className="text-sm text-foreground/75 transition-colors hover:text-foreground"
               >
-                aquaelectrical@gmail.com
+                hello@aquaelectrical.com
               </a>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-9 h-9 rounded-full bg-white/5">
-              <MapPin className="h-4 w-4 text-white/60" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]">
+              <MapPin className="h-4 w-4 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-white/40">Visit us</p>
-              <p className="text-sm text-white/70">
-                DHA Phase 6, Karachi
+              <p className="text-[10px] uppercase tracking-[0.22em] text-foreground/40">
+                Visit us
               </p>
+              <p className="text-sm text-foreground/75">DHA Phase 6, Karachi</p>
             </div>
           </div>
         </div>
       </div>
 
-      <Separator className="bg-white/10" />
+      <Separator className="bg-white/5" />
 
-      {/* Bottom Bar: Copyright + Social */}
+      {/* ── Bottom bar ── */}
       <div className="mx-auto container px-4 py-6 sm:px-6 md:px-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/40 text-sm">
-            &copy; {YEAR} Aqua Electrical. All Rights Reserved.
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <p className="text-xs text-foreground/45">
+            &copy; {YEAR} Aqua Electrical. All rights reserved. Designed in Karachi.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
               <Link
                 key={label}
                 href={href}
                 aria-label={label}
-                className="flex items-center justify-center w-9 h-9 rounded-full bg-white/5 text-white/40 hover:bg-white/10 hover:text-white transition-all duration-200"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-foreground/50 transition-all duration-200 hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
               >
                 <Icon className="h-4 w-4" />
               </Link>

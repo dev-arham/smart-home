@@ -23,10 +23,10 @@ export default async function UserAvatar() {
       <Link href="/login">
         <Button
           size="sm"
-          className="cursor-pointer bg-gray-900 hover:bg-gray-800 text-white rounded-full sm:h-10 sm:px-4 sm:text-sm"
+          className="cursor-pointer bg-primary hover:bg-primary/90 text-primary-foreground rounded-full sm:h-10 sm:px-4 sm:text-sm shadow-[0_0_24px_-8px_var(--color-primary)]"
         >
           <User className="h-4 w-4" />
-          <span className="max-sm:hidden">Login/Register</span>
+          <span className="max-sm:hidden">Login</span>
         </Button>
       </Link>
     );
@@ -38,7 +38,7 @@ export default async function UserAvatar() {
         <Button
           variant="ghost"
           size="sm"
-          className="cursor-pointer text-black hover:bg-gray-100 rounded-full sm:h-10 sm:px-4 sm:text-sm"
+          className="cursor-pointer text-foreground hover:bg-white/5 rounded-full sm:h-10 sm:px-4 sm:text-sm"
         >
           <UserCircle className="h-4 w-4 shrink-0" />
           <span className="max-sm:hidden truncate max-w-[100px]">{user?.name}</span>

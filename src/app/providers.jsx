@@ -5,8 +5,10 @@ import { store } from "@/store/store";
 import { Provider, useDispatch } from "react-redux";
 import { hydrateCart } from "@/store/cartSlice";
 import { hydrateWishlist } from "@/store/whishlistSlice";
+import { ReactLenis } from "lenis/react";
 
 function StoreHydration({ children }) {
+// ...
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -20,7 +22,11 @@ function StoreHydration({ children }) {
 export default function Providers({ children }) {
   return (
     <Provider store={store}>
-      <StoreHydration>{children}</StoreHydration>
+      <StoreHydration>
+        <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothTouch: false }}>
+          {children}
+        </ReactLenis>
+      </StoreHydration>
     </Provider>
   );
 }

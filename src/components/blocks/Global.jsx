@@ -54,7 +54,7 @@ export default function Global() {
 
   const globeConfig = {
     pointSize: 4,
-    globeColor: "#ffffff",
+    globeColor: "#8fe1ff",
     showAtmosphere: true,
     atmosphereColor: "#bae6fd",
     atmosphereAltitude: 0.15,
@@ -506,68 +506,16 @@ export default function Global() {
       className="relative w-full py-8"
     >
 
-      <FlickeringGrid
-        className="absolute inset-0 z-0 mask-[radial-gradient(450px_circle_at_center,white,transparent)]"
-        squareSize={8}
-        gridGap={6}
-        color="#60A5FA"
-        maxOpacity={0.5}
-        flickerChance={0.1}
-      />
-      <div className="container relative mx-auto px-4 sm:px-6">
+      <div
+        className="relative mx-auto w-full aspect-square max-w-[400px] sm:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]"
+        style={{
+          opacity: isInView ? 1 : 0,
+          transform: isInView ? "translateY(0px)" : "translateY(18px)",
+          transition: "all 800ms cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <World data={sampleArcs} globeConfig={globeConfig} />
 
-        <div className="grid items-center gap-8 md:gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
-          <div
-            className="w-full"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? "translateY(0px)" : "translateY(16px)",
-              transition: "all 700ms cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="h-12 w-2 shrink-0 rounded bg-linear-to-b from-sky-500 to-cyan-300" />
-              <div>
-                <h2 className="text-3xl font-semibold leading-tight text-slate-900 md:text-4xl xl:text-[2.7rem] xl:leading-[1.08]">
-                  Global Operation Localization
-                </h2>
-              </div>
-            </div>
-
-            <p className="mt-6 text-base font-medium text-slate-600 sm:mt-7 sm:text-lg">
-              International subsidiaries all over the world
-            </p>
-
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-slate-600">
-              Our extensive network of subsidiaries and distributors ensures
-              seamless service delivery and support worldwide, backed by a
-              highly skilled international team committed to excellence.
-            </p>
-
-            <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-              {stats.map((stat, index) => (
-                <Counter
-                  key={index}
-                  stat={stat}
-                  isInView={isInView}
-                  index={index}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div
-            className="relative mx-auto w-full aspect-square max-w-[400px] sm:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]"
-            style={{
-              opacity: isInView ? 1 : 0,
-              transform: isInView ? "translateY(0px)" : "translateY(18px)",
-              transition: "all 800ms cubic-bezier(0.16, 1, 0.3, 1)",
-            }}
-          >
-            <World data={sampleArcs} globeConfig={globeConfig} />
-
-          </div>
-        </div>
       </div>
 
       <style jsx>{`
