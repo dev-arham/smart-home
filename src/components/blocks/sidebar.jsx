@@ -45,7 +45,7 @@ const collectionItems = [
 
 const mainNavItems = [
     { title: "Home", url: "/", icon: Home },
-    { title: "All Products", url: "/category", icon: LayoutGrid },
+    // { title: "All Products", url: "/category", icon: LayoutGrid },
     { title: "About Us", url: "/about", icon: Info },
     { title: "Contact", url: "/contact", icon: Phone },
 ]
@@ -137,7 +137,7 @@ export function AppSidebar() {
                 </SidebarGroup>
 
                 {/* Categories */}
-                <SidebarGroup className="mt-4">
+                {/* <SidebarGroup className="mt-4">
                     <SidebarGroupLabel className="text-[11px] font-bold uppercase tracking-[0.22em] text-foreground/40 mb-2 px-4">
                         Categories
                     </SidebarGroupLabel>
@@ -161,7 +161,7 @@ export function AppSidebar() {
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
-                </SidebarGroup>
+                </SidebarGroup> */}
 
             </SidebarContent>
 

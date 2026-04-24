@@ -16,7 +16,7 @@ import WishlistCount from "./wishlist-count";
 
 const SECONDARY_NAV = [
   { label: "Home", href: "/" },
-  { label: "Categories", href: "/category" },
+  // { label: "Categories", href: "/category" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

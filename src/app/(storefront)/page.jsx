@@ -12,7 +12,7 @@ import FinalCTA from "@/components/blocks/v2/final-cta";
 import HeroAbout from "@/components/blocks/hero-about";
 import HomeVideo from "@/components/blocks/HomeVideo";
 
-export default function HomePage() {
+export default function HomePageV2() {
   return (
     <div className="relative w-full overflow-x-clip bg-background text-foreground selection:bg-accent/30 selection:text-foreground">
       <div className="bg-noise mix-blend-overlay fixed inset-0 z-50 pointer-events-none opacity-40" />
